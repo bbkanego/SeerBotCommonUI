@@ -1,0 +1,97 @@
+.tree, .tree ul {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.tree ul {
+  margin-left:1rem;
+  position:relative;
+}
+.tree ul ul {
+  margin-left:.5rem
+}
+.tree ul:before {
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid
+}
+.tree li {
+  margin:0;
+  padding:0 1em;
+  line-height:2em;
+  color:#369;
+  font-weight:700;
+  position:relative;
+  background-color: red;
+
+}
+.tree ul li:before {
+  content:"";
+  display:block;
+  width:10px;
+  height:0;
+  border-top:1px solid;
+  margin-top:-1px;
+  position:absolute;
+  top:1em;
+  left:0
+}
+.tree ul li:last-child:before {
+  background:#fff;
+  height:auto;
+  top:1em;
+  bottom:0
+}
+.indicator {
+  margin-right:5px;
+}
+.tree li a {
+  text-decoration: none;
+  color:#369;
+}
+.tree li button, .tree li button:active, .tree li button:focus {
+  text-decoration: none;
+  color:#369;
+  border:none;
+  background:transparent;
+  margin:0;
+  padding:0;
+  outline: 0;
+}
+
+.treeView {
+
+}
+
+.node {
+
+}
+
+.children {
+  margin-left: 20px;
+}
+
+.trigger {
+  margin:0 -0.0225rem 0 0;
+  line-height: 2rem;
+  cursor: pointer;
+}
+
+.label {
+  color: #000;
+  vertical-align: middle;
+  line-height: 2rem;
+  cursor: pointer;
+}
+
+.hasChild {
+  /*Using a Bootstrap glyphicon as the bullet point*/
+  content: "\e029";
+  font-family: 'Glyphicons Halflings', arial, sans-serif;
+  font-size: 1.5rem;
+}

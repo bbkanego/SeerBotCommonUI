@@ -1,0 +1,29 @@
+<!-- table class="tableWidget2">
+  <tr>
+    <th colspan="3">
+      {{messageJSON.heading}}
+    </th>
+  </tr>
+  <tr *ngFor="let row of messageJSON.rows">
+    <td *ngFor="let col of row.cols">
+      <a *ngIf='col.clickUrl' (click)="navigateTo(col)">{{col.colName}}</a>
+      <span *ngIf='!col.clickAction && !col.clickUrl'>{{col.colName}}</span>
+      <a *ngIf='col.clickAction' (click)="clickAndSendResponse(col)">{{col.colName}}</a>
+    </td>
+  </tr>
+</table> -->
+
+<li class="message {{getChatMessageClass()}}">
+  <div class="avatar"></div>
+  <div class="text_wrapper">
+    {{messageJSON.heading}}
+    <div style='margin-top:10px'>
+      <span *ngFor="let coptions of messageJSON.options">
+        <span *ngFor="let option of coptions.option">
+          <bk-button (onClick)="clickAndSendResponse(option)" class='options'
+                intent="success" [label]="option.message"></bk-button>
+        </span>
+      </span>
+    </div>
+  </div>
+</li>

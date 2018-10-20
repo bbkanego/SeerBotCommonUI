@@ -1,0 +1,23 @@
+<!-- A child component -->
+{{modalState}}
+
+<p-dialog header="{{errorHandlerHeading}}" modal="modal" width="300" responsive="true" (click)="hideErrorDialog()">
+  {{exceptionDetails}}
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="hideErrorDialog()" label="Ok"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<custom-modal (modalState)="errorModelState($event)">
+  <div class="app-modal-header">
+    {{errorHandlerHeading}}
+  </div>
+  <div class="app-modal-body">
+    {{exceptionDetails}}
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="errorModal.hide()">Close</button>
+  </div>
+</custom-modal>

@@ -1,0 +1,19 @@
+<div [formGroup]="currentFormGroup"
+     *ngIf="currentFormGroup && inline">
+  <label class="radio-inline" *ngFor=" let option of options">
+    <input type="radio" [formControlName]="currentFormControlName"
+           value="{{option.value}}">
+    {{option.label}}
+  </label>
+</div>
+
+<div [formGroup]="currentFormGroup"
+     *ngIf="currentFormGroup && !inline">
+  <div class="radio" *ngFor=" let option of options">
+    <label>
+      <input type="radio" [formControlName]="currentFormControlName"
+             value="{{option.value}}">
+      {{option.label}}
+    </label>
+  </div>
+</div>

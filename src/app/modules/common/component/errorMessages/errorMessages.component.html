@@ -1,0 +1,15 @@
+<!--
+  https://stackoverflow.com/questions/31196980/using-a-glyphicon-as-an-li-bullet-point-bootstrap-3
+-->
+<div class="container-fluid" scrollTo>
+  <div class="row" #errorContainer>
+    <div class="form-group" *ngIf="hasErrorMessages || fieldErrors"  class="alert alert-danger tp-20margin">
+      <h4>There were errors. Please fix before proceeding!</h4>
+      <ul *ngIf="hasErrorMessages" class="error-bullet">
+        <li *ngFor="let errorMessage of errorMessages; let i=index">
+          {{errorMessage.message}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

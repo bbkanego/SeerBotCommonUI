@@ -41,3 +41,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+my-component-library-0.0.0.tgz
+
+.ng_pkg_build
+dist.tgz

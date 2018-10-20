@@ -1,0 +1,35 @@
+<div class="chat_window" [hidden]='!showChatBox'>
+    <div class="top_menu">
+        <div class="buttons">
+            <div (click)='dismissChatbox()' class="button minimize" title="Minimize"></div>
+<!--             <div class="button minimize"></div>
+            <div class="button maximize"></div>
+ -->        </div>
+        <div class="title">EventBot!</div>
+    </div>
+    <ul class="messages" #messageListContainer>
+        <li #messageList></li>
+    </ul>
+    <div class="col-sm-12 messageButtonContainer">
+        <div class="input-group">
+            <input type="text" class="form-control message_input" (keydown)=onKeydownEvent($event) #chatbox placeholder="Type your message here and hit enter...">
+            <span class="input-group-btn">
+                <button (click)="sendMessage()" class="btn btn-default send-button" type="button">Send</button>
+            </span>
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+    <!-- <div class="bottom_wrapper clearfix">
+        <div class="message_input_wrapper">
+            <input class="message_input" #chatbox placeholder="Type your message here..." />
+        </div>
+        <div class="send_message">
+            <div class="icon"></div>
+            <bk-button (onClick)="sendMessage()" intent="success" label="Send"></bk-button>
+        </div>
+    </div> -->
+</div>
+<div class="container-fluid chat_window_collapsed" [hidden]='showChatBox'>
+    <div class="row chatwithus">
+        <a (click)='showChatbox()'>Chat Now!</a>
+    </div>
+</div>

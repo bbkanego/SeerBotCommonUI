@@ -1,0 +1,12 @@
+<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup" style="white-space: nowrap">
+
+    <label class="center-block">{{label}}&nbsp;
+        <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
+        <input #bkInputWidget autocomplete="off" [id]="controlId" 
+            (blur)="onBlurEvent($event)" [formControlName]="currentFormControlName"
+            class="form-control" type="checkbox" />
+    </label>
+    <div *ngIf="isInvalid()" class="errorMessage">
+        {{getErrorMessage()}}
+    </div>
+</div>

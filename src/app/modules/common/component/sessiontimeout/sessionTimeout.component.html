@@ -1,0 +1,8 @@
+<p-dialog header="{{sessionTimeoutHeading}}" modal="modal" width="300" responsive="true" [closable]="false">
+  {{sessionTimeoutMessage}}
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="continueSession()" label="Continue"></button>
+    </div>
+  </p-footer>
+</p-dialog>

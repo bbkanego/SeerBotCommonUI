@@ -1,0 +1,7 @@
+<div class="treeView" (contextmenu)="onContextMenuLocal($event)">
+  <div class="alert alert-danger" *ngIf="showError">
+    {{errorMessage}}
+  </div>
+  <bk-treeNode *ngFor="let node of nodes" [node]="node"></bk-treeNode>
+</div>
+

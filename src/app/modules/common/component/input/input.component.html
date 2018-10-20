@@ -1,0 +1,14 @@
+<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup" style="white-space: nowrap">
+
+  <label class="center-block">{{label}}&nbsp;
+    <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
+    <!--{{label}} {{isRequired()}} {{getFormControl().validations|json}}
+    add bk-validate-onblur [bkValidatorRule]="validationRule" for server side validation below
+    -->
+    <input #bkInputWidget autocomplete="off" [id]="controlId" (blur)="onBlurEvent($event)"
+      [formControlName]="currentFormControlName" class="form-control" [type]="inputType" />
+  </label>
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{getErrorMessage()}}
+  </div>
+</div>

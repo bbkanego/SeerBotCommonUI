@@ -1,5 +1,6 @@
 import { AbstractControl } from '@angular/forms';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+const moment = _moment;
 
 // @dynamic
 export class CustomValidator {

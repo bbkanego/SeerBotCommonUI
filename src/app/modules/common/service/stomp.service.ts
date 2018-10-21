@@ -1,7 +1,6 @@
-/// <reference path="../../../../typings.d.ts" />
 import { Injectable } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+// import * as Stomp from 'stompjs';
+// import * as SockJS from 'sockjs-client';
 
 export interface Config {
   // websocket endpoint
@@ -66,8 +65,8 @@ export class StompService {
     this.status = 'CONNECTING';
 
     // Prepare Client
-    this.socket = new SockJS(this.stompConfig.host);
-    this.stomp = Stomp.over(this.socket);
+    this.socket = null; // new SockJS(this.stompConfig.host);
+    this.stomp = null; // Stomp.over(this.socket);
 
     this.stomp.heartbeat.outgoing = this.stompConfig.heartbeatOut || 10000;
     this.stomp.heartbeat.incoming = this.stompConfig.heartbeatIn || 10000;

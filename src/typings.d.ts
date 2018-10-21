@@ -15,5 +15,5 @@ interface JQuery {
   id: string;
 }; */
 
-declare module 'stompjs';
-declare module 'sockjs-client';
+//declare module 'stompjs';
+//declare module 'sockjs-client';

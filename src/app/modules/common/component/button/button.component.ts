@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 import {Component, Input, EventEmitter, AfterViewInit, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
 @Component({
@@ -44,7 +43,7 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
   }
 
   ngAfterViewInit(): void {
-    $(this.targetButton.nativeElement).tooltip({placement: this.tootipPosition});
+    // $(this.targetButton.nativeElement).tooltip({placement: this.tootipPosition});
   }
 
   ngOnInit(): void {

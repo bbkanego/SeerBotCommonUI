@@ -21,7 +21,8 @@ import {
 import { ButtonComponent } from './component/button/button.component';
 import { ChartComponent } from './component/chart/chart.component';
 import { SessionTimeoutComponent } from './component/sessiontimeout/sessionTimeout.component';
-import { ErrorMessagesComponent } from './component/errorMessages/errorMessages.component';
+// import { ErrorMessagesComponent } from './component/errorMessages/errorMessages.component';
+import { BaseReactiveComponent } from './component/baseReactive.component';
 import {
   TreeViewComponent,
   TreeNodeComponent
@@ -93,7 +94,7 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     ScrollToDirective,
     WebSocketDirective,
     IncludePartialDirective,
-    ErrorMessagesComponent,
+    // ErrorMessagesComponent,
     ChartComponent,
     SessionTimeoutComponent,
     DynamicModalComponent,
@@ -114,10 +115,11 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     TextChat2ComponentComponent,
     TableChatComponentComponent,
     ConfirmChatComponent,
-    OptionsChatComponent
+    OptionsChatComponent,
+    BaseReactiveComponent
   ],
   entryComponents: [
-    ErrorMessagesComponent,
+    // ErrorMessagesComponent,
     TextChatComponentComponent,
     TextChat2ComponentComponent,
     TableChatComponentComponent,
@@ -164,7 +166,7 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     ChartComponent,
     SessionTimeoutComponent,
     WebSocketDirective,
-    ErrorMessagesComponent,
+    // ErrorMessagesComponent,
     DynamicModalComponent,
     TreeViewComponent,
     TreeNodeComponent,
@@ -175,7 +177,8 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     CheckboxGroupComponent,
     RadioGroupComponent,
     ChatComponent,
-    Chat2Component
+    Chat2Component,
+    BaseReactiveComponent
   ]
 })
 export class CommonUtilsModule {

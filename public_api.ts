@@ -7,6 +7,8 @@ export * from './src/app/modules/common/commonUtils.module';
 export { BaseCustomComponent } from './src/app/modules/common/component/BaseCustomComponent.component';
 export { BaseDynamicComponent } from './src/app/modules/common/component/BaseDynamicComponent';
 export { BaseReactiveComponent } from './src/app/modules/common/component/baseReactive.component';
+export { CustomFormControl } from './src/app/modules/common/model/controls';
+export { Option, Account, ChatData } from './src/app/modules/common/model/models';
 export { ButtonComponent } from './src/app/modules/common/component/button/button.component';
 export { ChartComponent } from './src/app/modules/common/component/chart/chart.component';
 export { ChatComponent } from './src/app/modules/common/component/chat/chat.component';

@@ -4,6 +4,9 @@ import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent
 import {Option} from '../../../common/model/models';
 import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
 import { Subscription } from 'rxjs/Subscription';
+import * as JQuery from 'jquery';
+
+const $ = JQuery;
 
 @Component({
   selector: 'bk-input',

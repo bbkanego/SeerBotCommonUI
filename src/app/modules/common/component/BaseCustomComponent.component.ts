@@ -67,7 +67,7 @@ export abstract class BaseCustomComponent {
     );
   }
 
-  constructor(private injector: Injector) {
+  constructor(injector: Injector) {
     this.validationService = injector.get(ValidationService);
     this.commonService = injector.get(CommonService);
     this.notificationService = injector.get(NotificationService);

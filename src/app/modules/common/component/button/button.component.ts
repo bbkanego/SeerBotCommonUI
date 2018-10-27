@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, AfterViewInit, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {Component, Input, EventEmitter, AfterViewInit, ElementRef, ViewChild, OnInit, Injector} from '@angular/core';
 import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
 @Component({
   selector: 'bk-button',
@@ -27,6 +27,10 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
     'link': 'btn btn-link active'};
 
   private buttonSizes = {'small': 'btn-sm', 'large': 'btn-lg', 'NONE': ''};
+
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   getButtonClass(): string {
     return this.buttonTypes[this.intent] + ' ' + this.buttonSizes[this.size] + ' ' + this.class

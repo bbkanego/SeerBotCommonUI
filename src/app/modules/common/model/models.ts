@@ -1,9 +1,9 @@
 export class Option {
-  value:string;
-  label:string;
+  value: string;
+  label: string;
 
 
-  constructor(value:string, label:string) {
+  constructor(value: string, label: string) {
     this.value = value;
     this.label = label;
   }
@@ -11,6 +11,11 @@ export class Option {
 
 export interface Account {
   userName: string;
+}
+
+export class Login {
+  username = '';
+  password = '';
 }
 
 export interface ChatData {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Headers, Http, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { NotificationService } from '../../common/service/notification.service';
 import { SUBSCRIBER_TYPES, COMMON_CONST } from '../../common/model/constants';
+import { Login } from '../model/models';
 
 @Injectable()
 export class AuthenticationService {
@@ -14,10 +15,10 @@ export class AuthenticationService {
   /**
    * We are not unsubscribing here since HTTP will clean it self up.
    * https://stackoverflow.com/questions/35042929/do-you-need-to-unsubscribe-from-angular-2-http-calls-to-prevent-memory-leak
-   * @param user
+   * @param login
    */
-  login(user): any {
-    return this.http.post(environment.LOGIN_URL, JSON.stringify({ 'userName': user.username, 'password': user.password }))
+  login(login: Login): any {
+    return this.http.post(environment.LOGIN_URL, JSON.stringify({ 'userName': login.username, 'password': login.password }))
       // get the response and call .json() to get the JSON data
       // .map((res:Response) => res.json())
       .subscribe((res: Response) => {
@@ -26,7 +27,7 @@ export class AuthenticationService {
         console.log('AuthenticationService = ' + authorization);
         if (authorization) {
           localStorage.setItem(COMMON_CONST.CURRENT_USER,
-            JSON.stringify({ 'userName': user.username, 'password': user.password, 'token': authorization }));
+            JSON.stringify({ 'userName': login.username, 'password': login.password, 'token': authorization }));
           this.notificationService.notify('Login was a success', SUBSCRIBER_TYPES.LOGIN_SUCCESS,
             SUBSCRIBER_TYPES.LOGIN_SUCCESS);
         }

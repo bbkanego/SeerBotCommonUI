@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from './httpClient.helper';
 import { environment } from '../environments/environment';
-import { Headers, Http, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';

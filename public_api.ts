@@ -8,7 +8,7 @@ export { BaseCustomComponent } from './src/app/modules/common/component/BaseCust
 export { BaseDynamicComponent } from './src/app/modules/common/component/BaseDynamicComponent';
 export { BaseReactiveComponent } from './src/app/modules/common/component/baseReactive.component';
 export { CustomFormControl } from './src/app/modules/common/model/controls';
-export { Option, Account, ChatData } from './src/app/modules/common/model/models';
+export { Option, Account, ChatData, Login } from './src/app/modules/common/model/models';
 export { ButtonComponent } from './src/app/modules/common/component/button/button.component';
 export { ChartComponent } from './src/app/modules/common/component/chart/chart.component';
 export { ChatComponent } from './src/app/modules/common/component/chat/chat.component';
@@ -55,3 +55,4 @@ export { CommonService } from './src/app/modules/common/service/common.service';
 export { StompService } from './src/app/modules/common/service/stomp.service';
 export { Utils } from './src/app/modules/common/service/utils.service';
 export { ValidationService } from './src/app/modules/common/service/validation.services';
+export { SUBSCRIBER_TYPES, COMMON_CONST } from './src/app/modules/common/model/constants';

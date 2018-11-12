@@ -26,7 +26,7 @@ export class HttpClient {
       /*headers.append('Authorization', 'Basic ' +
           // The btoa() method encodes a string in base-64.
         btoa('username:password'));*/
-      headers.append('Authorization', currentUser.token);
+      headers.append('Authorization', 'Bearer ' + currentUser.token);
     }
   }
 

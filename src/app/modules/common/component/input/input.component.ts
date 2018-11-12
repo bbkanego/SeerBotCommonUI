@@ -1,10 +1,9 @@
-import {Component, ElementRef, OnInit, Input, Output, AfterViewInit, ViewChild, Injector, OnDestroy} from '@angular/core';
-import {Calendar, DomHandler} from 'primeng/primeng';
-import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
-import {Option} from '../../../common/model/models';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
-import { Subscription } from 'rxjs/Subscription';
+import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as JQuery from 'jquery';
+import { Subscription } from 'rxjs/Subscription';
+
+import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
+import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
 
 const $ = JQuery;
 
@@ -43,7 +42,9 @@ export class InputComponent extends BaseCustomComponent implements OnInit, After
   }
 
   ngOnDestroy() {
-    this.formResetSub.unsubscribe();
+    if (this.formResetSub) {
+      this.formResetSub.unsubscribe();
+    }
   }
 
   onBlurEvent($event) {

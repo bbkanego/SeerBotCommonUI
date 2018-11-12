@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from './httpClient.helper';
-import { environment } from '../environments/environment';
-import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
+import { Inject, Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-// Import RxJs required methods
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { HttpClient } from './httpClient.helper';
 
+// Import RxJs required methods
 @Injectable()
 export class CommonService {
   messages: {} = null;
+  private environment;
 
-  constructor(private http: Http, private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, @Inject('environment') environment) {
+    this.environment = environment;
+  }
 
   /**
    * unsubscribing to observables created by angular's http service is not needed
@@ -32,10 +34,9 @@ export class CommonService {
   private getMessagesLocal(): Observable<any> {
     return (
       this.httpClient
-        .get(environment.ALL_MESSAGES_URL)
+        .get(this.environment.ALL_MESSAGES_URL)
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
-        //...errors if any
         .catch((error: any) =>
           Observable.throw(error.json().error || 'Server error')
         )

@@ -1,10 +1,14 @@
 // http://stackoverflow.com/questions/34464108/angular2-set-headers-for-every-request/34465070#34465070
 // https://github.com/ivanderbu2/angular-redux/blob/master/src/app/core/http.service.ts
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/finally';
+
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { NotificationService } from '../../common/service/notification.service';
+
 import { SUBSCRIBER_TYPES } from '../../common/model/constants';
+import { NotificationService } from '../../common/service/notification.service';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable()

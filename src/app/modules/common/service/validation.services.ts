@@ -1,37 +1,41 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '../../common/service/httpClient.helper';
-import { environment } from '../environments/environment';
-import { Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+import { Inject, Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import * as JQuery from 'jquery';
+import { Observable } from 'rxjs/Observable';
+
 import { SUBSCRIBER_TYPES } from '../../common/model/constants';
+import { HttpClient } from '../../common/service/httpClient.helper';
 import { NotificationService } from '../../common/service/notification.service';
 
 // Import RxJs required methods
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
-import * as JQuery from 'jquery';
-
 const $ = JQuery;
 
 @Injectable()
 export class ValidationService {
+  private environment;
   constructor(
-    private http: Http,
     private httpClient: HttpClient,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    @Inject('environment') environment
+  ) {
+    this.environment = environment;
+  }
 
   validateField(validatorName: string, fieldName: string): Observable<any> {
-    console.log('This is 222222');
-    let url =
-      environment.VALIDATE_FIELD_URL + '/' + validatorName + '/' + fieldName;
+    const url =
+      this.environment.VALIDATE_FIELD_URL +
+      '/' +
+      validatorName +
+      '/' +
+      fieldName;
     return (
       this.httpClient
         .get(url)
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
-        //...errors if any
         .catch((error: any) =>
           Observable.throw(error.json().error || 'Server error')
         )
@@ -42,12 +46,11 @@ export class ValidationService {
     return (
       this.httpClient
         .post(
-          environment.VALIDATE_ALL_FIELD_URL + '/' + validatorName,
+          this.environment.VALIDATE_ALL_FIELD_URL + '/' + validatorName,
           serializedForm
         )
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
-        //...errors if any
         .catch((error: any) =>
           Observable.throw(error.json().error || 'Server error')
         )
@@ -57,10 +60,9 @@ export class ValidationService {
   getValidationRuleMetadata(validatorRule: string): Observable<any> {
     return (
       this.httpClient
-        .get(environment.VALIDATION_METADATA_URL + '/' + validatorRule)
+        .get(this.environment.VALIDATION_METADATA_URL + '/' + validatorRule)
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
-        //...errors if any
         .catch((error: any) =>
           Observable.throw(error.json().error || 'Server error')
         )
@@ -72,19 +74,19 @@ export class ValidationService {
      * On Save response = {"fieldErrors":[{"fieldId":"firstName","message":"First Name is required"},
      * {"fieldId":"lastName","message":"Last Name is required"},{"fieldId":"address","message":"We need at least one address from you."}]}
      */
-    let pageLevelErrors = [];
-    for (let error of fieldErrors) {
-      let fieldId = error.fieldId;
-      let $domElementObj = $('#' + fieldId);
-      if ($domElementObj.length == 0) {
+    const pageLevelErrors = [];
+    for (const error of fieldErrors) {
+      const fieldId = error.fieldId;
+      const $domElementObj = $('#' + fieldId);
+      if ($domElementObj.length === 0) {
         pageLevelErrors.push(error);
         continue;
       }
-      let errorMessage = error.message;
-      let errorMsgDivId = fieldId + 'ErrorMsg';
-      let $errorObject = $('#' + errorMsgDivId);
-      if ($errorObject.length == 0) {
-        let $errorDiv = $('<div>' + errorMessage + '</div>');
+      const errorMessage = error.message;
+      const errorMsgDivId = fieldId + 'ErrorMsg';
+      const $errorObject = $('#' + errorMsgDivId);
+      if ($errorObject.length === 0) {
+        const $errorDiv = $('<div>' + errorMessage + '</div>');
         $errorDiv.attr('id', errorMsgDivId);
         $errorDiv.addClass('alert-danger').addClass('alert');
         $errorDiv.insertAfter($domElementObj);

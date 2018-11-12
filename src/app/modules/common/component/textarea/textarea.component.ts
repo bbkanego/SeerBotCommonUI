@@ -2,25 +2,19 @@ import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnIni
 import * as JQuery from 'jquery';
 import { Subscription } from 'rxjs/Subscription';
 
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
+import { BaseCustomComponent } from '../BaseCustomComponent.component';
+import { SUBSCRIBER_TYPES } from '../../model/constants';
 
 const $ = JQuery;
 
 @Component({
-  selector: 'app-bk-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  selector: 'app-bk-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.css']
 })
-/**
- * Source of Calendar: /Users/bkane/svn/code/angular/primeng-master/components/calendar/calendar.ts
- */
-export class InputComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TextareaComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
   formResetSub: Subscription;
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
-  private input;
-
-  @Input() inputType = 'text';
 
   constructor(injector: Injector) {
     super(injector);

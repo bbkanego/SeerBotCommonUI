@@ -71,6 +71,7 @@ import { TextChat2ComponentComponent } from './component/chat/text-chat2-compone
 import { TableChatComponentComponent } from './component/chat/table-chat-component.component';
 import { ConfirmChatComponent } from './component/chat/confirm-chat.component';
 import { OptionsChatComponent } from './component/chat/options-chat.component';
+import { TextareaComponent } from './component/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     SelectComponent,
     FileUploadComponent,
     InputComponent,
+    TextareaComponent,
     ScrollToDirective,
     WebSocketDirective,
     IncludePartialDirective,
@@ -148,6 +150,7 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
     ErrorHandler,
     CustomTabMenu,
     InputComponent,
+    TextareaComponent,
     FilterArrayPipe,
     DataTableComponent,
     TreeChooserComponent,

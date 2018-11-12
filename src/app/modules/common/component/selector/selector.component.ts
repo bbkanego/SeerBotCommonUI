@@ -5,7 +5,7 @@ import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'bk-select',
+  selector: 'app-bk-select',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.css']
 })
@@ -13,7 +13,7 @@ export class SelectComponent extends BaseCustomComponent implements AfterViewIni
   private formResetSub: Subscription;
 
   @Input() options: Option[];
-  @ViewChild('selectWidget') selectWidget: ElementRef
+  @ViewChild('selectWidget') selectWidget: ElementRef;
 
   ngAfterViewInit(): void {
   }

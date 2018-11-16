@@ -27,16 +27,21 @@ export class SelectComponent extends BaseCustomComponent implements AfterViewIni
         this.currentFormGroup = null;
         this.initFormGroup();
       }
-    })
+    });
   }
 
   ngOnDestroy() {
     this.formResetSub.unsubscribe();
   }
 
+  /**
+   * This method is here for a reason. Do not remove since the parent class' "isInvalid" method 
+   * does not work for select.
+   */
   isInvalid() {
     return (
-      this.getFormControl().errors && this.currentFormGroup.invalid
+      this.getFormControl().errors && this.currentFormGroup.invalid 
+        && (this.currentForm.submitted || this.getFormControl().touched)
     );
   }
 }

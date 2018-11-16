@@ -63,7 +63,8 @@ export abstract class BaseCustomComponent {
 
   isInvalid() {
     return (
-      this.getFormControl().errors && this.currentFormGroup.invalid && (this.currentForm.submitted || this.elementBlurred)
+      this.getFormControl().errors && this.currentFormGroup.invalid 
+          && (this.currentForm.submitted || this.getFormControl().touched)
     );
   }
 

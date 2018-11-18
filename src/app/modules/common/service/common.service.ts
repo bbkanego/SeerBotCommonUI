@@ -11,6 +11,7 @@ import { HttpClient } from './httpClient.helper';
 @Injectable()
 export class CommonService {
   messages: {} = null;
+  cmsContent: {} = null;
   private environment;
 
   constructor(private httpClient: HttpClient, @Inject('environment') environment) {
@@ -23,18 +24,26 @@ export class CommonService {
    */
   getMessages(): void {
     if (this.messages == null) {
-      this.getMessagesLocal().subscribe((incomingMessages: any) => {
+      this.getMessagesLocal(this.environment.ALL_MESSAGES_URL).subscribe((incomingMessages: any) => {
         this.messages = incomingMessages;
+      });
+    }
+  }
+
+  getCmsContent(): void {
+    if (this.messages == null) {
+      this.getMessagesLocal(this.environment.GET_ALL_CMS_CONTENT).subscribe((incomingMessages: any) => {
+        this.cmsContent = incomingMessages;
       });
     }
   }
 
   /**
    */
-  private getMessagesLocal(): Observable<any> {
+  private getMessagesLocal(endPointUrl): Observable<any> {
     return (
       this.httpClient
-        .get(this.environment.ALL_MESSAGES_URL)
+        .get(endPointUrl)
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
         .catch((error: any) =>

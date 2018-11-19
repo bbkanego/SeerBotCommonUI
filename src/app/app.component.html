@@ -1,1 +1,21 @@
 <app-header>Such Header</app-header>
+<div class='container-fluid'>
+    <div class="row">
+      <div class="col-sm-12">
+<form [formGroup]="testForm" #myForm='ngForm' 
+
+    novalidate (ngSubmit)="save()">
+
+    <!-- We'll add our form controls here -->
+    <app-bk-input [currentFormGroup]='testForm' controlId='name' 
+    label='Name' currentFormControlName='name'></app-bk-input>
+
+    <app-bk-input [currentFormGroup]='testForm' controlId='lastName' 
+    label='Last Name' currentFormControlName='lastName'></app-bk-input>
+
+    <bk-button intent="success" label="Test me!"></bk-button>
+
+</form>
+</div>
+</div>
+</div>

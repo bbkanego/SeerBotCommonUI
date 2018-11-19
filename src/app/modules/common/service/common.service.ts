@@ -31,7 +31,7 @@ export class CommonService {
   }
 
   getCmsContent(): void {
-    if (this.messages == null) {
+    if (this.cmsContent == null) {
       this.getMessagesLocal(this.environment.GET_ALL_CMS_CONTENT).subscribe((incomingMessages: any) => {
         this.cmsContent = incomingMessages;
       });

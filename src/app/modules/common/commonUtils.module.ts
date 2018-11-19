@@ -73,6 +73,8 @@ import { ConfirmChatComponent } from './component/chat/confirm-chat.component';
 import { OptionsChatComponent } from './component/chat/options-chat.component';
 import { TextareaComponent } from './component/textarea/textarea.component';
 
+import {MatInputModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     ModalComponent,
@@ -143,7 +145,8 @@ import { TextareaComponent } from './component/textarea/textarea.component';
     ButtonModule,
     RouterModule,
     TreeModule,
-    FileUploadModule
+    FileUploadModule,
+    MatInputModule
   ],
   exports: [
     ModalComponent,

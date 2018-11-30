@@ -50,9 +50,9 @@ export { AuthenticationService } from './src/app/modules/common/service/authenti
 export { CrudService } from './src/app/modules/common/service/crud.service';
 export { HttpClient } from './src/app/modules/common/service/httpClient.helper';
 export { LoggerService } from './src/app/modules/common/service/logger.service';
-export { NotificationService } from './src/app/modules/common/service/notification.service';
+export { NotificationService, Notification } from './src/app/modules/common/service/notification.service';
 export { CommonService } from './src/app/modules/common/service/common.service';
-export { StompService } from './src/app/modules/common/service/stomp.service';
+export { StompService, Config } from './src/app/modules/common/service/stomp.service';
 export { Utils } from './src/app/modules/common/service/utils.service';
 export { ValidationService } from './src/app/modules/common/service/validation.services';
 export { SUBSCRIBER_TYPES, COMMON_CONST } from './src/app/modules/common/model/constants';

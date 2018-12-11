@@ -46,3 +46,5 @@ my-component-library-0.0.0.tgz
 
 .ng_pkg_build
 dist.tgz
+
+*.iml

@@ -1,8 +1,8 @@
-import {Component, Input, AfterViewInit, ViewChild, ElementRef, OnInit, OnDestroy} from '@angular/core';
-import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
-import {Option} from '../../../common/model/models';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
-import { Subscription } from 'rxjs/Subscription';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Option} from '../../model/models';
+import {SUBSCRIBER_TYPES} from '../../model/constants';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-bk-select',

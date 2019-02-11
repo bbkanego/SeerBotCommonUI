@@ -12,7 +12,7 @@ import { NotificationService } from '../../service/notification.service';
 export class TableChatComponentComponent extends BaseDynamicComponent implements OnInit {
 
   constructor(private router: Router, private notificationService: NotificationService) {
-    super()
+    super();
   }
 
   getChatData(): ChatData {

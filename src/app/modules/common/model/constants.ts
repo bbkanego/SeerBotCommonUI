@@ -13,7 +13,10 @@ export const SUBSCRIBER_TYPES = {
   TOGGLE_LOADER: 'ToggleLoader',
   FORM_GROUP_RESET: 'FormGroupReset',
   SHOW_HELP: 'ShowHelp',
-  HIDE_HELP: 'HideHelp'
+  HIDE_HELP: 'HideHelp',
+  ERROR_400: 'ERROR_400',
+  ERROR_207: 'ERROR_207',
+  ERROR_500: 'ERROR_500',
 };
 
 export const COMMON_CONST = {

@@ -19,8 +19,4 @@ export class AppComponent implements OnInit {
       }
     );
   }
-
-  save() {
-    
-  }
 }

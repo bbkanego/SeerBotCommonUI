@@ -16,15 +16,19 @@ import { AuthenticationService } from './authentication.service';
  * This is a helper which abstracts the HTTP POST and get and adds additional headers to the each request.
  */
 export class HttpClient {
-
   private timeoutObj;
 
-  constructor(private http: Http, private notificationService: NotificationService,
-    private authenticationService: AuthenticationService) {
-  }
+  constructor(
+    private http: Http,
+    private notificationService: NotificationService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   // tslint:disable-next-line:member-ordering
-  static createAuthorizationHeader(authenticationService: AuthenticationService, headers: Headers) {
+  static createAuthorizationHeader(
+    authenticationService: AuthenticationService,
+    headers: Headers
+  ) {
     const currentUser = JSON.parse(authenticationService.getCurrentUser());
     if (currentUser && currentUser.token) {
       /*headers.append('Authorization', 'Basic ' +
@@ -40,9 +44,31 @@ export class HttpClient {
   }
 
   private handleError(error: Response | any) {
+    console.log('Error, status code: ' + error.status);
     if (error.status === 401) {
-      this.notificationService.notifyAny(error, SUBSCRIBER_TYPES.FORCE_LOGOUT,
-        SUBSCRIBER_TYPES.FORCE_LOGOUT);
+      this.notificationService.notifyAny(
+        error,
+        SUBSCRIBER_TYPES.FORCE_LOGOUT,
+        SUBSCRIBER_TYPES.FORCE_LOGOUT
+      );
+    } else if (error.status === 400) {
+      this.notificationService.notifyAny(
+        error.json(),
+        SUBSCRIBER_TYPES.ERROR_400,
+        SUBSCRIBER_TYPES.ERROR_400
+      );
+    } else if (error.status === 207) {
+      this.notificationService.notifyAny(
+        error.json(),
+        SUBSCRIBER_TYPES.ERROR_207,
+        SUBSCRIBER_TYPES.ERROR_207
+      );
+    } else if (error.status === 500) {
+      this.notificationService.notifyAny(
+        error.json(),
+        SUBSCRIBER_TYPES.ERROR_500,
+        SUBSCRIBER_TYPES.ERROR_500
+      );
     }
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
@@ -53,28 +79,38 @@ export class HttpClient {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    this.notificationService.notify(error, SUBSCRIBER_TYPES.NETWORK_ERROR, SUBSCRIBER_TYPES.NETWORK_ERROR);
+    this.notificationService.notify(
+      error,
+      SUBSCRIBER_TYPES.NETWORK_ERROR,
+      SUBSCRIBER_TYPES.NETWORK_ERROR
+    );
     return Observable.throw(errMsg);
   }
 
   get(url): Observable<Response> {
-
     this.showLoader();
 
     const headers = new Headers();
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http.get(url, {
-      headers: headers
-    }).catch((err) => {
-      return this.handleError(err);
-    }).do((res: Response) => {
-      this.onSuccess(res);
-    }, (error: any) => {
-      this.onError(error);
-    }).finally(() => {
-      this.onEnd();
-    });
+    return this.http
+      .get(url, {
+        headers: headers
+      })
+      .catch(err => {
+        return this.handleError(err);
+      })
+      .do(
+        (response: Response) => {
+          return this.onSuccess(response);
+        },
+        (error: any) => {
+          this.onError(error);
+        }
+      )
+      .finally(() => {
+        this.onEnd();
+      });
   }
 
   post(url, serializedData): Observable<Response> {
@@ -82,17 +118,24 @@ export class HttpClient {
     const headers = new Headers();
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http.post(url, serializedData, {
-      headers: headers
-    }).catch((err) => {
-      return this.handleError(err);
-    }).do((res: Response) => {
-      this.onSuccess(res);
-    }, (error: any) => {
-      this.onError(error);
-    }).finally(() => {
-      this.onEnd();
-    });
+    return this.http
+      .post(url, serializedData, {
+        headers: headers
+      })
+      .catch(err => {
+        return this.handleError(err);
+      })
+      .do(
+        (res: Response) => {
+          this.onSuccess(res);
+        },
+        (error: any) => {
+          this.onError(error);
+        }
+      )
+      .finally(() => {
+        this.onEnd();
+      });
   }
 
   put(url, serializedData): Observable<Response> {
@@ -100,17 +143,24 @@ export class HttpClient {
     const headers = new Headers();
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http.put(url, serializedData, {
-      headers: headers
-    }).catch((err) => {
-      return this.handleError(err);
-    }).do((res: Response) => {
-      this.onSuccess(res);
-    }, (error: any) => {
-      this.onError(error);
-    }).finally(() => {
-      this.onEnd();
-    });
+    return this.http
+      .put(url, serializedData, {
+        headers: headers
+      })
+      .catch(err => {
+        return this.handleError(err);
+      })
+      .do(
+        (res: Response) => {
+          this.onSuccess(res);
+        },
+        (error: any) => {
+          this.onError(error);
+        }
+      )
+      .finally(() => {
+        this.onEnd();
+      });
   }
 
   delete(url: string, id: string): Observable<Response> {
@@ -118,17 +168,24 @@ export class HttpClient {
     const headers = new Headers();
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http.delete(url + '/' + id, {
-      headers: headers
-    }).catch((err) => {
-      return this.handleError(err);
-    }).do((res: Response) => {
-      this.onSuccess(res);
-    }, (error: any) => {
-      this.onError(error);
-    }).finally(() => {
-      this.onEnd();
-    });
+    return this.http
+      .delete(url + '/' + id, {
+        headers: headers
+      })
+      .catch(err => {
+        return this.handleError(err);
+      })
+      .do(
+        (res: Response) => {
+          this.onSuccess(res);
+        },
+        (error: any) => {
+          this.onError(error);
+        }
+      )
+      .finally(() => {
+        this.onEnd();
+      });
   }
 
   postMultipart(url, formData: FormData) {
@@ -136,25 +193,35 @@ export class HttpClient {
     const headers = new Headers();
     // do not set the content type. the browser will set that. if you set content type manually u will get error.
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http.post(url, formData, {
-      headers: headers
-    }).catch((err) => {
-      return this.handleError(err);
-    }).do((res: Response) => {
-      this.onSuccess(res);
-    }, (error: any) => {
-      this.onError(error);
-    }).finally(() => {
-      this.onEnd();
-    });
+    return this.http
+      .post(url, formData, {
+        headers: headers
+      })
+      .catch(err => {
+        return this.handleError(err);
+      })
+      .do(
+        (res: Response) => {
+          this.onSuccess(res);
+        },
+        (error: any) => {
+          this.onError(error);
+        }
+      )
+      .finally(() => {
+        this.onEnd();
+      });
   }
 
-  private onSuccess(res: Response): void {
-    console.log('Request successful');
+  private onSuccess(response: Response) {
+    console.log('Request successful, status: ' + response.status);
+    if (response.status !== 200) {
+      return this.handleError(response);
+    }
   }
 
   private onError(res: Response): void {
-    console.log('Error, status code: ' + res);
+    console.log('Error, status code: ' + res.status);
   }
 
   private onEnd(): void {
@@ -162,14 +229,20 @@ export class HttpClient {
   }
 
   private showLoader(): void {
-    this.notificationService.notifyAny(true, SUBSCRIBER_TYPES.TOGGLE_LOADER,
-      SUBSCRIBER_TYPES.TOGGLE_LOADER);
+    this.notificationService.notifyAny(
+      true,
+      SUBSCRIBER_TYPES.TOGGLE_LOADER,
+      SUBSCRIBER_TYPES.TOGGLE_LOADER
+    );
   }
 
   private hideLoader(): void {
     // clearTimeout(this.timeoutObj);
 
-    this.notificationService.notifyAny(false, SUBSCRIBER_TYPES.TOGGLE_LOADER,
-      SUBSCRIBER_TYPES.TOGGLE_LOADER);
+    this.notificationService.notifyAny(
+      false,
+      SUBSCRIBER_TYPES.TOGGLE_LOADER,
+      SUBSCRIBER_TYPES.TOGGLE_LOADER
+    );
   }
 }

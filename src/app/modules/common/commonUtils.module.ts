@@ -21,7 +21,7 @@ import {
 import { ButtonComponent } from './component/button/button.component';
 import { ChartComponent } from './component/chart/chart.component';
 import { SessionTimeoutComponent } from './component/sessiontimeout/sessionTimeout.component';
-// import { ErrorMessagesComponent } from './component/errorMessages/errorMessages.component';
+import { ErrorMessagesComponent } from './component/errorMessages/errorMessages.component';
 import { BaseReactiveComponent } from './component/baseReactive.component';
 import {
   TreeViewComponent,
@@ -98,7 +98,7 @@ import {MatInputModule} from '@angular/material';
     ScrollToDirective,
     WebSocketDirective,
     IncludePartialDirective,
-    // ErrorMessagesComponent,
+    ErrorMessagesComponent,
     ChartComponent,
     SessionTimeoutComponent,
     DynamicModalComponent,
@@ -123,7 +123,7 @@ import {MatInputModule} from '@angular/material';
     BaseReactiveComponent
   ],
   entryComponents: [
-    // ErrorMessagesComponent,
+    ErrorMessagesComponent,
     TextChatComponentComponent,
     TextChat2ComponentComponent,
     TableChatComponentComponent,
@@ -172,7 +172,7 @@ import {MatInputModule} from '@angular/material';
     ChartComponent,
     SessionTimeoutComponent,
     WebSocketDirective,
-    // ErrorMessagesComponent,
+    ErrorMessagesComponent,
     DynamicModalComponent,
     TreeViewComponent,
     TreeNodeComponent,

@@ -45,6 +45,7 @@ import { NotificationService } from './service/notification.service';
 import { LoggerService } from './service/logger.service';
 import { ValidationService } from './service/validation.services';
 import { HttpClient } from './service/httpClient.helper';
+import { CookieService } from './service/cookie.service';
 import { Utils } from './service/utils.service';
 
 // Guards
@@ -134,6 +135,7 @@ import {MatInputModule} from '@angular/material';
     ValidationService,
     HttpClient,
     LoggerService,
+    CookieService,
     PendingChangesGuard,
     Utils
   ],

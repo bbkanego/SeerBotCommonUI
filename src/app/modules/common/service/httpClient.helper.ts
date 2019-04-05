@@ -4,7 +4,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { SUBSCRIBER_TYPES } from '../../common/model/constants';
@@ -113,15 +113,23 @@ export class HttpClient {
       });
   }
 
-  post(url, serializedData): Observable<Response> {
+  post(
+    url,
+    serializedData,
+    inputHeaders?: [{ name: string; value: string }]
+  ): Observable<Response> {
     this.showLoader();
     const headers = new Headers();
+    if (inputHeaders) {
+      inputHeaders.forEach(header => {
+        headers.append(header.name, header.value);
+      });
+    }
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
+    const requestOptions = new RequestOptions({ headers: headers, withCredentials: true });
     return this.http
-      .post(url, serializedData, {
-        headers: headers
-      })
+      .post(url, serializedData, requestOptions)
       .catch(err => {
         return this.handleError(err);
       })

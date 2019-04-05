@@ -147,6 +147,7 @@ export {
   Notification
 } from './src/app/modules/common/service/notification.service';
 export { CommonService } from './src/app/modules/common/service/common.service';
+export { CookieService } from './src/app/modules/common/service/cookie.service';
 export {
   StompService,
   Config

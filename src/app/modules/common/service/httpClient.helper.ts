@@ -11,6 +11,11 @@ import { SUBSCRIBER_TYPES } from '../../common/model/constants';
 import { NotificationService } from '../../common/service/notification.service';
 import { AuthenticationService } from './authentication.service';
 
+export interface IntputHeader {
+  name: string;
+  value: string;
+}
+
 @Injectable()
 /**
  * This is a helper which abstracts the HTTP POST and get and adds additional headers to the each request.
@@ -116,7 +121,7 @@ export class HttpClient {
   post(
     url,
     serializedData,
-    inputHeaders?: [{ name: string; value: string }]
+    inputHeaders?: IntputHeader[]
   ): Observable<Response> {
     this.showLoader();
     const headers = new Headers();
@@ -127,7 +132,10 @@ export class HttpClient {
     }
     HttpClient.setCommonHeaders(headers);
     HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    const requestOptions = new RequestOptions({ headers: headers, withCredentials: true });
+    const requestOptions = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
     return this.http
       .post(url, serializedData, requestOptions)
       .catch(err => {

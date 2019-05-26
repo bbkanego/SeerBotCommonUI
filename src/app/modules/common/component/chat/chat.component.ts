@@ -106,6 +106,7 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewChe
       previousChatId: this.previousChatId,
       currentSessionId: this.currentSessionId,
       uniqueClientId: '',
+      authCode: '',
       response: ''
     };
     this.httpClient
@@ -125,6 +126,7 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewChe
       previousChatId: null,
       currentSessionId: null,
       uniqueClientId: '',
+      authCode: '',
       response: ''
     };
     this.httpClient
@@ -145,6 +147,7 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewChe
       previousChatId: this.previousChatId,
       currentSessionId: this.currentSessionId,
       uniqueClientId: '',
+      authCode: '',
       response: ''
     };
     if (appendRequest) {

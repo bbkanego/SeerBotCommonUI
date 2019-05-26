@@ -34,7 +34,7 @@ export class CustomFormControl extends FormControl {
     const REGEX_ONLY_NUMBERS = '[0-9]*$';
     const tempValidators = [];
     if (validationRules['required']) {
-      tempValidators.push(Validators.required)
+      tempValidators.push(Validators.required);
     }
 
     if (validationRules['validateMinMaxLength']) {

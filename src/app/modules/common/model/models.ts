@@ -27,4 +27,5 @@ export interface ChatData {
   previousChatId: string;
   currentSessionId: object;
   uniqueClientId: string;
+  authCode: string;
 }

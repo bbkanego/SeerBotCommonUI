@@ -149,7 +149,8 @@ export class Chat2Component
       previousChatId: this.previousChatId,
       currentSessionId: this.currentSessionId,
       uniqueClientId: this.uniqueClientId,
-      response: ''
+      response: '',
+      authCode: '',
     };
     this.httpClient
       .post(environment.SEND_CHAT_URL, JSON.stringify(message))
@@ -168,7 +169,8 @@ export class Chat2Component
       previousChatId: null,
       currentSessionId: null,
       uniqueClientId: this.uniqueClientId,
-      response: ''
+      response: '',
+      authCode: '',
     };
     this.httpClient
       .post(environment.SEND_CHAT_URL, JSON.stringify(message))
@@ -206,7 +208,8 @@ export class Chat2Component
       previousChatId: this.previousChatId,
       currentSessionId: this.currentSessionId,
       uniqueClientId: this.uniqueClientId,
-      response: ''
+      response: '',
+      authCode: '',
     };
     if (appendRequest) {
       this.chatMessages.push(message);

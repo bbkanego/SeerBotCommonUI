@@ -1,6 +1,6 @@
 <div [formGroup]="currentFormGroup" *ngIf="currentFormGroup">
   <label class="center-block"
-    >{{ label }}&nbsp;
+  >{{ label }}&nbsp;
     <span
       *ngIf="isRequired()"
       class="glyphicon glyphicon-asterisk icon-required"
@@ -14,9 +14,9 @@
       #selectWidget
       class="form-control"
     >
-      <option value="{{ option.value }}" *ngFor="let option of options">{{
+      <option value="{{ option.value }}" *ngFor="let option of options; let i = index">{{
         option.label
-      }}</option>
+        }}</option>
     </select>
   </label>
   <div *ngIf="isInvalid()" class="errorMessage">

@@ -1,21 +1,23 @@
 <app-header>Such Header</app-header>
 <div class='container-fluid'>
-    <div class="row">
-      <div class="col-sm-12">
-<form [formGroup]="testForm" #myForm='ngForm' 
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="testForm" novalidate (ngSubmit)="save()">
 
-    novalidate (ngSubmit)="save()">
+        <!-- We'll add our form controls here -->
+        <app-bk-input [currentFormGroup]='testForm' controlId='name'
+                      label='Name' currentFormControlName='name'></app-bk-input>
 
-    <!-- We'll add our form controls here -->
-    <app-bk-input [currentFormGroup]='testForm' controlId='name' 
-    label='Name' currentFormControlName='name'></app-bk-input>
+        <app-bk-input [currentFormGroup]='testForm' controlId='lastName'
+                      label='Last Name' currentFormControlName='lastName'></app-bk-input>
 
-    <app-bk-input [currentFormGroup]='testForm' controlId='lastName' 
-    label='Last Name' currentFormControlName='lastName'></app-bk-input>
+        <app-bk-select [currentFormGroup]='testForm' controlId='category'
+                       [options]='category'
+                       label='Last Name' currentFormControlName='category'></app-bk-select>
 
-    <bk-button intent="success" label="Test me!"></bk-button>
+        <bk-button intent="success" type="submit" label="Test me!"></bk-button>
 
-</form>
-</div>
-</div>
+      </form>
+    </div>
+  </div>
 </div>

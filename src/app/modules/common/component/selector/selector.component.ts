@@ -5,14 +5,11 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild,
-  Output,
-  EventEmitter
-} from '@angular/core';
-import { BaseCustomComponent } from '../BaseCustomComponent.component';
-import { Option } from '../../model/models';
-import { SUBSCRIBER_TYPES } from '../../model/constants';
-import { Subscription } from 'rxjs/Subscription';
+  ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Option} from '../../model/models';
+import {SUBSCRIBER_TYPES} from '../../model/constants';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-bk-select',
@@ -26,7 +23,11 @@ export class SelectComponent extends BaseCustomComponent
   @Input() options: Option[];
   @ViewChild('selectWidget') selectWidget: ElementRef;
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    if (!this.getFormControl().value) {
+      this.getFormControl().setValue(this.options[0].value);
+    }
+  }
 
   ngOnInit(): void {
     this.initFormGroup();
@@ -52,9 +53,7 @@ export class SelectComponent extends BaseCustomComponent
    */
   isInvalid() {
     return (
-      this.getFormControl().errors &&
-      this.currentFormGroup.invalid &&
-      (this.currentForm.submitted || this.getFormControl().touched)
+      this.getFormControl().errors && this.currentFormGroup.invalid && this.getFormControl().touched
     );
   }
 

@@ -1,11 +1,11 @@
-import { Input, Output, EventEmitter, Injectable, Injector } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
-import { COMMON_CONST } from '../../common/model/constants';
-import { CustomFormControl } from '../../common/model/controls';
-import { CommonService } from '../../common/service/common.service';
-import { ValidationService } from '../../common/service/validation.services';
-import { NotificationService } from '../../common/service/notification.service';
-import { LoggerService } from '../../common/service/logger.service';
+import {Input, Output, EventEmitter, Injectable, Injector} from '@angular/core';
+import {FormGroup, FormControl, FormGroupDirective} from '@angular/forms';
+import {COMMON_CONST} from '../../common/model/constants';
+import {CustomFormControl} from '../../common/model/controls';
+import {CommonService} from '../../common/service/common.service';
+import {ValidationService} from '../../common/service/validation.services';
+import {NotificationService} from '../../common/service/notification.service';
+import {LoggerService} from '../../common/service/logger.service';
 
 @Injectable()
 export abstract class BaseCustomComponent {
@@ -63,8 +63,7 @@ export abstract class BaseCustomComponent {
 
   isInvalid() {
     return (
-      this.getFormControl().errors && this.currentFormGroup.invalid 
-          && (this.currentForm.submitted || this.getFormControl().touched)
+      this.getFormControl().errors && this.currentFormGroup.invalid && this.getFormControl().touched
     );
   }
 
@@ -80,10 +79,10 @@ export abstract class BaseCustomComponent {
       return this.commonService.messages['message.field.required'];
     } else if (this.getFormControl().errors.minlength) {
       return this.commonService.messages['message.field.lessthan']
-                + ' ' + this.getFormControl().errors.minlength.requiredLength;
+        + ' ' + this.getFormControl().errors.minlength.requiredLength;
     } else if (this.getFormControl().errors.maxlength) {
       return this.commonService.messages['message.field.morethan']
-                + ' ' + this.getFormControl().errors.minlength.requiredLength;
+        + ' ' + this.getFormControl().errors.minlength.requiredLength;
     } else if (this.getFormControl().errors.invalidChars) {
       if (this.getFormControl().validationRules['containsCharsMessage']) {
         const containsCharsMessage = this.getFormControl().validationRules['containsCharsMessage'];
@@ -95,7 +94,7 @@ export abstract class BaseCustomComponent {
       return this.commonService.messages['message.field.invalidstring']
     } else if (this.getFormControl().errors.max) {
       return this.commonService.messages['message.field.shouldbelessthan']
-              +  ' ' + this.getFormControl().errors.max.max;
+        + ' ' + this.getFormControl().errors.max.max;
     } else if (this.getFormControl().errors.pattern) {
       return 'Invalid data entered';
     } else if (this.getFormControl().errors.invalidFloat) {
@@ -115,5 +114,19 @@ export abstract class BaseCustomComponent {
     if (this.controlId == null) {
       this.controlId = this.currentFormControlName;
     }
+  }
+
+  /**
+   * Marks all controls in a form group as touched
+   * @param formGroup - The form group to touch
+   */
+  protected markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      if (control.controls) { // control is a FormGroup
+        this.markFormGroupTouched(control);
+      } else { // control is a FormControl
+        control.markAsTouched();
+      }
+    });
   }
 }

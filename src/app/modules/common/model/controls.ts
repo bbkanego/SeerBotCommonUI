@@ -40,18 +40,18 @@ export class CustomFormControl extends FormControl {
     if (validationRules['validateMinMaxLength']) {
       const maxLength = validationRules['vars'].maxLength.value;
       const minLength = validationRules['vars'].minLength.value;
-      tempValidators.push(Validators.minLength(minLength))
-      tempValidators.push(Validators.maxLength(maxLength))
+      tempValidators.push(Validators.minLength(minLength));
+      tempValidators.push(Validators.maxLength(maxLength));
     }
 
     if (validationRules['validateMaxLength']) {
       const maxLength = validationRules['vars'].maxLength.value;
-      tempValidators.push(Validators.maxLength(maxLength))
+      tempValidators.push(Validators.maxLength(maxLength));
     }
 
     if (validationRules['validateMinLength']) {
       const minLength = validationRules['vars'].minLength.value;
-      tempValidators.push(Validators.minLength(minLength))
+      tempValidators.push(Validators.minLength(minLength));
     }
 
     if (validationRules['validateValues']) {

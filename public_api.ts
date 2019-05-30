@@ -163,3 +163,6 @@ export {
 export {
     ErrorMessagesComponent
 } from './src/app/modules/common/component/errorMessages/errorMessages.component';
+export {
+  CustomValidator
+} from './src/app/modules/common/validator/custom.validator';

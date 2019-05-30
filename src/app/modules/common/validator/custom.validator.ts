@@ -9,11 +9,11 @@ const moment = _moment;
 // @dynamic
 export class CustomValidator {
 
-  static validateDateFormat(format: string) {
-    return (control: AbstractControl) => {
+  static validateDateFormat(format: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
       const isValid = moment(control.value, format.toUpperCase(), true).isValid();
       return isValid ? null : {'invalidDateFormat': true};
-    }
+    };
   }
 
   /**
@@ -23,10 +23,10 @@ export class CustomValidator {
   static isSelectValid(notAllowedValue?: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value || control.value.length === 0 || control.value === '_NONE_' || control.value === notAllowedValue) {
-        return {invalidSelect: true};
+        return {required: true};
       }
       return null;
-    }
+    };
   }
 
   static hasPunctuation(punctuation: string, errorType: string) {
@@ -58,8 +58,8 @@ export class CustomValidator {
     };
   }
 
-  static containsAllowedString(allowedStrings: string) {
-    return (input: AbstractControl) => {
+  static containsAllowedString(allowedStrings: string): ValidatorFn {
+    return (input: AbstractControl): { [key: string]: any } => {
       const allowedStrArray: string[] = allowedStrings.split(',');
       let containsVal = false;
       for (const val of allowedStrArray) {

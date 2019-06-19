@@ -11,7 +11,6 @@ import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
 export class CheckboxComponent extends BaseCustomComponent
   implements OnInit, OnDestroy {
 
-  formResetSub: Subscription;
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
 
   constructor(injector: Injector) {
@@ -19,21 +18,10 @@ export class CheckboxComponent extends BaseCustomComponent
   }
 
   ngOnDestroy(): void {
-    this.formResetSub.unsubscribe();
   }
 
   ngOnInit() {
     this.initFormGroup();
-
-    this.formResetSub = this.notificationService
-      .onNotification()
-      .subscribe((eventData: any) => {
-        if (eventData.type === SUBSCRIBER_TYPES.FORM_GROUP_RESET) {
-          this.currentForm.form = eventData.message;
-          this.currentFormGroup = null;
-          this.initFormGroup();
-        }
-      });
   }
 
   onBlurEvent(event) {

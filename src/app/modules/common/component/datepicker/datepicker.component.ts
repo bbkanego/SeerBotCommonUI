@@ -59,7 +59,6 @@ export interface LocaleSettings {
  */
 export class DatePickerComponent extends BaseCustomComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  formResetSub: Subscription;
   private nativeElem: any;
   @ViewChild('bkCalendarInput') bkCalendarInput: ElementRef;
   showDateContainer = false;
@@ -203,18 +202,9 @@ export class DatePickerComponent extends BaseCustomComponent
     this.createMonth(this.currentMonth, this.currentYear);
 
     this.initFormGroup();
-
-    this.formResetSub = this.notificationService.onNotification().subscribe((eventData: any) => {
-      if (eventData.type === SUBSCRIBER_TYPES.FORM_GROUP_RESET) {
-        this.currentForm.form = eventData.message;
-        this.currentFormGroup = null;
-        this.initFormGroup();
-      }
-    })
   }
 
   ngOnDestroy() {
-    this.formResetSub.unsubscribe();
   }
 
   ngAfterViewInit() {

@@ -16,7 +16,6 @@ const $ = JQuery;
  * Source of Calendar: /Users/bkane/svn/code/angular/primeng-master/components/calendar/calendar.ts
  */
 export class InputComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
-  formResetSub: Subscription;
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
   private input;
 
@@ -28,23 +27,12 @@ export class InputComponent extends BaseCustomComponent implements OnInit, After
 
   ngOnInit(): void {
     this.initFormGroup();
-
-    this.formResetSub = this.notificationService.onNotification().subscribe((eventData: any) => {
-      if (eventData.type === SUBSCRIBER_TYPES.FORM_GROUP_RESET) {
-        this.currentForm.form = eventData.message;
-        this.currentFormGroup = null;
-        this.initFormGroup();
-      }
-    })
   }
 
   ngAfterViewInit() {
   }
 
   ngOnDestroy() {
-    if (this.formResetSub) {
-      this.formResetSub.unsubscribe();
-    }
   }
 
   onBlurEvent($event) {

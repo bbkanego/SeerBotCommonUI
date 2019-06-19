@@ -18,7 +18,6 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class SelectComponent extends BaseCustomComponent
   implements AfterViewInit, OnInit, OnDestroy {
-  private formResetSub: Subscription;
 
   @Input() options: Option[];
   @ViewChild('selectWidget') selectWidget: ElementRef;
@@ -31,20 +30,9 @@ export class SelectComponent extends BaseCustomComponent
 
   ngOnInit(): void {
     this.initFormGroup();
-
-    this.formResetSub = this.notificationService
-      .onNotification()
-      .subscribe((eventData: any) => {
-        if (eventData.type === SUBSCRIBER_TYPES.FORM_GROUP_RESET) {
-          this.currentForm.form = eventData.message;
-          this.currentFormGroup = null;
-          this.initFormGroup();
-        }
-      });
   }
 
   ngOnDestroy() {
-    this.formResetSub.unsubscribe();
   }
 
   /**

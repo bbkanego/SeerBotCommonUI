@@ -13,7 +13,6 @@ const $ = JQuery;
   styleUrls: ['./textarea.component.css']
 })
 export class TextareaComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
-  formResetSub: Subscription;
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
 
   constructor(injector: Injector) {
@@ -22,23 +21,12 @@ export class TextareaComponent extends BaseCustomComponent implements OnInit, Af
 
   ngOnInit(): void {
     this.initFormGroup();
-
-    this.formResetSub = this.notificationService.onNotification().subscribe((eventData: any) => {
-      if (eventData.type === SUBSCRIBER_TYPES.FORM_GROUP_RESET) {
-        this.currentForm.form = eventData.message;
-        this.currentFormGroup = null;
-        this.initFormGroup();
-      }
-    })
   }
 
   ngAfterViewInit() {
   }
 
   ngOnDestroy() {
-    if (this.formResetSub) {
-      this.formResetSub.unsubscribe();
-    }
   }
 
   onBlurEvent($event) {

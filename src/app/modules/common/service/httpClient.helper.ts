@@ -84,7 +84,7 @@ export class HttpClient {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    this.notificationService.notify(
+    this.notificationService.notifyAny(
       error,
       SUBSCRIBER_TYPES.NETWORK_ERROR,
       SUBSCRIBER_TYPES.NETWORK_ERROR

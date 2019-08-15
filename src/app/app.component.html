@@ -1,22 +1,43 @@
 <app-header>Such Header</app-header>
-<div class='container-fluid'>
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
       <form [formGroup]="testForm" novalidate (ngSubmit)="save()">
-
         <!-- We'll add our form controls here -->
-        <app-bk-input [currentFormGroup]='testForm' controlId='name'
-                      label='Name' currentFormControlName='name'></app-bk-input>
+        <app-bk-input
+          [currentFormGroup]="testForm"
+          controlId="name"
+          label="Name"
+          currentFormControlName="name"
+        ></app-bk-input>
 
-        <app-bk-input [currentFormGroup]='testForm' controlId='lastName'
-                      label='Last Name' currentFormControlName='lastName'></app-bk-input>
+        <app-bk-input
+          [currentFormGroup]="testForm"
+          controlId="lastName"
+          label="Last Name"
+          currentFormControlName="lastName"
+        ></app-bk-input>
 
-        <app-bk-select [currentFormGroup]='testForm' controlId='category'
-                       [options]='category'
-                       label='Last Name' currentFormControlName='category'></app-bk-select>
+        <app-bk-select
+          [currentFormGroup]="testForm"
+          controlId="category"
+          [options]="category"
+          label="Last Name"
+          currentFormControlName="category"
+        >
+        </app-bk-select>
 
+        <app-bk-multi-select
+          [currentFormGroup]="testForm"
+          controlId="multiSelectCategoryId"
+          (onSelect)='showSelectedValues($event)'
+          [options]="category"
+          label="Last Name"
+          [startingValues]='null'
+          currentFormControlName="multiSelectCategory"
+        >
+        </app-bk-multi-select>
         <bk-button intent="success" type="submit" label="Test me!"></bk-button>
-
       </form>
     </div>
   </div>

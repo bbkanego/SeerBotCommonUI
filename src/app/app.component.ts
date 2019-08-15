@@ -1,10 +1,9 @@
-import {Component, OnInit, Injector} from '@angular/core';
-import {FormGroup, Validators, AbstractControl} from '@angular/forms';
-import {CustomFormControl} from './modules/common/model/controls';
-import {Option} from "./modules/common/model/models";
-import {CustomValidator} from "./modules/common/validator/custom.validator";
-import {CommonService} from "./modules/common/service/common.service";
-import {BaseCustomComponent} from "./modules/common/component/BaseCustomComponent.component";
+import { Component, Injector, OnInit } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { BaseCustomComponent } from "./modules/common/component/BaseCustomComponent.component";
+import { CustomFormControl } from './modules/common/model/controls';
+import { Option } from "./modules/common/model/models";
+import { CustomValidator } from "./modules/common/validator/custom.validator";
 
 @Component({
   selector: 'app-root',
@@ -15,22 +14,25 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   title = 'app';
   testForm: FormGroup;
   category: Option[];
+  multiSelectStartValues: string[] = [];
+  selectedValuesForMultiSelect: string[] = [];
 
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
+    this.multiSelectStartValues = ['cat1', 'cat3', 'cat4'];
     this.commonService.messages = {
       'message.field.required': 'This is required!'
     };
 
     this.category = [
-      {value: '_NONE_', label: 'Select'},
-      {value: 'cat1', label: 'Tennis'},
-      {value: 'cat2', label: 'Golf'},
-      {value: 'cat3', label: 'Football'},
-      {value: 'cat3', label: 'Soccer'}
+      { value: '_NONE_', label: 'Select' },
+      { value: 'cat1', label: 'Tennis' },
+      { value: 'cat2', label: 'Golf' },
+      { value: 'cat3', label: 'Football' },
+      { value: 'cat4', label: 'Soccer' }
     ];
     this.testForm = new FormGroup(
       {
@@ -39,7 +41,9 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
         'lastName': new CustomFormControl(null, null,
           [Validators.required], null),
         'category': new CustomFormControl(null, null,
-          [CustomValidator.isSelectValid('cat2')], null)
+          [CustomValidator.isSelectValid('cat2')], null),
+        'multiSelectCategory': new CustomFormControl(null, null,
+            [Validators.required], null)
       }
     );
   }
@@ -47,5 +51,10 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   save() {
     this.markFormGroupTouched(this.testForm);
     console.log(this.testForm.valid);
+  }
+
+  showSelectedValues(values) {
+    console.log(values);
+    this.selectedValuesForMultiSelect = values;
   }
 }

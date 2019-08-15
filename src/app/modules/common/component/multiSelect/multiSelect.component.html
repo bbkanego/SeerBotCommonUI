@@ -1,0 +1,56 @@
+<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup">
+  <label class="center-block"
+    >{{ label }}&nbsp;
+    <span
+      *ngIf="isRequired()"
+      class="glyphicon glyphicon-asterisk icon-required"
+    ></span>
+
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        (focus)='onFocusEvent($event)'
+        data-toggle="dropdown">
+        {{ showSelectedValues() }}
+        <span class="caret"> </span>
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let option of options; let i = index">
+          <label>
+            <input *ngIf='option.value && option.value != "_NONE_"'
+              type="checkbox"
+              (focus)='onFocusEvent($event)'
+              (change)='onChange($event)'
+              [attr.checked]='isSelected(option.value) ? true : null'
+              (click)="selectValue($event)"
+              value="{{ option.value }}"
+            />
+            {{ option.label }}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <select
+      [id]="controlId"
+      [attr.multiple]="multiple === true ? 'multiple' : null"
+      [attr.size]="size != -1 ? size : null"
+      (change)="onChange($event)"
+      (focus)="onFocusEvent($event)"
+      (blur)="onBlurEvent($event)"
+      [formControlName]="currentFormControlName"
+      #selectWidget
+      class="form-control"
+    >
+      <option
+        value="{{ option.value }}"
+        *ngFor="let option of options; let i = index"
+        >{{ option.label }}</option
+      >
+    </select> -->
+  </label>
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{ getErrorMessage() }}
+  </div>
+</div>

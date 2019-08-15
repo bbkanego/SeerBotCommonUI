@@ -75,9 +75,11 @@ import { OptionsChatComponent } from './component/chat/options-chat.component';
 import { TextareaComponent } from './component/textarea/textarea.component';
 
 import {MatInputModule} from '@angular/material';
+import { MultiSelectComponent } from './component/multiSelect/multiSelect.component';
 
 @NgModule({
   declarations: [
+    MultiSelectComponent,
     ModalComponent,
     ErrorHandler,
     CustomTabMenu,
@@ -151,6 +153,7 @@ import {MatInputModule} from '@angular/material';
     MatInputModule
   ],
   exports: [
+    MultiSelectComponent,
     ModalComponent,
     ErrorHandler,
     CustomTabMenu,

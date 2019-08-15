@@ -5,11 +5,11 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
-import {Option} from '../../model/models';
-import {SUBSCRIBER_TYPES} from '../../model/constants';
-import {Subscription} from 'rxjs/Subscription';
+  ViewChild
+} from '@angular/core';
+import { BaseCustomComponent } from '../BaseCustomComponent.component';
+import { Option } from '../../model/models';
+import { CustomValidator } from '../../validator/custom.validator';
 
 @Component({
   selector: 'app-bk-select',
@@ -29,6 +29,9 @@ export class SelectComponent extends BaseCustomComponent
   }
 
   ngOnInit(): void {
+    if (this.getFormControl().validationRules['required']) {
+      this.getFormControl().setValidators([CustomValidator.isSelectValid()]);
+    }
     this.initFormGroup();
   }
 

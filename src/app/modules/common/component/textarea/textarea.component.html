@@ -6,7 +6,9 @@
     add bk-validate-onblur [bkValidatorRule]="validationRule" for server side validation below
     -->
     <textarea #bkInputWidget autocomplete="off" [id]="controlId" (blur)="onBlurEvent($event)"
+      [attr.maxLength]="textAreaLength > 0 ? textAreaLength : null"
       [formControlName]="currentFormControlName" class="form-control"></textarea>
+    {{getNumberOfCharsLeft()}}
   </label>
   <div *ngIf="isInvalid()" class="errorMessage">
     {{getErrorMessage()}}

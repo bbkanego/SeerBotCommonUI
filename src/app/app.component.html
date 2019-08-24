@@ -11,12 +11,13 @@
           currentFormControlName="name"
         ></app-bk-input>
 
-        <app-bk-input
+        <app-bk-textarea
           [currentFormGroup]="testForm"
           controlId="lastName"
           label="Last Name"
+          textAreaLength='3000'
           currentFormControlName="lastName"
-        ></app-bk-input>
+        ></app-bk-textarea>
 
         <app-bk-select
           [currentFormGroup]="testForm"
@@ -33,11 +34,24 @@
           (onSelect)='showSelectedValues($event)'
           [options]="category"
           label="Last Name"
-          [startingValues]='null'
+          [startingValues]='multiSelectStartValues'
           currentFormControlName="multiSelectCategory"
         >
         </app-bk-multi-select>
+        {{multiSelectStartValues.join()}}
+        <app-bk-multi-select
+          [currentFormGroup]="testForm"
+          controlId="multiSelectCategoryId2"
+          (onSelect)='showSelectedValues2($event)'
+          [options]="category"
+          label="Categories"
+          [startingValues]='multiSelectStartValues2'
+          currentFormControlName="multiSelectCategory2"
+        >
+        </app-bk-multi-select>
+        {{multiSelectStartValues2.join()}}
         <bk-button intent="success" type="submit" label="Test me!"></bk-button>
+        <bk-button intent="success" type="button" (onClick)='changeMultiSelectValues($event)' label="Change Multi-select Values"></bk-button>
       </form>
     </div>
   </div>

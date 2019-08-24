@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Option } from '../../model/models';
 import { CustomValidator } from '../../validator/custom.validator';
 import { BaseCustomComponent } from '../BaseCustomComponent.component';
@@ -9,12 +9,12 @@ import { BaseCustomComponent } from '../BaseCustomComponent.component';
   styleUrls: ['./multiSelect.component.css']
 })
 export class MultiSelectComponent extends BaseCustomComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() options: Option[];
   @ViewChild('selectWidget') selectWidget: ElementRef;
   selectedValues: string[] = [];
-  @Input() startingValues: string[] = [];
+  @Input() startingValues: any[] = [];
   @Input() noneLabel = 'None Selected';
 
   constructor(injector: Injector) {
@@ -22,15 +22,22 @@ export class MultiSelectComponent extends BaseCustomComponent
   }
 
   isSelected(valueToCheck: string): boolean {
-    return this.startingValues && this.startingValues.indexOf(valueToCheck) !== -1;
+    return this.selectedValues && this.selectedValues.indexOf(valueToCheck) !== -1;
   }
 
   ngOnInit(): void {
     this.initFormGroup();
+  }
+
+  ngAfterViewInit() {
+    this.selectedValues = [];
+    // this.startingValues = [];
     if (this.startingValues) {
-      this.startingValues.forEach((value) => {
-        this.selectedValues.push(value);
+      this.startingValues.forEach((startValue) => {
+        this.selectedValues.push(startValue.value);
       });
+    } else {
+      this.selectedValues = [];
     }
     this.setControlValue();
 
@@ -79,9 +86,17 @@ export class MultiSelectComponent extends BaseCustomComponent
     }
   }
 
-  showSelectedValues(): string {
+  get showSelectedValues(): string {
+    const selectedLabels: string[] = [];
     if (this.selectedValues.length > 0) {
-      return this.selectedValues.join();
+      this.selectedValues.forEach((value) => {
+        this.options.forEach(option => {
+          if (option.value === value) {
+            selectedLabels.push(option.label);
+          }
+        });
+      });
+      return selectedLabels.join();
     }
     return this.noneLabel;
   }

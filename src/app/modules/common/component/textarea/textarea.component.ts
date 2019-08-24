@@ -15,12 +15,24 @@ const $ = JQuery;
 export class TextareaComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
 
+  @Input() textAreaLength: number = null;
+
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
     this.initFormGroup();
+    const validationRules = this.getFormControl().validationRules;
+    if (validationRules['validateMaxLength']) {
+      this.textAreaLength = validationRules['vars'].maxLength.value;
+    }
+  }
+
+  getNumberOfCharsLeft(): string {
+    if (!this.textAreaLength || !this.getFormControl().value) { return null; }
+
+    return this.textAreaLength - this.getFormControl().value.length + ' chars left';
   }
 
   ngAfterViewInit() {

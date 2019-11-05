@@ -1,21 +1,22 @@
-<app-header>Such Header</app-header>
+<app-header>Kitchen Sink!</app-header>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="white-space: nowrap">
       <form [formGroup]="testForm" novalidate (ngSubmit)="save()">
         <!-- We'll add our form controls here -->
-        <app-bk-input
-          [currentFormGroup]="testForm"
-          controlId="name"
-          label="Name"
-          currentFormControlName="name"
-        ></app-bk-input>
+        <label class="center-block" for="name">Name
+          <span class="glyphicon glyphicon-asterisk icon-required"></span>
+          <app-bk-input
+            [currentFormGroup]="testForm"
+            controlId="name"
+            currentFormControlName="name"></app-bk-input>
+        </label>
 
         <app-bk-textarea
           [currentFormGroup]="testForm"
           controlId="lastName"
           label="Last Name"
-          textAreaLength='3000'
+          textAreaLength="3000"
           currentFormControlName="lastName"
         ></app-bk-textarea>
 
@@ -24,34 +25,35 @@
           controlId="category"
           [options]="category"
           label="Last Name"
-          currentFormControlName="category"
-        >
+          currentFormControlName="category">
         </app-bk-select>
 
         <app-bk-multi-select
           [currentFormGroup]="testForm"
           controlId="multiSelectCategoryId"
-          (onSelect)='showSelectedValues($event)'
+          (onSelect)="showSelectedValues($event)"
           [options]="category"
           label="Last Name"
-          [startingValues]='multiSelectStartValues'
-          currentFormControlName="multiSelectCategory"
-        >
+          [startingValues]="multiSelectStartValues"
+          currentFormControlName="multiSelectCategory">
         </app-bk-multi-select>
-        {{multiSelectStartValues.join()}}
+        {{ multiSelectStartValues.join() }}
         <app-bk-multi-select
           [currentFormGroup]="testForm"
           controlId="multiSelectCategoryId2"
-          (onSelect)='showSelectedValues2($event)'
+          (onSelect)="showSelectedValues2($event)"
           [options]="category"
           label="Categories"
-          [startingValues]='multiSelectStartValues2'
-          currentFormControlName="multiSelectCategory2"
-        >
+          [startingValues]="multiSelectStartValues2"
+          currentFormControlName="multiSelectCategory2">
         </app-bk-multi-select>
-        {{multiSelectStartValues2.join()}}
+        {{ multiSelectStartValues2.join() }}
         <bk-button intent="success" type="submit" label="Test me!"></bk-button>
-        <bk-button intent="success" type="button" (onClick)='changeMultiSelectValues($event)' label="Change Multi-select Values"></bk-button>
+        <bk-button
+          intent="success"
+          type="button"
+          (onClick)="changeMultiSelectValues($event)"
+          label="Change Multi-select Values"></bk-button>
       </form>
     </div>
   </div>

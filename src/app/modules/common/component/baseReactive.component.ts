@@ -2,7 +2,8 @@ import {
     AbstractControl,
     FormArray,
     FormGroup,
-    ValidationErrors
+    ValidationErrors,
+    FormControl
 } from '@angular/forms';
 import { CustomFormControl } from '../../common/model/controls';
 import { NotificationService } from '../../common/service/notification.service';
@@ -41,7 +42,7 @@ function getFormValidationErrors(controls: FormGroupControls): AllValidationErro
     return errors;
 }
 
-@Directive({selector: 'app-base-reactive-componet'})
+@Directive({ selector: 'app-base-reactive-component' })
 export class BaseReactiveComponent extends BaseCustomComponent {
     constructor(injector: Injector) {
         super(injector);
@@ -239,5 +240,21 @@ export class BaseReactiveComponent extends BaseCustomComponent {
         $('html, body').animate({
             scrollTop: scrollToElement.offset().top
         }, 500);
+    }
+
+    countControls(control: AbstractControl): number {
+        if (control instanceof FormControl) {
+            return 1;
+        }
+
+        if (control instanceof FormArray) {
+            return control.controls.reduce((acc, curr) => acc + this.countControls(curr), 1);
+        }
+
+        if (control instanceof FormGroup) {
+            return Object.keys(control.controls)
+                .map(key => control.controls[key])
+                .reduce((acc, curr) => acc + this.countControls(curr), 1);
+        }
     }
 }

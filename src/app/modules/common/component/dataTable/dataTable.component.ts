@@ -187,6 +187,7 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   sortingImage: string = 'glyphicon-resize-vertical';
 
   @Input() smallDeviceHeader: string;
+  @Input() noResultsFoundHeader = 'No items found for your search criteria';
 
   // this will be NgModel bound
   filterValue: string;

@@ -82,7 +82,7 @@ export abstract class BaseCustomComponent {
         + ' ' + this.getFormControl().errors.minlength.requiredLength;
     } else if (this.getFormControl().errors.maxlength) {
       return this.commonService.messages['message.field.morethan']
-        + ' ' + this.getFormControl().errors.minlength.requiredLength;
+        + ' ' + this.getFormControl().errors.maxlength.requiredLength;
     } else if (this.getFormControl().errors.invalidChars) {
       if (this.getFormControl().validationRules['containsCharsMessage']) {
         const containsCharsMessage = this.getFormControl().validationRules['containsCharsMessage'];

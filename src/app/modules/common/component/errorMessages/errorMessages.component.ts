@@ -6,13 +6,14 @@ import {
   ElementRef,
   AfterViewInit
 } from '@angular/core';
-import { NotificationService } from '../../../common/service/notification.service';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
+import { NotificationService } from '../../service/notification.service';
+import { SUBSCRIBER_TYPES } from '../../model/constants';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-bk-error-messages',
-  templateUrl: './errorMessages.component.html'
+  templateUrl: './errorMessages.component.html',
+  styleUrls: ['./errorMessages.component.css']
 })
 export class ErrorMessagesComponent
   implements OnInit, OnDestroy, AfterViewInit {
@@ -89,5 +90,9 @@ export class ErrorMessagesComponent
         this.errorMessage = null;
       }
     });
+  }
+
+  hideErrorContainer() {
+    this.errorContainer.nativeElement.style.display = 'none';
   }
 }

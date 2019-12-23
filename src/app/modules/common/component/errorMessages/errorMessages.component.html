@@ -3,7 +3,9 @@
 -->
 <div class="container-fluid" scrollTo>
   <div class="row" #errorContainer>
-    <div class="form-group" *ngIf="hasErrorMessages || fieldErrors" class="alert alert-danger tp-20margin">
+    <div *ngIf="hasErrorMessages || fieldErrors" class="errorMessage alert alert-danger tp-20margin">
+      <div (click)='hideErrorContainer()' class="action"><span class="actionIcon glyphicon glyphicon-remove"></span>
+      </div>
       <h4>There were errors. Please fix before proceeding!</h4>
       <ul *ngIf="hasErrorMessages" class="error-bullet">
         <li *ngFor="let errorMessage of errorMessages; let i=index">
@@ -11,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="form-group" *ngIf="errorMessage != null" class="alert alert-danger tp-20margin">
+    <div *ngIf="errorMessage != null" class="alert alert-danger tp-20margin">
       <h4>There were errors. Please fix before proceeding!</h4>
       <ul class="error-bullet">
         <li>

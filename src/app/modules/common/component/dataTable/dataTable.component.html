@@ -111,7 +111,7 @@
     </ng-template>
     <tr *ngIf="dataColumnsArray">
       <td [attr.colspan]="dataColumnsArray.length" style="text-align: center" class="visible-lg visible-md">
-        <ul class="pagination" style="margin-top: 0;margin-bottom: 0">
+        <ul class="pagination pagination-sm" style="margin-top: 0;margin-bottom: 0">
           <li>
             <a class="btn {{(currentPage === 1)? 'disabled': ''}}" (click)="goToPage(1)" aria-label="First"
               title="Got to the first record">

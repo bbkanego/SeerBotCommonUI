@@ -17,7 +17,9 @@ export {
   Option,
   Account,
   ChatData,
-  Login
+  Login,
+  ChartData,
+  ChartDataSet
 } from './src/app/modules/common/model/models';
 export {
   ButtonComponent

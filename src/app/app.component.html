@@ -52,9 +52,15 @@
         <bk-button
           intent="success"
           type="button"
-          (onClick)="changeMultiSelectValues($event)"
+          (onClick)="changeMultiSelectValues()"
           label="Change Multi-select Values"></bk-button>
       </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12" style="white-space: nowrap">
+      <app-bk-chart [chartData]="chartData"></app-bk-chart>
     </div>
   </div>
 </div>

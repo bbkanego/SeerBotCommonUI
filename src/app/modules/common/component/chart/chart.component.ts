@@ -1,27 +1,26 @@
-import {Component, OnInit, ElementRef, ViewChild, SimpleChanges, OnDestroy,
-  Input, OnChanges, AfterViewInit} from '@angular/core';
-import Chart from 'chart.js';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 
-import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+import {Chart} from 'chart.js';
+import {ChartData} from '../../model/models';
 
 @Component({
-  selector: 'bk-chart',
+  selector: 'app-bk-chart',
   templateUrl: './chart.component.html'
 })
-export class ChartComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-  @Input() type:string = 'pie';
-  _data:any = null;
-  @ViewChild('chart') chartElement:ElementRef;
-  chart:any = null;
-
-  @Input() get data():any {
-    return this._data;
-  }
-
-  set data(val:any) {
-    this._data = val;
-    this.reInit();
-  }
+export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  @Input() chartData: ChartData = null;
+  @ViewChild('chart') chartElement: ElementRef;
+  chart: Chart = null;
 
   reInit() {
     if (this.chart) {
@@ -32,46 +31,26 @@ export class ChartComponent extends BaseCustomComponent implements OnInit, After
 
   initChart() {
     if (this.chartElement) {
-      let donutCtx = this.chartElement.nativeElement.getContext('2d');
-      // https://www.sitepoint.com/introduction-chart-js-2-0-six-examples/
-      this.chart = new Chart(donutCtx, {
-        type: 'bar',
+      const chartContext = this.chartElement.nativeElement.getContext('2d');
+      /**
+       * Very good examples here: https://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
+       */
+      this.chart = new Chart(chartContext, {
+        type: this.chartData.type,
         data: {
-          labels: ["M", "T", "W", "T", "F", "S", "S"],
-          datasets: [{
-            backgroundColor: [
-              "#2ecc71",
-              "#3498db",
-              "#95a5a6",
-              "#9b59b6",
-              "#f1c40f",
-              "#e74c3c",
-              "#34495e"
-            ],
-            data: [12, 19, 3, 17, 28, 24, 7]
-          }]
-        }
+          labels: this.chartData.labels,
+          datasets: this.chartData.dataSets
+        },
+        options: this.chartData.options
       });
     }
-
-    //let context = $(this.chartElement.nativeElement).getContext('2d');
-    //alert($(this.chartElement.nativeElement).length)
-    /*this.chart = new Chart($(this.chartElement.nativeElement), {
-     type: this.type,
-     data: this._data
-     });*/
   }
 
-  ngOnInit():void {
-    //this.initChart();
+  ngOnInit(): void {
+    // this.initChart();
   }
 
-  ngOnChanges(changes:SimpleChanges):void {
-    let recordsCurrentValue = changes['data'].currentValue;
-    if (recordsCurrentValue) {
-      // https://www.sitepoint.com/introduction-chart-js-2-0-six-examples/
-
-    }
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   ngOnDestroy() {
@@ -81,11 +60,11 @@ export class ChartComponent extends BaseCustomComponent implements OnInit, After
     }
   }
 
-  ngAfterViewInit():void {
+  ngAfterViewInit(): void {
     this.initChart();
   }
 
   isAllDataProvided() {
-    return this.data != null;
+    return this.chartData != null;
   }
 }

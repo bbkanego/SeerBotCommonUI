@@ -1,9 +1,9 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { BaseCustomComponent } from "./modules/common/component/BaseCustomComponent.component";
-import { CustomFormControl } from './modules/common/model/controls';
-import { Option } from "./modules/common/model/models";
-import { CustomValidator } from "./modules/common/validator/custom.validator";
+import {Component, Injector, OnInit} from '@angular/core';
+import {FormGroup, Validators} from '@angular/forms';
+import {BaseCustomComponent} from "./modules/common/component/BaseCustomComponent.component";
+import {CustomFormControl} from './modules/common/model/controls';
+import {ChartData, ChartDataSet, Option} from "./modules/common/model/models";
+import {CustomValidator} from "./modules/common/validator/custom.validator";
 
 @Component({
   selector: 'app-root',
@@ -19,27 +19,29 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   selectedValuesForMultiSelect: string[] = [];
   selectedValuesForMultiSelect2: string[] = [];
 
+  chartData: ChartData;
+
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
-    this.multiSelectStartValues = [{ value: 'cat1', label: 'Tennis' },
-    { value: 'cat3', label: 'Football' },
-    { value: 'cat4', label: 'Soccer' }];
-    this.multiSelectStartValues2 = [{ value: 'cat1', label: 'Tennis' },
-    { value: 'cat2', label: 'Golf' }];
+    this.multiSelectStartValues = [{value: 'cat1', label: 'Tennis'},
+      {value: 'cat3', label: 'Football'},
+      {value: 'cat4', label: 'Soccer'}];
+    this.multiSelectStartValues2 = [{value: 'cat1', label: 'Tennis'},
+      {value: 'cat2', label: 'Golf'}];
 
     this.commonService.messages = {
       'message.field.required': 'This is required!'
     };
 
     this.category = [
-      { value: '_NONE_', label: 'Select' },
-      { value: 'cat1', label: 'Tennis' },
-      { value: 'cat2', label: 'Golf' },
-      { value: 'cat3', label: 'Football' },
-      { value: 'cat4', label: 'Soccer' }
+      {value: '_NONE_', label: 'Select'},
+      {value: 'cat1', label: 'Tennis'},
+      {value: 'cat2', label: 'Golf'},
+      {value: 'cat3', label: 'Football'},
+      {value: 'cat4', label: 'Soccer'}
     ];
     this.testForm = new FormGroup(
       {
@@ -55,6 +57,25 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
           [Validators.required], null)
       }
     );
+
+    const dataSets: ChartDataSet[] = [{
+      label: 'Success',
+      data: [80],
+      backgroundColor: '#66cc00'
+    } as ChartDataSet,
+      {
+        label: 'Failure',
+        data: [5],
+        backgroundColor: '#ff4000'
+      } as ChartDataSet,
+      {
+        label: 'Maybe',
+        data: [15],
+        backgroundColor: '#ffff00'
+      } as ChartDataSet,
+    ];
+
+    this.chartData = {type: 'bar', labels: ['Bot Performance'], dataSets: dataSets};
   }
 
   save() {

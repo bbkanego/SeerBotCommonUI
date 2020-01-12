@@ -2,6 +2,10 @@
 
 This component library provides a shared library of commonly used components which can be included in your Angular projects. The components include various widgets, validation etc.
 
+## Test components
+1. wewe
+2. Next start the app using 'npm run start'
+
 ## How to deploy the component library
 > To deploy run the below commands
 ```

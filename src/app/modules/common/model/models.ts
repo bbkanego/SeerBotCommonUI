@@ -29,3 +29,28 @@ export interface ChatData {
   uniqueClientId: string;
   authCode: string;
 }
+
+/**
+ * Chart data set
+ * example:
+ * {
+      label: 'apples',
+      data: [12, 19, 3, 17, 6, 3, 7],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }
+ * */
+export interface ChartDataSet {
+  label: string;
+  data: number[];
+  backgroundColor?: any;
+  borderColor?: any;
+  fill?: boolean;
+}
+
+// used by the Chart component
+export interface ChartData {
+  type: string;
+  labels: string[];
+  dataSets: ChartDataSet[];
+  options?: {};
+}

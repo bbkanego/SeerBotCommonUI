@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 
 import * as JQuery from 'jquery';
 
@@ -23,7 +15,8 @@ export class TooltipComponent implements OnInit, AfterViewInit {
   @Input() position = 'right';
   @ViewChild('tooltipContainer') tooltipContainerRef: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) {
+  }
 
   ngOnInit() {
     // this.renderer.setStyle(this.tooltipContainerRef, 'font-size', '40px');
@@ -31,7 +24,7 @@ export class TooltipComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     const targElementObj = $(this.targetElementRef);
-    targElementObj.css({ position: 'relative', display: 'inline-block' });
+    targElementObj.css({position: 'relative', display: 'inline-block'});
     const toolTipObj = $(this.tooltipContainerRef.nativeElement);
     // display right
     let endingRight;
@@ -54,11 +47,11 @@ export class TooltipComponent implements OnInit, AfterViewInit {
     }
 
     targElementObj.mouseover(() => {
-      toolTipObj.css({ display: 'block' });
+      toolTipObj.css({display: 'block'});
     });
 
     targElementObj.mouseout(() => {
-      toolTipObj.css({ display: 'none' });
+      toolTipObj.css({display: 'none'});
     });
   }
 }

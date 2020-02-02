@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, Injector, ElementRef, ViewChild } from '@angular/core';
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
-import { Subscription } from 'rxjs/Subscription';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
+import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
 
 @Component({
   selector: 'app-bk-checkbox',
@@ -13,6 +11,8 @@ export class CheckboxComponent extends BaseCustomComponent
 
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
 
+  @Input() value: string;
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -22,6 +22,12 @@ export class CheckboxComponent extends BaseCustomComponent
 
   ngOnInit() {
     this.initFormGroup();
+  }
+
+  onCheckChange(event) {
+    if (event.target.checked) {
+      this.onClick.emit(event.target.value);
+    }
   }
 
   onBlurEvent(event) {

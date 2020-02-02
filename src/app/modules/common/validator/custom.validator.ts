@@ -23,10 +23,8 @@ export class CustomValidator {
   static isSelectValid(notAllowedValue?: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value || control.value.length === 0 || control.value === '_NONE_' || control.value === notAllowedValue) {
-        console.log('dfdfdfdfdf');
         return { required: true };
       }
-      console.log('nullllll');
       return null;
     };
   }

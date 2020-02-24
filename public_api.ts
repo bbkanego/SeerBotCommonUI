@@ -168,3 +168,6 @@ export {
 export {
   CustomValidator
 } from './src/app/modules/common/validator/custom.validator';
+export {
+  PopoutComponent
+} from './src/app/modules/common/component/popout/popout.component';

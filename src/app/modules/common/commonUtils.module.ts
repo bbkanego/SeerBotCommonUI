@@ -76,6 +76,7 @@ import { TextareaComponent } from './component/textarea/textarea.component';
 
 import {MatInputModule} from '@angular/material';
 import { MultiSelectComponent } from './component/multiSelect/multiSelect.component';
+import {PopoutComponent} from "./component/popout/popout.component";
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { MultiSelectComponent } from './component/multiSelect/multiSelect.compon
     TableChatComponentComponent,
     ConfirmChatComponent,
     OptionsChatComponent,
-    BaseReactiveComponent
+    BaseReactiveComponent,
+    PopoutComponent
   ],
   entryComponents: [
     ErrorMessagesComponent,
@@ -189,7 +191,8 @@ import { MultiSelectComponent } from './component/multiSelect/multiSelect.compon
     RadioGroupComponent,
     ChatComponent,
     Chat2Component,
-    BaseReactiveComponent
+    BaseReactiveComponent,
+    PopoutComponent
   ]
 })
 export class CommonUtilsModule {

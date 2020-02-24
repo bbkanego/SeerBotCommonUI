@@ -58,6 +58,21 @@
     </div>
   </div>
 
+  <bk-button
+    intent="success"
+    type="button"
+    (onClick)="showDynamicModal()"
+    label="Show Dynamic Modal"></bk-button>
+
+  <bk-button
+    intent="success"
+    type="button"
+    (onClick)="showPopout()"
+    label="Show Popout"></bk-button>
+
+  <app-bk-dynamic-modal #dynamicModalComponentBk></app-bk-dynamic-modal>
+  <app-bk-popout #popoutComponent></app-bk-popout>
+
   <div class="row">
     <div class="col-sm-12" style="white-space: nowrap">
       <app-bk-chart [chartData]="chartData"></app-bk-chart>

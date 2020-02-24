@@ -1,18 +1,18 @@
 // http://jasonwatmore.com/post/2017/01/24/angular-2-custom-modal-window-dialog-box
 import {
-    Component,
-    ComponentFactoryResolver,
-    ComponentRef,
-    EventEmitter,
-    Injector,
-    NgModuleFactoryLoader,
-    OnDestroy,
-    OnInit,
-    Output,
-    Renderer2,
-    SystemJsNgModuleLoader,
-    ViewChild,
-    ViewContainerRef,
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef, ElementRef,
+  EventEmitter,
+  Injector, Input,
+  NgModuleFactoryLoader,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  SystemJsNgModuleLoader,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import {NotificationService} from '../../service/notification.service';
 import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
@@ -21,10 +21,10 @@ import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog
  * https://netbasal.com/dynamically-creating-components-with-angular-a7346f4a982d
  */
-@Component ({
-  templateUrl: './dynamicModal.component.html',
-  selector: 'app-bk-dynamic-modal',
-  styleUrls: ['./dynamicModal.component.css'],
+@Component({
+  templateUrl: './popout.component.html',
+  selector: 'app-bk-popout',
+  styleUrls: ['./popout.component.css'],
   providers: [
     {
       provide: NgModuleFactoryLoader,
@@ -32,17 +32,22 @@ import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
     }
   ]
 })
-export class DynamicModalComponent implements OnInit, OnDestroy {
-  public static SHOW_DYNAMIC_MODAL = 'ShowDynamicModal';
+export class PopoutComponent implements OnInit, OnDestroy {
+  public static SHOW_POPOUT = 'ShowPopout';
   visible = false;
   visibleAnimate = false;
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
   @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;
+  @ViewChild('dynamicPopoutMinimized') dynamicPopoutMinimized: ElementRef;
   private componentRef;
   private errorComponentRef;
   theHeader: string;
   modalShim;
+  @Input()
+  defaultWidth = '500';
+  @Input()
+  defaultBodyHeight = '700';
 
   constructor(private notificationService: NotificationService, private injector: Injector,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -71,8 +76,8 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.notificationService.onNotification().subscribe((eventData:any) => {
-      if (eventData.type === DynamicModalComponent.SHOW_DYNAMIC_MODAL) {
+    this.notificationService.onNotification().subscribe((eventData: any) => {
+      if (eventData.type === PopoutComponent.SHOW_POPOUT) {
         if (this.theBodyContainer) {
           this.theBodyContainer.clear();
         }
@@ -84,6 +89,8 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
         if (extraData.lazyModule) {
           this.loadSubComponent(extraData);
           this.theHeader = extraData.modalHeader;
+          this.defaultBodyHeight = extraData.height;
+          this.defaultWidth = extraData.width;
 
           // error component
           const errorFactory = this.componentFactoryResolver.resolveComponentFactory(ErrorMessagesComponent);
@@ -94,6 +101,8 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
           this.componentRef = this.theBodyContainer.createComponent(factory);
           this.componentRef.instance.extraDynamicData = extraData;
           this.theHeader = extraData.modalHeader;
+          this.defaultBodyHeight = extraData.height;
+          this.defaultWidth = extraData.width;
 
           // error component
           const errorFactory = this.componentFactoryResolver.resolveComponentFactory(ErrorMessagesComponent);
@@ -120,9 +129,25 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 200);
     this.modalState.emit('Shown!');
-    /* this.modalShim = this.renderer.createElement('div');
-    this.renderer.addClass(this.modalShim, 'backdrop');
-    this.renderer.appendChild(document.body, this.modalShim); */
+    this.hideDynamicPopoutMinimized();
+  }
+
+  private hideDynamicPopoutMinimized() {
+    this.dynamicPopoutMinimized.nativeElement.style.display = 'none';
+  }
+
+  private showDynamicPopoutMinimized() {
+    this.dynamicPopoutMinimized.nativeElement.style.display = 'block';
+  }
+
+  minimize() {
+    this.showDynamicPopoutMinimized();
+    this.hide();
+  }
+
+  maximize() {
+    this.hideDynamicPopoutMinimized();
+    this.show();
   }
 
   hide(): void {

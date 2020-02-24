@@ -4,6 +4,9 @@ import {BaseCustomComponent} from "./modules/common/component/BaseCustomComponen
 import {CustomFormControl} from './modules/common/model/controls';
 import {ChartData, ChartDataSet, Option} from "./modules/common/model/models";
 import {CustomValidator} from "./modules/common/validator/custom.validator";
+import {DynamicModalComponent, SelectComponent} from "../../public_api";
+import {HelpExampleComponent} from "./modules/test-components/help/help-example.component";
+import {PopoutComponent} from "./modules/common/component/popout/popout.component";
 
 @Component({
   selector: 'app-root',
@@ -76,6 +79,22 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
     ];
 
     this.chartData = {type: 'bar', labels: ['Bot Performance'], dataSets: dataSets};
+  }
+
+  showDynamicModal() {
+    const eventData = {
+      extraData: {modalHeader: "Dynamic Modal Example"},
+      component: HelpExampleComponent
+    };
+    this.notificationService.notifyAny(eventData, DynamicModalComponent.SHOW_DYNAMIC_MODAL, DynamicModalComponent.SHOW_DYNAMIC_MODAL);
+  }
+
+  showPopout() {
+    const eventData = {
+      extraData: {modalHeader: "Dynamic Popout Example", height: 500, width: 1000},
+      component: HelpExampleComponent
+    };
+    this.notificationService.notifyAny(eventData, PopoutComponent.SHOW_POPOUT, PopoutComponent.SHOW_POPOUT);
   }
 
   save() {

@@ -1,0 +1,29 @@
+<div class="dynamicPopout fade modal2" tabindex="-1"
+     [ngClass]="{'in': visibleAnimate}" role="dialog"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0, 'width.px': defaultWidth}">
+  <div role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="hide()" class="close" data-dismiss="modal" aria-label="Close">
+          <span title="Hide"
+            class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button type="button" (click)="minimize()" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="glyphicon glyphicon-collapse-down" title="Minimize"></span>
+        </button>
+        <h2 class="modal-title">{{theHeader}}</h2>
+      </div>
+      <div class="modal-body" [ngStyle]="{'height.px': defaultBodyHeight}">
+        <ng-template #theError></ng-template>
+        <ng-template #theBody></ng-template>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dynamicPopoutMinimized img-rounded" #dynamicPopoutMinimized>
+  <button type="button" (click)="maximize()" class="close" data-dismiss="modal" aria-label="Close">
+    <span class="glyphicon glyphicon-collapse-up" title="Maximize"></span>
+  </button>
+</div>

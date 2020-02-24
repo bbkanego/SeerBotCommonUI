@@ -1,0 +1,43 @@
+.dynamicPopout {
+  position: fixed;
+  right: 2px;
+  bottom: 5px;
+  z-index: 1000;
+  /*transform: translate(-50%, -50%);
+  border: 1px solid #ddd;
+  padding: 1rem;*/
+}
+
+.modal-body {
+  max-height: calc(100vh - 212px);
+  overflow-y: auto;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+  }
+}
+
+.modal-white .modal-backdrop {
+  background-color: #0000ff;
+}
+
+.dynamicPopoutMinimized {
+  width:100px;
+  padding: 5px;
+  position: fixed;
+  right: 2px;
+  bottom: 5px;
+  z-index: 1000;
+  display: none;
+  border: 1px solid #BDBDBD;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

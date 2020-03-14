@@ -22,16 +22,21 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   @ViewChild('chart') chartElement: ElementRef;
   chart: Chart = null;
 
-  reInit() {
+  reInit(inputChartData) {
     if (this.chart) {
       this.chart.destroy();
-      this.initChart();
+      this.initChart(inputChartData);
     }
   }
 
-  initChart() {
+  initChart(inputChartData) {
     if (this.chartElement) {
       const chartContext = this.chartElement.nativeElement.getContext('2d');
+
+      if (inputChartData) {
+        this.chartData = inputChartData;
+      }
+
       /**
        * Very good examples here: https://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
        */
@@ -61,7 +66,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   }
 
   ngAfterViewInit(): void {
-    this.initChart();
+    this.initChart(null);
   }
 
   isAllDataProvided() {

@@ -1,12 +1,18 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators} from '@angular/forms';
-import {BaseCustomComponent} from "./modules/common/component/BaseCustomComponent.component";
+import {BaseCustomComponent} from './modules/common/component/BaseCustomComponent.component';
 import {CustomFormControl} from './modules/common/model/controls';
-import {ChartData, ChartDataSet, Option} from "./modules/common/model/models";
-import {CustomValidator} from "./modules/common/validator/custom.validator";
-import {DynamicModalComponent, SelectComponent} from "../../public_api";
-import {HelpExampleComponent} from "./modules/test-components/help/help-example.component";
-import {PopoutComponent} from "./modules/common/component/popout/popout.component";
+import {ChartData, ChartDataSet, Option} from './modules/common/model/models';
+import {CustomValidator} from './modules/common/validator/custom.validator';
+import {DynamicModalComponent, ModalComponent} from '../../public_api';
+import {HelpExampleComponent} from './modules/test-components/help/help-example.component';
+import {PopoutComponent} from './modules/common/component/popout/popout.component';
+
+export interface CommonModalModel {
+  header: string;
+  bodyMessage: string;
+  buttonOk: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -23,9 +29,17 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   selectedValuesForMultiSelect2: string[] = [];
 
   chartData: ChartData;
+  customModalData: CommonModalModel = {header: '', bodyMessage: '', buttonOk: ''};
+
+  @ViewChild('customModal') testCustomModel: ModalComponent;
 
   constructor(injector: Injector) {
     super(injector);
+  }
+
+  showCustomModal() {
+    this.customModalData = {header: 'Test Header', bodyMessage: 'Test Body Message', buttonOk: 'Done'};
+    this.testCustomModel.show();
   }
 
   ngOnInit() {
@@ -83,7 +97,7 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
 
   showDynamicModal() {
     const eventData = {
-      extraData: {modalHeader: "Dynamic Modal Example"},
+      extraData: {modalHeader: 'Dynamic Modal Example'},
       component: HelpExampleComponent
     };
     this.notificationService.notifyAny(eventData, DynamicModalComponent.SHOW_DYNAMIC_MODAL, DynamicModalComponent.SHOW_DYNAMIC_MODAL);
@@ -91,7 +105,7 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
 
   showPopout() {
     const eventData = {
-      extraData: {modalHeader: "Dynamic Popout Example", height: 500, width: 1000},
+      extraData: {modalHeader: 'Dynamic Popout Example', height: 500, width: 1000},
       component: HelpExampleComponent
     };
     this.notificationService.notifyAny(eventData, PopoutComponent.SHOW_POPOUT, PopoutComponent.SHOW_POPOUT);

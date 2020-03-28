@@ -67,7 +67,7 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
       this.componentRef = cmpFactory.create(this._injector);
       this.componentRef.instance.extraDynamicData = extraData;
       this.theBodyContainer.insert(this.componentRef.hostView);
-    })
+    });
   }
 
   ngOnInit(): void {

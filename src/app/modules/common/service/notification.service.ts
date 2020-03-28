@@ -1,14 +1,12 @@
 // http://plnkr.co/edit/ITnd5R5H4NRKqM9yy4Ir?p=preview
-import { Observable } from 'rxjs/Observable'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import {SUBSCRIBER_TYPES} from '../../common/model/constants';
-import {EventEmitter} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {SUBSCRIBER_TYPES} from '../model/constants';
 
 export interface Notification {
-  type: string,
-  message: any,
-  subscriberType: string
+  type: string;
+  message: any;
+  subscriberType: string;
 }
 
 export class NotificationService {
@@ -20,13 +18,13 @@ export class NotificationService {
 
   notify(message: string, type: string, subscriberType: string) {
     this.notifications.next(
-      { 'type': type, 'message': message, 'subscriberType': subscriberType}
+      {'type': type, 'message': message, 'subscriberType': subscriberType}
     );
   }
 
   notifyAny(message: any, type: string, subscriberType: string) {
     this.notifications.next(
-      { type: type, message: message, subscriberType: subscriberType}
+      {type: type, message: message, subscriberType: subscriberType}
     );
   }
 

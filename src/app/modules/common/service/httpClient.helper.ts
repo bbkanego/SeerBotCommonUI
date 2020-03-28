@@ -7,9 +7,10 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { SUBSCRIBER_TYPES } from '../../common/model/constants';
-import { NotificationService } from '../../common/service/notification.service';
+import { SUBSCRIBER_TYPES } from '../model/constants';
+import { NotificationService } from './notification.service';
 import { AuthenticationService } from './authentication.service';
+import {_throw} from 'rxjs/observable/throw';
 
 export interface IntputHeader {
   name: string;
@@ -50,27 +51,28 @@ export class HttpClient {
 
   private handleError(error: Response | any) {
     console.log('Error, status code: ' + error.status);
+    const errorResponseBody = JSON.parse(error._body);
     if (error.status === 401) {
       this.notificationService.notifyAny(
-        error,
+        errorResponseBody,
         SUBSCRIBER_TYPES.FORCE_LOGOUT,
         SUBSCRIBER_TYPES.FORCE_LOGOUT
       );
     } else if (error.status === 400) {
       this.notificationService.notifyAny(
-        error.json(),
+        errorResponseBody,
         SUBSCRIBER_TYPES.ERROR_400,
         SUBSCRIBER_TYPES.ERROR_400
       );
     } else if (error.status === 207) {
       this.notificationService.notifyAny(
-        error.json(),
+        errorResponseBody,
         SUBSCRIBER_TYPES.ERROR_207,
         SUBSCRIBER_TYPES.ERROR_207
       );
     } else if (error.status === 500) {
       this.notificationService.notifyAny(
-        error.json(),
+        errorResponseBody,
         SUBSCRIBER_TYPES.ERROR_500,
         SUBSCRIBER_TYPES.ERROR_500
       );
@@ -78,9 +80,7 @@ export class HttpClient {
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ''} ${errorResponseBody}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
@@ -89,7 +89,7 @@ export class HttpClient {
       SUBSCRIBER_TYPES.NETWORK_ERROR,
       SUBSCRIBER_TYPES.NETWORK_ERROR
     );
-    return Observable.throw(errMsg);
+    return _throw(errMsg);
   }
 
   get(url): Observable<Response> {

@@ -70,8 +70,27 @@
     (onClick)="showPopout()"
     label="Show Popout"></bk-button>
 
+  <bk-button
+    intent="success"
+    type="button"
+    (onClick)="showCustomModal()"
+    label="Show Custom Modal"></bk-button>
+
   <app-bk-dynamic-modal #dynamicModalComponentBk></app-bk-dynamic-modal>
   <app-bk-popout #popoutComponent></app-bk-popout>
+
+  <app-bk-custom-modal #customModal>
+    <div class="app-modal-header">
+      <span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>{{customModalData.header}}
+    </div>
+    <div class="app-modal-body">
+      {{customModalData.bodyMessage}}
+    </div>
+    <div class="app-modal-footer">
+      <bk-button intent="success" (click)='testCustomModel.hide()' label="{{ customModalData.buttonOk }}">
+      </bk-button>
+    </div>
+  </app-bk-custom-modal>
 
   <div class="row">
     <div class="col-sm-12" style="white-space: nowrap">

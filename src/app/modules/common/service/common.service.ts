@@ -1,11 +1,12 @@
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Inject, Injectable } from '@angular/core';
-import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Inject, Injectable} from '@angular/core';
+import {Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
-import { HttpClient } from './httpClient.helper';
+import {HttpClient} from './httpClient.helper';
+import {CommonModalModel} from '../../../app.component';
 
 // Import RxJs required methods
 @Injectable()

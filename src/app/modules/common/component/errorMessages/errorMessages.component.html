@@ -23,3 +23,21 @@
     </div>
   </div>
 </div>
+
+<app-bk-custom-modal #errorsModal>
+  <div class="app-modal-header">
+    <span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;There Were Errors
+  </div>
+  <div class="app-modal-body">
+    <h4>There were errors. Please fix before proceeding!</h4>
+    <ul *ngIf="hasErrorMessages" class="error-bullet">
+      <li *ngFor="let errorMessage of errorMessages; let i=index">
+        {{errorMessage.message}}
+      </li>
+    </ul>
+  </div>
+  <div class="app-modal-footer">
+    <bk-button intent="warning" (click)='errorsModal.hide()' label="OK">
+    </bk-button>
+  </div>
+</app-bk-custom-modal>

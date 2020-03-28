@@ -25,31 +25,31 @@ export abstract class CrudService<T> {
 
   protected getRequest(url: string): Observable<T> {
     return this.httpClient.get(url)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map((res: Response) => res.json());
+      // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected postRequest(url: string, model: T) {
     return this.httpClient.post(url, JSON.stringify(model))
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map((res: Response) => res.json());
+      // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected putRequest(url: string, model: T) {
     return this.httpClient.put(url, JSON.stringify(model))
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map((res: Response) => res.json());
+      // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected deleteRequest(url: string, id: string) {
     return this.httpClient.delete(url, id)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map((res: Response) => res.json());
+      // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected postMultiPartRequest(url: string, model: FormData) {
     return this.httpClient.postMultipart(url, model)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map((res: Response) => res.json());
+      // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 }

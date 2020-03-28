@@ -1,14 +1,8 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
-} from '@angular/core';
-import { NotificationService } from '../../service/notification.service';
-import { SUBSCRIBER_TYPES } from '../../model/constants';
-import { Router, NavigationStart } from '@angular/router';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {NotificationService} from '../../service/notification.service';
+import {SUBSCRIBER_TYPES} from '../../model/constants';
+import {NavigationStart, Router} from '@angular/router';
+import {ModalComponent} from '../modal/modal.component';
 
 @Component({
   selector: 'app-bk-error-messages',
@@ -26,11 +20,13 @@ export class ErrorMessagesComponent
   private sub: any;
   private navSub: any;
   @ViewChild('errorContainer') errorContainer: ElementRef;
+  @ViewChild('errorsModal') errorsModal: ModalComponent;
 
   constructor(
     private notificationService: NotificationService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
@@ -45,32 +41,31 @@ export class ErrorMessagesComponent
          this.hasErrorMessages = false;*/
       });
     });
-    const config = { attributes: true, childList: true, characterData: true };
+    const config = {attributes: true, childList: true, characterData: true};
     observer.observe(this.errorContainer.nativeElement, config);
   }
 
   ngOnInit(): void {
     this.sub = this.notificationService.onNotification().subscribe(
       (data: any) => {
+        this.errorContainer.nativeElement.style.display = 'block';
         if (
           SUBSCRIBER_TYPES.PAGE_ERROR === data.subscriberType ||
           SUBSCRIBER_TYPES.ERROR_207 === data.subscriberType
         ) {
-          console.log(
-            'Validation Error occurred: ',
-            JSON.stringify(data.message)
-          );
-          this.errorMessages = data.message.pageLevelErrors;
-          this.fieldErrors = data.message.fieldErrors;
-          this.hasErrorMessages = this.errorMessages.length > 0;
+          this.showPageLevelValidationErrors(data);
 
           // $(this.errorContainer).offset().top;
         } else if (
           SUBSCRIBER_TYPES.ERROR_400 === data.subscriberType
         ) {
-          this.errorMessage = data.message.errorMessage;
-          this.errorCode = data.message.errorCode;
-          this.referenceCode = data.message.referenceCode;
+          if (data.message.pageLevelErrors) {
+            this.showPageLevelValidationErrors(data);
+          } else {
+            this.errorMessage = data.message.errorMessage;
+            this.errorCode = data.message.errorCode;
+            this.referenceCode = data.message.referenceCode;
+          }
         } else if (
           SUBSCRIBER_TYPES.ERROR_500 === data.subscriberType
         ) {
@@ -90,6 +85,16 @@ export class ErrorMessagesComponent
         this.errorMessage = null;
       }
     });
+  }
+
+  private showPageLevelValidationErrors(data: any) {
+    console.log('Validation Error occurred: ', JSON.stringify(data.message)
+    );
+    this.errorMessages = data.message.pageLevelErrors;
+    this.fieldErrors = data.message.fieldErrors.length > 0;
+    this.hasErrorMessages = this.errorMessages.length > 0;
+
+    this.errorsModal.show();
   }
 
   hideErrorContainer() {

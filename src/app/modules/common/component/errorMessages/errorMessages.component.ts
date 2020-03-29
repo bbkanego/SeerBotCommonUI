@@ -99,5 +99,8 @@ export class ErrorMessagesComponent
 
   hideErrorContainer() {
     this.errorContainer.nativeElement.style.display = 'none';
+    this.hasErrorMessages = false;
+    this.fieldErrors = false;
+    this.errorMessages = null;
   }
 }

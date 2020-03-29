@@ -47,9 +47,6 @@ export class CommonService {
         .get(endPointUrl)
         // get the response and call .json() to get the JSON data
         .map((res: Response) => res.json())
-        .catch((error: any) =>
-          Observable.throw(error.json().error || 'Server error')
-        )
     );
   }
 }

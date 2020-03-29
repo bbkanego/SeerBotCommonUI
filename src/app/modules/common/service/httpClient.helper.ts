@@ -3,13 +3,13 @@
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 
-import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
-import { SUBSCRIBER_TYPES } from '../model/constants';
-import { NotificationService } from './notification.service';
-import { AuthenticationService } from './authentication.service';
+import {SUBSCRIBER_TYPES} from '../model/constants';
+import {NotificationService} from './notification.service';
+import {AuthenticationService} from './authentication.service';
 import {_throw} from 'rxjs/observable/throw';
 
 export interface IntputHeader {
@@ -28,7 +28,8 @@ export class HttpClient {
     private http: Http,
     private notificationService: NotificationService,
     private authenticationService: AuthenticationService
-  ) {}
+  ) {
+  }
 
   // tslint:disable-next-line:member-ordering
   static createAuthorizationHeader(
@@ -51,6 +52,15 @@ export class HttpClient {
 
   private handleError(error: Response | any) {
     console.log('Error, status code: ' + error.status);
+    if (error.status === 0) {
+      console.log('There was a network error. The target server is down!');
+      this.notificationService.notifyAny(
+        {},
+        SUBSCRIBER_TYPES.NETWORK_ERROR,
+        SUBSCRIBER_TYPES.NETWORK_ERROR
+      );
+      return _throw('Network Error occurred');
+    }
     const errorResponseBody = JSON.parse(error._body);
     if (error.status === 401) {
       this.notificationService.notifyAny(

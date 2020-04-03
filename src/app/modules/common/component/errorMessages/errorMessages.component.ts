@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../service/notification.service';
 import {SUBSCRIBER_TYPES} from '../../model/constants';
 import {NavigationStart, Router} from '@angular/router';
@@ -21,6 +21,8 @@ export class ErrorMessagesComponent
   private navSub: any;
   @ViewChild('errorContainer') errorContainer: ElementRef;
   @ViewChild('errorsModal') errorsModal: ModalComponent;
+  @Input()
+  errorHeading = 'There were errors. Please fix before proceeding!';
 
   constructor(
     private notificationService: NotificationService,
@@ -69,6 +71,7 @@ export class ErrorMessagesComponent
         } else if (
           SUBSCRIBER_TYPES.ERROR_500 === data.subscriberType
         ) {
+          this.errorHeading = 'Something Went Wrong!';
           this.errorMessage = data.message.errorMessage;
           this.errorCode = data.message.errorCode;
           this.referenceCode = data.message.referenceCode;

@@ -35,6 +35,14 @@ export class OptionsChatComponent extends BaseDynamicComponent implements OnInit
                 'clickAndSendResponse', 'clickAndSendResponse');
   }
 
+  isButtonWidgetType(widget) {
+    return widget.type == 'button';
+  }
+
+  isLinkWidgetType(widget) {
+    return widget.type == 'link';
+  }
+
   getChatMessageClass() {
     const chat = this.chatData;
     if (chat.accountId === 'ChatBot') {

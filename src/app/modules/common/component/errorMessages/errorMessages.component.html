@@ -7,7 +7,7 @@
       <div (click)='hideErrorContainer()' class="action"><span class="actionIcon glyphicon glyphicon-remove"></span>
       </div>
       <h4><span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;{{errorHeading}}</h4>
-      <ul *ngIf="hasErrorMessages" class="error-bullet">
+      <ul *ngIf="hasErrorMessages">
         <li *ngFor="let errorMessage of errorMessages; let i=index">
           {{errorMessage.message}}
         </li>
@@ -31,8 +31,8 @@
     <span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;There Were Errors
   </div>
   <div class="app-modal-body">
-    <h4>There were errors. Please fix before proceeding!</h4>
-    <ul *ngIf="hasErrorMessages" class="error-bullet">
+    <h4>{{errorHeading}}</h4>
+    <ul *ngIf="hasErrorMessages">
       <li *ngFor="let errorMessage of errorMessages; let i=index">
         {{errorMessage.message}}
       </li>

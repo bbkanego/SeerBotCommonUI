@@ -36,8 +36,12 @@
   opacity: 1;
 }
 .message.left .avatar {
-  background-color: #f5886e;
+  background-color: #fff;
   float: left;
+  background-image: url("../../../../../assets/img/icons8-bot-64.png");
+  background-size: 40px 40px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .message.left .text_wrapper {
   background-color: #ffe6cb;

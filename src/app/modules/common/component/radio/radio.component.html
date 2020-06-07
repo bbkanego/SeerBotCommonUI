@@ -1,17 +1,17 @@
-<div [formGroup]="currentFormGroup"
-     *ngIf="currentFormGroup && inline">
-  <label class="radio-inline" *ngFor=" let option of options">
-    <input type="radio" [formControlName]="currentFormControlName"
+<div *ngIf="currentFormGroup && inline"
+     [formGroup]="currentFormGroup">
+  <label *ngFor=" let option of options" class="radio-inline">
+    <input [formControlName]="currentFormControlName" type="radio"
            value="{{option.value}}">
     {{option.label}}
   </label>
 </div>
 
-<div [formGroup]="currentFormGroup"
-     *ngIf="currentFormGroup && !inline">
-  <div class="radio" *ngFor=" let option of options">
+<div *ngIf="currentFormGroup && !inline"
+     [formGroup]="currentFormGroup">
+  <div *ngFor=" let option of options" class="radio">
     <label>
-      <input type="radio" [formControlName]="currentFormControlName"
+      <input [formControlName]="currentFormControlName" type="radio"
              value="{{option.value}}">
       {{option.label}}
     </label>

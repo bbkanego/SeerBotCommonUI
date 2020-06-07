@@ -1,7 +1,7 @@
 // https://stackoverflow.com/questions/35922071/warn-user-of-unsaved-changes-before-leaving-page
-import { Injectable } from '@angular/core';
-import { CanDeactivate } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {CanDeactivate} from '@angular/router';
+import {Observable} from 'rxjs';
 
 export interface CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;

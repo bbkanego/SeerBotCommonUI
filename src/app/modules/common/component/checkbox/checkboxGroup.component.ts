@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, Injector, ElementRef, ViewChild, Input } from '@angular/core';
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
-import { Subscription } from 'rxjs/Subscription';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
-import { Option } from '../../../common/model/models';
+import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+import {Option} from '../../../common/model/models';
 
 @Component({
   selector: 'app-bk-checkbox-grp',

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseDynamicComponent } from '../BaseDynamicComponent';
-import { ChatData } from '../../../common/model/models';
-import { Router } from '@angular/router';
-import { NotificationService } from '../../service/notification.service';
+import {Component, OnInit} from '@angular/core';
+import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {ChatData} from '../../../common/model/models';
+import {Router} from '@angular/router';
+import {NotificationService} from '../../service/notification.service';
 
 @Component({
   selector: 'app-table-chat-component',
@@ -32,7 +32,7 @@ export class TableChatComponentComponent extends BaseDynamicComponent implements
 
   clickAndSendResponse(col) {
     this.notificationService.notify(col,
-                'clickAndSendResponse', 'clickAndSendResponse');
+      'clickAndSendResponse', 'clickAndSendResponse');
   }
 
   getChatMessageClass() {

@@ -1,5 +1,5 @@
 // http://jasonwatmore.com/post/2017/01/24/angular-2-custom-modal-window-dialog-box
-import { Component, ElementRef, EventEmitter, Inject, Output, ViewChild } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 
 /**
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog

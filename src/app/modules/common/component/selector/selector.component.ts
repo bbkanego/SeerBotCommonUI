@@ -1,15 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import { BaseCustomComponent } from '../BaseCustomComponent.component';
-import { Option } from '../../model/models';
-import { CustomValidator } from '../../validator/custom.validator';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Option} from '../../model/models';
+import {CustomValidator} from '../../validator/custom.validator';
 
 @Component({
   selector: 'app-bk-select',

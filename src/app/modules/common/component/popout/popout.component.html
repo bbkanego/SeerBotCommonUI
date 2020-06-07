@@ -1,19 +1,19 @@
-<div class="dynamicPopout fade modal2" tabindex="-1"
-     [ngClass]="{'in': visibleAnimate}" role="dialog"
-     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0, 'width.px': defaultWidth}">
+<div [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0, 'width.px': defaultWidth}"
+     class="dynamicPopout fade modal2" role="dialog"
+     tabindex="-1">
   <div role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" (click)="hide()" class="close" data-dismiss="modal" aria-label="Close">
-          <span title="Hide"
-            class="glyphicon glyphicon-remove"></span>
+        <button (click)="hide()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span class="glyphicon glyphicon-remove"
+                title="Hide"></span>
         </button>
-        <button type="button" (click)="minimize()" class="close" data-dismiss="modal" aria-label="Close">
+        <button (click)="minimize()" aria-label="Close" class="close" data-dismiss="modal" type="button">
           <span class="glyphicon glyphicon-collapse-down" title="Minimize"></span>
         </button>
         <h2 class="modal-title">{{theHeader}}</h2>
       </div>
-      <div class="modal-body" [ngStyle]="{'height.px': defaultBodyHeight}">
+      <div [ngStyle]="{'height.px': defaultBodyHeight}" class="modal-body">
         <ng-template #theError></ng-template>
         <ng-template #theBody></ng-template>
       </div>
@@ -22,8 +22,8 @@
     </div>
   </div>
 </div>
-<div class="dynamicPopoutMinimized img-rounded" #dynamicPopoutMinimized>
-  <button type="button" (click)="maximize()" class="close" data-dismiss="modal" aria-label="Close">
+<div #dynamicPopoutMinimized class="dynamicPopoutMinimized img-rounded">
+  <button (click)="maximize()" aria-label="Close" class="close" data-dismiss="modal" type="button">
     <span class="glyphicon glyphicon-collapse-up" title="Maximize"></span>
   </button>
 </div>

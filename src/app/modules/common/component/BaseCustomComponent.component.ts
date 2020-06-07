@@ -1,5 +1,5 @@
-import {Input, Output, EventEmitter, Injectable, Injector} from '@angular/core';
-import {FormGroup, FormControl, FormGroupDirective} from '@angular/forms';
+import {EventEmitter, Injectable, Injector, Input, Output} from '@angular/core';
+import {FormGroup, FormGroupDirective} from '@angular/forms';
 import {COMMON_CONST} from '../../common/model/constants';
 import {CustomFormControl} from '../../common/model/controls';
 import {CommonService} from '../../common/service/common.service';
@@ -9,9 +9,6 @@ import {LoggerService} from '../../common/service/logger.service';
 
 @Injectable()
 export abstract class BaseCustomComponent {
-  protected notificationService: NotificationService;
-  protected loggerService: LoggerService;
-
   // FOR reactive forms based pages
   @Input() currentFormGroup: FormGroup;
   @Input() currentFormControlName: string;
@@ -19,27 +16,27 @@ export abstract class BaseCustomComponent {
   @Input() label: string;
   @Input() disabled: any;
   @Input() currentForm: FormGroupDirective;
+  @Input() validationRule: string = COMMON_CONST.DEFAULT_VALIDATION_RULE;
+  @Output() onFocus: EventEmitter<any> = new EventEmitter();
+  @Output() onBlur: EventEmitter<any> = new EventEmitter();
+  @Output() onClick: EventEmitter<any> = new EventEmitter();
+  @Output() onContextMenu: EventEmitter<any> = new EventEmitter();
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
+  @Output() onDrop: EventEmitter<any> = new EventEmitter();
+  // use this to pass data to component when creating components using angular dynamic components
+  extraDynamicData: any = {};
+  protected notificationService: NotificationService;
+  protected loggerService: LoggerService;
   protected elementBlurred = false;
-
   protected validationService: ValidationService;
   protected commonService: CommonService;
 
-  @Input() validationRule: string = COMMON_CONST.DEFAULT_VALIDATION_RULE;
-
-  @Output() onFocus: EventEmitter<any> = new EventEmitter();
-
-  @Output() onBlur: EventEmitter<any> = new EventEmitter();
-
-  @Output() onClick: EventEmitter<any> = new EventEmitter();
-
-  @Output() onContextMenu: EventEmitter<any> = new EventEmitter();
-
-  @Output() onSelect: EventEmitter<any> = new EventEmitter();
-
-  @Output() onDrop: EventEmitter<any> = new EventEmitter();
-
-  // use this to pass data to component when creating components using angular dynamic components
-  extraDynamicData: any = {};
+  constructor(injector: Injector) {
+    this.validationService = injector.get(ValidationService);
+    this.commonService = injector.get(CommonService);
+    this.notificationService = injector.get(NotificationService);
+    this.loggerService = injector.get(LoggerService);
+  }
 
   getFormControl(): CustomFormControl {
     if (this.currentFormGroup == null) {
@@ -67,13 +64,6 @@ export abstract class BaseCustomComponent {
     );
   }
 
-  constructor(injector: Injector) {
-    this.validationService = injector.get(ValidationService);
-    this.commonService = injector.get(CommonService);
-    this.notificationService = injector.get(NotificationService);
-    this.loggerService = injector.get(LoggerService);
-  }
-
   getErrorMessage() {
     if (this.getFormControl().errors.required) {
       return this.commonService.messages['message.field.required'];
@@ -91,7 +81,7 @@ export abstract class BaseCustomComponent {
         return this.commonService.messages['message.field.invalidstring'];
       }
     } else if (this.getFormControl().errors.invalidStringEntered) {
-      return this.commonService.messages['message.field.invalidstring']
+      return this.commonService.messages['message.field.invalidstring'];
     } else if (this.getFormControl().errors.max) {
       return this.commonService.messages['message.field.shouldbelessthan']
         + ' ' + this.getFormControl().errors.max.max;

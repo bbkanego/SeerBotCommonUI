@@ -30,6 +30,7 @@
   border-style: solid;
   border-color: transparent transparent transparent black;
 }
+
 /*Show to the left of the text ^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
 /*Show to the right of the text -------------------------------- */
@@ -57,6 +58,7 @@
   border-style: solid;
   border-color: transparent black transparent transparent;
 }
+
 /*Show to the right of the text ^^^^^^^^^^^^^^^^^^ */
 
 /*Show above the text -------------------------------- */
@@ -85,6 +87,7 @@
   border-style: solid;
   border-color: black transparent transparent transparent;
 }
+
 /*Show above the text ^^^^^^^^^^^^^^^^^^^^^^ */
 
 /*Show below the text -------------------------------- */
@@ -114,6 +117,7 @@
   border-style: solid;
   border-color: transparent transparent black transparent;
 }
+
 /*Show below the text ^^^^^^^^^^^^^^^^^^^^^^ */
 
 .tooltip:hover .tooltiptextAbove .tooltiptextBottom .tooltiptextLeft .tooltiptextRight {

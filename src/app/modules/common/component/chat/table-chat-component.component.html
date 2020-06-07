@@ -9,9 +9,9 @@
       </tr>
       <tr *ngFor="let row of getMessage().rows">
         <td *ngFor="let col of row.cols">
-          <a *ngIf='col.clickUrl' (click)="navigateTo(col)">{{col.col}}</a>
+          <a (click)="navigateTo(col)" *ngIf='col.clickUrl'>{{col.col}}</a>
           <span *ngIf='!col.clickAction && !col.clickUrl'>{{col.col}}</span>
-          <span *ngIf='col.clickAction' (click)="clickAndSendResponse(col)">{{col.col}}</span>
+          <span (click)="clickAndSendResponse(col)" *ngIf='col.clickAction'>{{col.col}}</span>
         </td>
       </tr>
     </table>

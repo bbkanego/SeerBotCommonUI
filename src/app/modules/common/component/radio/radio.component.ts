@@ -1,16 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  ViewChild
-} from '@angular/core';
-import { SelectComponent } from '../../../common/component/selector/selector.component';
-import { Option } from '../../../common/model/models';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {SelectComponent} from '../../../common/component/selector/selector.component';
 
 @Component({
   selector: 'bk-radio',
@@ -20,7 +9,9 @@ export class RadioComponent extends SelectComponent
   implements OnInit, AfterViewInit {
   @Input() inline = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+  }
 }

@@ -1,5 +1,6 @@
-import {Component, Input, EventEmitter, AfterViewInit, ElementRef, ViewChild, OnInit, Injector} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+
 @Component({
   selector: 'bk-button',
   templateUrl: './button.component.html',
@@ -21,10 +22,12 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
 
   @ViewChild('targetButton') targetButton: ElementRef;
 
-  private buttonTypes = {'success': 'btn btn-success active', 'danger': 'btn btn-danger active',
+  private buttonTypes = {
+    'success': 'btn btn-success active', 'danger': 'btn btn-danger active',
     'default': 'btn btn-default active', 'primary': 'btn btn-primary active',
     'info': 'btn btn-info active', 'warning': 'btn btn-warning active',
-    'link': 'btn btn-link active'};
+    'link': 'btn btn-link active'
+  };
 
   private buttonSizes = {'small': 'btn-sm', 'large': 'btn-lg', 'NONE': ''};
 
@@ -34,7 +37,7 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
 
   getButtonClass(): string {
     return this.buttonTypes[this.intent] + ' ' + this.buttonSizes[this.size] + ' ' + this.class
-    + ' button-xs';
+      + ' button-xs';
     // + " " + (this.blockLevel === true)? "btn-block": "";
   }
 
@@ -57,7 +60,7 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
   }
 
   isButtonDisabled(): boolean {
-    return this.disabled || (this.currentFormGroup != null && this.currentFormGroup.invalid 
-                                      && this.currentForm != null && this.currentForm.submitted);
+    return this.disabled || (this.currentFormGroup != null && this.currentFormGroup.invalid
+      && this.currentForm != null && this.currentForm.submitted);
   }
 }

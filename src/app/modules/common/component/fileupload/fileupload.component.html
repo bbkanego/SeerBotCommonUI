@@ -1,9 +1,9 @@
 <div *ngIf="showSimpleFileUpload" class="row">
   <div class="col-lg-4 col-sm-12">
-    <input type="file" [attr.multiple]="multiple ? true : null" #fileInput>
+    <input #fileInput [attr.multiple]="multiple ? true : null" type="file">
   </div>
   <div class="col-lg-8 col-sm-12">
-    <button type="button" (click)="uploadFile()" class="btn btn-primary">
+    <button (click)="uploadFile()" class="btn btn-primary" type="button">
       <span *ngIf="showProgress" class="glyphicon glyphicon-cog gly-spin"
             style="margin-right: 10px"></span>{{uploadButtonLabel}}
     </button>
@@ -19,10 +19,10 @@
 </div>-->
 
 <div *ngIf="showComplexFileUpload">
-  <p-fileUpload name="fileUpload"
-                (onBeforeSend)="onBeforeSend($event)"
+  <p-fileUpload (onBeforeSend)="onBeforeSend($event)"
                 (onBeforeUpload)="onBeforeUpload($event)"
-                (onUpload)="onUpload($event)"
                 (onProgress)="onProgress($event)"
-                [url]="uploadUrl"></p-fileUpload>
+                (onUpload)="onUpload($event)"
+                [url]="uploadUrl"
+                name="fileUpload"></p-fileUpload>
 </div>

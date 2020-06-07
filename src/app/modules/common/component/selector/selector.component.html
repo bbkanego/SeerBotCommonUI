@@ -1,13 +1,13 @@
-<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup">
-  <select *ngIf='!label'
-    [id]="controlId"
-    (change)="onChange($event)"
-    (focus)="onFocusEvent($event)"
-    (blur)="onBlurEvent($event)"
-    [formControlName]="currentFormControlName"
-    #selectWidget
-    class="form-control">
-    <option value="{{ option.value }}" *ngFor="let option of options; let i = index">{{
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup">
+  <select #selectWidget
+          (blur)="onBlurEvent($event)"
+          (change)="onChange($event)"
+          (focus)="onFocusEvent($event)"
+          *ngIf='!label'
+          [formControlName]="currentFormControlName"
+          [id]="controlId"
+          class="form-control">
+    <option *ngFor="let option of options; let i = index" value="{{ option.value }}">{{
       option.label
       }}</option>
   </select>
@@ -17,14 +17,14 @@
       *ngIf="isRequired()"
       class="glyphicon glyphicon-asterisk icon-required"></span>
     <select
-      [id]="controlId"
+      #selectWidget
+      (blur)="onBlurEvent($event)"
       (change)="onChange($event)"
       (focus)="onFocusEvent($event)"
-      (blur)="onBlurEvent($event)"
       [formControlName]="currentFormControlName"
-      #selectWidget
+      [id]="controlId"
       class="form-control">
-      <option value="{{ option.value }}" *ngFor="let option of options; let i = index">{{
+      <option *ngFor="let option of options; let i = index" value="{{ option.value }}">{{
         option.label
         }}</option>
     </select>

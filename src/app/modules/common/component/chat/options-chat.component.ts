@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseDynamicComponent } from '../BaseDynamicComponent';
-import { NotificationService } from '../../../common/service/notification.service';
-import { Router } from '@angular/router';
-import { ChatData } from '../../../common/model/models';
+import {Component, OnInit} from '@angular/core';
+import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {NotificationService} from '../../../common/service/notification.service';
+import {Router} from '@angular/router';
+import {ChatData} from '../../../common/model/models';
 
 @Component({
   selector: 'app-options-chat',
@@ -12,10 +12,7 @@ import { ChatData } from '../../../common/model/models';
 export class OptionsChatComponent extends BaseDynamicComponent implements OnInit {
 
   constructor(private router: Router, private notificationService: NotificationService) {
-    super()
-  }
-
-  ngOnInit() {
+    super();
   }
 
   get chatData(): ChatData {
@@ -26,13 +23,16 @@ export class OptionsChatComponent extends BaseDynamicComponent implements OnInit
     return this.context.message;
   }
 
+  ngOnInit() {
+  }
+
   navigateTo(column) {
     this.router.navigate([column.clickUrl]);
   }
 
   clickAndSendResponse(col) {
     this.notificationService.notify(col,
-                'clickAndSendResponse', 'clickAndSendResponse');
+      'clickAndSendResponse', 'clickAndSendResponse');
   }
 
   isButtonWidgetType(widget) {

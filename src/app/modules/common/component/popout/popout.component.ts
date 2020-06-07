@@ -2,9 +2,10 @@
 import {
   Component,
   ComponentFactoryResolver,
-  ComponentRef, ElementRef,
+  ElementRef,
   EventEmitter,
-  Injector, Input,
+  Injector,
+  Input,
   NgModuleFactoryLoader,
   OnDestroy,
   OnInit,
@@ -40,39 +41,20 @@ export class PopoutComponent implements OnInit, OnDestroy {
   @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
   @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;
   @ViewChild('dynamicPopoutMinimized') dynamicPopoutMinimized: ElementRef;
-  private componentRef;
-  private errorComponentRef;
   theHeader: string;
   modalShim;
   @Input()
   defaultWidth = '500';
   @Input()
   defaultBodyHeight = '700';
+  private componentRef;
+  private errorComponentRef;
 
   constructor(private notificationService: NotificationService, private injector: Injector,
               private componentFactoryResolver: ComponentFactoryResolver,
               private renderer: Renderer2,
               private _injector: Injector,
               private loader: NgModuleFactoryLoader) {
-  }
-
-  /**
-   * https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
-   * @param lazyModule
-   */
-  private loadSubComponent(extraData) {
-    const moduleNameString = extraData.lazyModule.modulePath;
-    const componentName = extraData.lazyModule.componentName;
-    this.loader.load(moduleNameString).then((factory) => {
-      const module = factory.create(this._injector);
-      const r = module.componentFactoryResolver;
-      const cmpFactory = r.resolveComponentFactory(componentName);
-
-      // create a component and attach it to the view
-      this.componentRef = cmpFactory.create(this._injector);
-      this.componentRef.instance.extraDynamicData = extraData;
-      this.theBodyContainer.insert(this.componentRef.hostView);
-    })
   }
 
   ngOnInit(): void {
@@ -132,14 +114,6 @@ export class PopoutComponent implements OnInit, OnDestroy {
     this.hideDynamicPopoutMinimized();
   }
 
-  private hideDynamicPopoutMinimized() {
-    this.dynamicPopoutMinimized.nativeElement.style.display = 'none';
-  }
-
-  private showDynamicPopoutMinimized() {
-    this.dynamicPopoutMinimized.nativeElement.style.display = 'block';
-  }
-
   minimize() {
     this.showDynamicPopoutMinimized();
     this.hide();
@@ -155,5 +129,32 @@ export class PopoutComponent implements OnInit, OnDestroy {
     setTimeout(() => this.visible = false, 300);
     this.modalState.emit('hidden');
     // this.renderer.removeChild(document.body, this.modalShim);
+  }
+
+  /**
+   * https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
+   * @param lazyModule
+   */
+  private loadSubComponent(extraData) {
+    const moduleNameString = extraData.lazyModule.modulePath;
+    const componentName = extraData.lazyModule.componentName;
+    this.loader.load(moduleNameString).then((factory) => {
+      const module = factory.create(this._injector);
+      const r = module.componentFactoryResolver;
+      const cmpFactory = r.resolveComponentFactory(componentName);
+
+      // create a component and attach it to the view
+      this.componentRef = cmpFactory.create(this._injector);
+      this.componentRef.instance.extraDynamicData = extraData;
+      this.theBodyContainer.insert(this.componentRef.hostView);
+    });
+  }
+
+  private hideDynamicPopoutMinimized() {
+    this.dynamicPopoutMinimized.nativeElement.style.display = 'none';
+  }
+
+  private showDynamicPopoutMinimized() {
+    this.dynamicPopoutMinimized.nativeElement.style.display = 'block';
   }
 }

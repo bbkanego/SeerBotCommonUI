@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { Injectable } from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class DialogService {
-    /**
+  /**
    * Ask user to confirm an action. `message` explains the action and choices.
    * Returns observable resolving to `true`=confirm or `false`=cancel
    */

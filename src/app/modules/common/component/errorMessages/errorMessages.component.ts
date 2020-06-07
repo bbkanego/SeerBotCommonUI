@@ -17,12 +17,12 @@ export class ErrorMessagesComponent
   errorMessage: string = null;
   errorCode: string = null;
   referenceCode: string;
-  private sub: any;
-  private navSub: any;
   @ViewChild('errorContainer') errorContainer: ElementRef;
   @ViewChild('errorsModal') errorsModal: ModalComponent;
   @Input()
   errorHeading = 'There were errors. Please fix before proceeding!';
+  private sub: any;
+  private navSub: any;
 
   constructor(
     private notificationService: NotificationService,
@@ -90,6 +90,13 @@ export class ErrorMessagesComponent
     });
   }
 
+  hideErrorContainer() {
+    this.errorContainer.nativeElement.style.display = 'none';
+    this.hasErrorMessages = false;
+    this.fieldErrors = false;
+    this.errorMessages = null;
+  }
+
   private showPageLevelValidationErrors(data: any) {
     console.log('Validation Error occurred: ', JSON.stringify(data.message)
     );
@@ -98,12 +105,5 @@ export class ErrorMessagesComponent
     this.hasErrorMessages = this.errorMessages.length > 0;
 
     this.errorsModal.show();
-  }
-
-  hideErrorContainer() {
-    this.errorContainer.nativeElement.style.display = 'none';
-    this.hasErrorMessages = false;
-    this.fieldErrors = false;
-    this.errorMessages = null;
   }
 }

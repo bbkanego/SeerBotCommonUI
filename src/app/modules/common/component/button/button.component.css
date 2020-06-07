@@ -3,6 +3,10 @@
 }
 
 /*This displays buttons stacked on top of each other for small devices*/
-@media all and (max-width:480px) {
-  .button-xs { width: 100%; display:block; margin-bottom: 0.625rem}
+@media all and (max-width: 480px) {
+  .button-xs {
+    width: 100%;
+    display: block;
+    margin-bottom: 0.625rem
+  }
 } 

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, HostListener} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input} from '@angular/core';
 import {NotificationService} from '../../common/service/notification.service';
 
 @Directive({
@@ -50,8 +50,10 @@ export class DropTargetDirective {
     const draggedItemObj = JSON.parse(draggedItem);
     const draggedItemParentObj = JSON.parse(draggedItemParent);
 
-    const onDropData = {event: ev, draggedItem: draggedItemObj, draggedItemParent: draggedItemParentObj,
-        dropTarget: this.dropTarget};
+    const onDropData = {
+      event: ev, draggedItem: draggedItemObj, draggedItemParent: draggedItemParentObj,
+      dropTarget: this.dropTarget
+    };
 
     this.notificationService.notifyAny(onDropData, 'OnDrop', 'OnDrop');
     /*console.log("onDrop dragged item = " + draggedItem + ", draggedItemParent = " + draggedItemParent

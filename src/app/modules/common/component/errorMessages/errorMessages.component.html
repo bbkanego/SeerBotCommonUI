@@ -2,7 +2,7 @@
   https://stackoverflow.com/questions/31196980/using-a-glyphicon-as-an-li-bullet-point-bootstrap-3
 -->
 <div class="container-fluid" scrollTo>
-  <div class="row" #errorContainer>
+  <div #errorContainer class="row">
     <div *ngIf="hasErrorMessages || fieldErrors" class="errorMessage alert alert-danger tp-20margin">
       <div (click)='hideErrorContainer()' class="action"><span class="actionIcon glyphicon glyphicon-remove"></span>
       </div>
@@ -39,7 +39,7 @@
     </ul>
   </div>
   <div class="app-modal-footer">
-    <bk-button intent="warning" (click)='errorsModal.hide()' label="OK">
+    <bk-button (click)='errorsModal.hide()' intent="warning" label="OK">
     </bk-button>
   </div>
 </app-bk-custom-modal>

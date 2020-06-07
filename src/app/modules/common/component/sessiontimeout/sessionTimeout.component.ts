@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, OnDestroy, ViewChild, HostListener} from '@angular/core';
-import {NotificationService} from '../../../common/service/notification.service'
+import {Component, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {NotificationService} from '../../../common/service/notification.service';
 import {Dialog} from 'primeng/primeng';
-import {Subscription} from 'rxjs/Subscription';
-import { Router, NavigationStart } from '@angular/router';
+import {Subscription} from 'rxjs';
+import {NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-bk-session-timeout',
@@ -13,13 +13,13 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
   @Input() sessionTimeOutInMins = 30;
   sessionTimeOutInSeconds = 0;
   timeoutMessageDisplayInSeconds = 5 * 60;
-  private lastActivityTimestamp: number = Date.now();
   @ViewChild(Dialog) sessionDialog: Dialog;
-  private sub: Subscription;
-  private navSub: Subscription;
   sessionTimeoutHeading = 'Session Ending';
   sessionTimeoutMessage = 'Your session is about to end!';
   intervalTracker: any;
+  private lastActivityTimestamp: number = Date.now();
+  private sub: Subscription;
+  private navSub: Subscription;
 
   constructor(private notificationService: NotificationService, private router: Router) {
   }
@@ -35,7 +35,7 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
           this.resetTimeout();
         }
       },
-        error => console.log(error)
+      error => console.log(error)
     );
 
     this.navSub = this.router.events.subscribe((event) => {
@@ -69,6 +69,16 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
     this.sessionDialog.visible = false;
   }
 
+  continueSession() {
+    this.resetTimeout();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalTracker);
+    this.sub.unsubscribe();
+    this.navSub.unsubscribe();
+  }
+
   private resetTimeout() {
     this.lastActivityTimestamp = Date.now();
     this.hideSessionDialog();
@@ -78,21 +88,11 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
     const elapsedTimeInSeconds = (Date.now() - this.lastActivityTimestamp) / 1000;
     // console.log('current time = ' + elapsedTimeInSeconds);
     if ((elapsedTimeInSeconds >= (this.sessionTimeOutInSeconds - this.timeoutMessageDisplayInSeconds))
-                                          && !this.sessionDialog.visible) {
+      && !this.sessionDialog.visible) {
       this.showSessionDialog();
     } else if (elapsedTimeInSeconds >= (this.sessionTimeOutInSeconds)) {
       clearInterval(this.intervalTracker);
       this.notificationService.notify('Logout was a success', 'ForcedLogout', 'ForcedLogout');
     }
-  }
-
-  continueSession() {
-    this.resetTimeout();
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.intervalTracker);
-    this.sub.unsubscribe();
-    this.navSub.unsubscribe();
   }
 }

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class CookieService {
-  constructor() {}
+  constructor() {
+  }
 
   set(key: string, value: string, expires?: Date): void {
     let cookieValue = `${key}=${value}`;

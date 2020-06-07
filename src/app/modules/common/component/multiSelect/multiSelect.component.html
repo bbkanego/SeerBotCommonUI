@@ -1,6 +1,6 @@
-<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup">
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup">
   <label class="center-block"
-    >{{ label }}&nbsp;
+  >{{ label }}&nbsp;
     <span
       *ngIf="isRequired()"
       class="glyphicon glyphicon-asterisk icon-required"
@@ -8,23 +8,23 @@
 
     <div class="dropdown">
       <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
         (focus)='onFocusEvent($event)'
-        data-toggle="dropdown">
+        class="btn btn-primary dropdown-toggle"
+        data-toggle="dropdown"
+        type="button">
         {{ showSelectedValues }}
         <span class="caret"> </span>
       </button>
       <ul class="dropdown-menu">
         <li *ngFor="let option of options; let i = index">
           <label>
-            <input *ngIf='option.value && option.value != "_NONE_"'
-              type="checkbox"
-              (focus)='onFocusEvent($event)'
-              (change)='onChange($event)'
-              [attr.checked]='isSelected(option.value) ? true : null'
-              (click)="selectValue($event)"
-              value="{{ option.value }}"
+            <input (change)='onChange($event)'
+                   (click)="selectValue($event)"
+                   (focus)='onFocusEvent($event)'
+                   *ngIf='option.value && option.value != "_NONE_"'
+                   [attr.checked]='isSelected(option.value) ? true : null'
+                   type="checkbox"
+                   value="{{ option.value }}"
             />
             {{ option.label }}
           </label>

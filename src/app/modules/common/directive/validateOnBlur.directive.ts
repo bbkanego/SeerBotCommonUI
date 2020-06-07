@@ -1,24 +1,9 @@
-import {
-  Directive,
-  Input,
-  ElementRef,
-  Renderer2,
-  OnInit,
-  OnDestroy,
-  HostListener
-} from '@angular/core';
-import {
-  FormArray,
-  FormControlName,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  NgControl
-} from '@angular/forms';
-import { CustomFormControl } from '../../common/model/controls';
-import { ValidationService } from '../../common/service/validation.services';
-import { NotificationService } from '../../common/service/notification.service';
-import { COMMON_CONST } from '../../common/model/constants';
+import {Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {FormControlName, FormGroup, NgControl} from '@angular/forms';
+import {CustomFormControl} from '../../common/model/controls';
+import {ValidationService} from '../../common/service/validation.services';
+import {NotificationService} from '../../common/service/notification.service';
+import {COMMON_CONST} from '../../common/model/constants';
 
 /**
  * https://stackoverflow.com/questions/33866824/angular2-control-validation-on-blur/41973780#41973780
@@ -75,6 +60,11 @@ export class ValidationOnBlurDirective implements OnInit, OnDestroy {
     this.wasChanged = true; // ng-value change
   }
 
+  @HostListener('blur')
+  onBlur($event) {
+    // this.validateOnBlur($event);
+  }
+
   private isEqual(): boolean {
     const newValue = this.nativeElement.value;
     if (newValue === '') {
@@ -84,11 +74,6 @@ export class ValidationOnBlurDirective implements OnInit, OnDestroy {
       return true;
     }
     return false;
-  }
-
-  @HostListener('blur')
-  onBlur($event) {
-    // this.validateOnBlur($event);
   }
 
   private validateOnBlur($event) {
@@ -113,9 +98,9 @@ export class ValidationOnBlurDirective implements OnInit, OnDestroy {
     const $containerDomObj = $('#' + $containerDomId);
     console.log(
       'OnBlur called ---------- ' +
-        JSON.stringify($event) +
-        ', ' +
-        this.formControl
+      JSON.stringify($event) +
+      ', ' +
+      this.formControl
     );
     this.validationService
       .validateAllFields(this.bkValidatorRule, serializedForm)

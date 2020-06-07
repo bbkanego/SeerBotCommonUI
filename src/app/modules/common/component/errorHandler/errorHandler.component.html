@@ -1,11 +1,11 @@
 <!-- A child component -->
 {{modalState}}
 
-<p-dialog header="{{errorHandlerHeading}}" modal="modal" width="300" responsive="true" (click)="hideErrorDialog()">
+<p-dialog (click)="hideErrorDialog()" header="{{errorHandlerHeading}}" modal="modal" responsive="true" width="300">
   {{exceptionDetails}}
   <p-footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-      <button type="button" pButton icon="fa-close" (click)="hideErrorDialog()" label="Ok"></button>
+      <button (click)="hideErrorDialog()" icon="fa-close" label="Ok" pButton type="button"></button>
     </div>
   </p-footer>
 </p-dialog>
@@ -18,6 +18,6 @@
     {{exceptionDetails}}
   </div>
   <div class="app-modal-footer">
-    <button type="button" class="btn btn-default" (click)="errorModal.hide()">Close</button>
+    <button (click)="errorModal.hide()" class="btn btn-default" type="button">Close</button>
   </div>
 </app-bk-custom-modal>

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { AsyncValidatorFn, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { CustomValidator } from '../../common/validator/custom.validator';
+import {Injectable} from '@angular/core';
+import {AsyncValidatorFn, FormControl, ValidatorFn, Validators} from '@angular/forms';
+import {CustomValidator} from '../../common/validator/custom.validator';
 
 export const VALIDATION_ERROR_TYPES = {
   REQUIRED: 'required',
@@ -10,12 +10,11 @@ export const VALIDATION_ERROR_TYPES = {
 // @dynamic
 @Injectable()
 export class CustomFormControl extends FormControl {
-  private validationErrorMap = new Map<string, string>();
-  private _errorMessages: any;
   validationRules = {};
+  private validationErrorMap = new Map<string, string>();
 
   constructor(formState?: any, validationRules?: {}, validator?: ValidatorFn | ValidatorFn[],
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]) {
+              asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]) {
     super(formState, validator, asyncValidator);
     this.validationRules = validationRules ? validationRules : {};
     this.addValidationRules(this.validationRules);
@@ -28,6 +27,20 @@ export class CustomFormControl extends FormControl {
         }
       }
     }
+  }
+
+  private _errorMessages: any;
+
+  public get errorMessages(): any {
+    return this._errorMessages;
+  }
+
+  addValidationError(key: string, value: string) {
+    this.validationErrorMap.set(key, value);
+  }
+
+  getValidationErrorsMap(): Map<string, string> {
+    return this.validationErrorMap;
   }
 
   private addValidationRules(validationRules: any) {
@@ -90,17 +103,5 @@ export class CustomFormControl extends FormControl {
     if (tempValidators.length > 0) {
       this.setValidators(tempValidators);
     }
-  }
-
-  public get errorMessages(): any {
-    return this._errorMessages;
-  }
-
-  addValidationError(key: string, value: string) {
-    this.validationErrorMap.set(key, value);
-  }
-
-  getValidationErrorsMap(): Map<string, string> {
-    return this.validationErrorMap;
   }
 }

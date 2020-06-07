@@ -6,8 +6,8 @@
   </tr>
   <tr>
     <td>
-      <input type="button" (click)="clickYes()" value="{{messageJSON.yesOption.message}}">
-      <input type="button" (click)="clickNo()"  value="{{messageJSON.noOption.message}}">
+      <input (click)="clickYes()" type="button" value="{{messageJSON.yesOption.message}}">
+      <input (click)="clickNo()" type="button" value="{{messageJSON.noOption.message}}">
     </td>
   </tr>
 </table>

@@ -2,37 +2,34 @@
  * https://bootsnipp.com/snippets/ZlkBn
  */
 import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  Input,
-  OnDestroy,
-  SimpleChanges,
-  OnChanges,
   AfterViewChecked,
-  ViewEncapsulation,
-  ViewContainerRef,
+  Component,
   ComponentFactoryResolver,
-  ComponentRef
+  ComponentRef,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef,
+  ViewEncapsulation
 } from '@angular/core';
-import { UUID } from 'angular2-uuid';
-import { HttpClient } from '../../../common/service/httpClient.helper';
-import { environment } from '../../environments/environment';
-import { StompService } from '../../../common/service/stomp.service';
-import { AuthenticationService } from '../../service/authentication.service';
-import {
-  NotificationService,
-  Notification
-} from '../../../common/service/notification.service';
-import { ChatData, Account } from '../../../common/model/models';
-import { TableChatComponentComponent } from './table-chat-component.component';
-import { BaseDynamicComponent } from '../BaseDynamicComponent';
-import { Subscription } from 'rxjs/Subscription';
-import { ConfirmChatComponent } from './confirm-chat.component';
-import { Router } from '@angular/router';
-import { OptionsChatComponent } from '../../../common/component/chat/options-chat.component';
-import { TextChat2ComponentComponent } from './text-chat2-component.component';
+import {UUID} from 'angular2-uuid';
+import {HttpClientHelper} from '../../../common/service/httpClient.helper';
+import {environment} from '../../environments/environment';
+import {StompService} from '../../../common/service/stomp.service';
+import {Notification, NotificationService} from '../../../common/service/notification.service';
+import {ChatData} from '../../../common/model/models';
+import {TableChatComponentComponent} from './table-chat-component.component';
+import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {Subscription} from 'rxjs';
+import {ConfirmChatComponent} from './confirm-chat.component';
+import {Router} from '@angular/router';
+import {OptionsChatComponent} from '../../../common/component/chat/options-chat.component';
+import {TextChat2ComponentComponent} from './text-chat2-component.component';
+import {Utils} from '../../service/utils.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,14 +49,19 @@ export class Chat2Component
   chatMessageBoxContainer: ElementRef;
   @ViewChild('messageListContainer')
   messageListContainer: ElementRef;
-  @ViewChild('messageList', { read: ViewContainerRef })
+  @ViewChild('messageList', {read: ViewContainerRef})
   messageList: ViewContainerRef;
   showChatBox = false;
   @Input()
   showChatBoxAfterSeconds = 10000;
+  @Input()
+  hostUrl: string;
+  @Input()
+  subscriptionUrl: string;
+  chatMessages: ChatData[] = [];
+  componentRef: ComponentRef<{}>;
   private dynamicComponentMap: Map<number, ComponentRef<{}>> = new Map();
   private dynamicComponentCount = 0;
-
   private subscription: any;
   private headers = {};
   private chatSessionId;
@@ -69,29 +71,21 @@ export class Chat2Component
   private initiateMessageSent = false;
   private messageSide = 'left';
   private uniqueClientId;
-
-  @Input()
-  hostUrl: string;
-  @Input()
-  subscriptionUrl: string;
-  chatMessages: ChatData[] = new Array();
-
   private DYNAMIC_COMPONENTS = {
     text: TextChat2ComponentComponent,
     table: TableChatComponentComponent,
     confirmAction: ConfirmChatComponent,
     options: OptionsChatComponent
   };
-  componentRef: ComponentRef<{}>;
 
   constructor(
-    private httpClient: HttpClient,
+    private httpClient: HttpClientHelper,
     private stomp: StompService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private notificationService: NotificationService,
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     setTimeout(() => {
@@ -114,51 +108,6 @@ export class Chat2Component
     this.connect();
   }
 
-  private deleteChildComponent(eventObj: Notification) {
-    const childComponent: ComponentRef<{}> = this.dynamicComponentMap.get(
-      +eventObj.message
-    );
-    childComponent.destroy();
-    this.dynamicComponentMap.delete(+eventObj.message);
-  }
-
-  private performYesNoAction(eventObj: Notification) {
-    if (this.clickedColumn && eventObj.message.response === 'yes') {
-      // this.router.navigate([this.clickedColumn.clickActionUrl]);
-      this.sendMessageGeneral(
-        eventObj.message.messageJSON.yesResponse +
-          '|' +
-          this.clickedColumn.clickItemId,
-        false
-      );
-      this.clickedColumn = null;
-    } else if (this.clickedColumn && eventObj.message.response === 'no') {
-      // this.router.navigate([this.clickedColumn.clickActionUrl]);
-      this.sendMessageGeneral(eventObj.message.messageJSON.noResponse, false);
-      this.clickedColumn = null;
-    }
-  }
-
-  private clickAndSendResponse(eventObj: Notification) {
-    this.clickedColumn = eventObj.message;
-    const message: ChatData = {
-      id: null,
-      message: eventObj.message.clickResponse,
-      chatSessionId: this.chatSessionId,
-      accountId: null,
-      previousChatId: this.previousChatId,
-      currentSessionId: this.currentSessionId,
-      uniqueClientId: this.uniqueClientId,
-      response: '',
-      authCode: '',
-    };
-    this.httpClient
-      .post(environment.SEND_CHAT_URL, JSON.stringify(message))
-      .subscribe(() => {
-        this.chatBox.nativeElement.value = '';
-      });
-  }
-
   sendPingMessage() {
     this.initiateMessageSent = true;
     const message: ChatData = {
@@ -174,30 +123,13 @@ export class Chat2Component
     };
     this.httpClient
       .post(environment.SEND_CHAT_URL, JSON.stringify(message))
-      .subscribe(() => {});
+      .subscribe(() => {
+      });
   }
 
   sendMessage() {
     this.sendMessageGeneral(this.chatBox.nativeElement.value, true);
   }
-
-  /* sendMessageNew() {
-    let text = this.chatBox.nativeElement.value;
-    if (text.trim() === '') {
-      return;
-    }
-    $messages = $('.messages');
-    this.messageSide = this.messageSide === 'left' ? 'right' : 'left';
-    message = new Message({
-      text: text,
-      message_side: message_side
-    });
-    message.draw();
-    return $messages.animate(
-      { scrollTop: $messages.prop('scrollHeight') },
-      300
-    );
-  } */
 
   sendMessageGeneral(messageStr: string, appendRequest: boolean) {
     const message: ChatData = {
@@ -233,6 +165,24 @@ export class Chat2Component
     }
   }
 
+  /* sendMessageNew() {
+    let text = this.chatBox.nativeElement.value;
+    if (text.trim() === '') {
+      return;
+    }
+    $messages = $('.messages');
+    this.messageSide = this.messageSide === 'left' ? 'right' : 'left';
+    message = new Message({
+      text: text,
+      message_side: message_side
+    });
+    message.draw();
+    return $messages.animate(
+      { scrollTop: $messages.prop('scrollHeight') },
+      300
+    );
+  } */
+
   ngOnDestroy() {
     // unsubscribe
     this.subscription.unsubscribe();
@@ -257,21 +207,21 @@ export class Chat2Component
   }
 
   setUpStomp() {
-    const currentUser = JSON.parse(this.authenticationService.getCurrentUser());
+    const currentUser = JSON.parse(Utils.getCurrentUser());
     if (currentUser && currentUser.token) {
       this.headers['Authorization'] = currentUser.token;
     }
     console.log(
       'hostUrl = ' +
-        this.hostUrl +
-        ', subscriptionUrl = ' +
-        this.subscriptionUrl
+      this.hostUrl +
+      ', subscriptionUrl = ' +
+      this.subscriptionUrl
     );
     this.stomp.stompConfig = {
       host: this.hostUrl + '?token=' + currentUser.token,
       debug: true,
       headers: this.headers,
-      queue: { init: false }
+      queue: {init: false}
     };
   }
 
@@ -287,20 +237,6 @@ export class Chat2Component
     });
   }
 
-  // response
-  private handleResponse(data: ChatData) {
-    // console.log('data received = ' + JSON.stringify(data));
-    this.chatMessages.push(data);
-    this.appendChatResponse(data);
-    this.chatSessionId = data.chatSessionId;
-    this.previousChatId = data.id;
-    this.currentSessionId = data.currentSessionId;
-    this.scrollToTheBottom = true;
-    if (this.chatBox) {
-      this.chatBox.nativeElement.focus();
-    }
-  }
-
   ngAfterViewChecked() {
     if (this.scrollToTheBottom) {
       this.scrollToBottom();
@@ -311,7 +247,7 @@ export class Chat2Component
   scrollToBottom(): void {
     if (this.messageListContainer) {
       const $messageListContainerObj = $(this.messageListContainer.nativeElement);
-      $messageListContainerObj.animate({ scrollTop: $messageListContainerObj.prop('scrollHeight') }, 300);
+      $messageListContainerObj.animate({scrollTop: $messageListContainerObj.prop('scrollHeight')}, 300);
       // this.messageListContainer.nativeElement.scrollTop = this.messageListContainer.nativeElement.scrollHeight;
     }
   }
@@ -339,6 +275,79 @@ export class Chat2Component
       this.proccessConfirmAction(messageJSON, data);
     } else if (messageJSON.widget === 'options') {
       this.proccessOptionsAction(messageJSON, data);
+    }
+  }
+
+  getChatResponse(chat: ChatData) {
+    if (chat.accountId === 'ChatBot') {
+      return chat.response;
+    } else {
+      return chat.message;
+    }
+  }
+
+  onKeydownEvent(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.sendMessage();
+    }
+  }
+
+  private deleteChildComponent(eventObj: Notification) {
+    const childComponent: ComponentRef<{}> = this.dynamicComponentMap.get(
+      +eventObj.message
+    );
+    childComponent.destroy();
+    this.dynamicComponentMap.delete(+eventObj.message);
+  }
+
+  private performYesNoAction(eventObj: Notification) {
+    if (this.clickedColumn && eventObj.message.response === 'yes') {
+      // this.router.navigate([this.clickedColumn.clickActionUrl]);
+      this.sendMessageGeneral(
+        eventObj.message.messageJSON.yesResponse +
+        '|' +
+        this.clickedColumn.clickItemId,
+        false
+      );
+      this.clickedColumn = null;
+    } else if (this.clickedColumn && eventObj.message.response === 'no') {
+      // this.router.navigate([this.clickedColumn.clickActionUrl]);
+      this.sendMessageGeneral(eventObj.message.messageJSON.noResponse, false);
+      this.clickedColumn = null;
+    }
+  }
+
+  private clickAndSendResponse(eventObj: Notification) {
+    this.clickedColumn = eventObj.message;
+    const message: ChatData = {
+      id: null,
+      message: eventObj.message.clickResponse,
+      chatSessionId: this.chatSessionId,
+      accountId: null,
+      previousChatId: this.previousChatId,
+      currentSessionId: this.currentSessionId,
+      uniqueClientId: this.uniqueClientId,
+      response: '',
+      authCode: '',
+    };
+    this.httpClient
+      .post(environment.SEND_CHAT_URL, JSON.stringify(message))
+      .subscribe(() => {
+        this.chatBox.nativeElement.value = '';
+      });
+  }
+
+  // response
+  private handleResponse(data: ChatData) {
+    // console.log('data received = ' + JSON.stringify(data));
+    this.chatMessages.push(data);
+    this.appendChatResponse(data);
+    this.chatSessionId = data.chatSessionId;
+    this.previousChatId = data.id;
+    this.currentSessionId = data.currentSessionId;
+    this.scrollToTheBottom = true;
+    if (this.chatBox) {
+      this.chatBox.nativeElement.focus();
     }
   }
 
@@ -375,14 +384,6 @@ export class Chat2Component
     this.createDynamicComponent('options', contextData);
   }
 
-  getChatResponse(chat: ChatData) {
-    if (chat.accountId === 'ChatBot') {
-      return chat.response;
-    } else {
-      return chat.message;
-    }
-  }
-
   private createDynamicComponent(type, contextData) {
     if (type) {
       this.dynamicComponentCount++;
@@ -407,12 +408,6 @@ export class Chat2Component
     }
   }
 
-  onKeydownEvent(event: KeyboardEvent) {
-    if (event.keyCode === 13) {
-      this.sendMessage();
-    }
-  }  
-  
 }
 
 export class Message {
@@ -435,7 +430,7 @@ export class Message {
       .find('.text')
       .html(this.text);
     $('.messages').append($message);
-    return setTimeout(function() {
+    return setTimeout(function () {
       return $message.addClass('appeared');
     }, 0);
   }

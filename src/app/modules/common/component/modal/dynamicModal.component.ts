@@ -1,18 +1,17 @@
 // http://jasonwatmore.com/post/2017/01/24/angular-2-custom-modal-window-dialog-box
 import {
-    Component,
-    ComponentFactoryResolver,
-    ComponentRef,
-    EventEmitter,
-    Injector,
-    NgModuleFactoryLoader,
-    OnDestroy,
-    OnInit,
-    Output,
-    Renderer2,
-    SystemJsNgModuleLoader,
-    ViewChild,
-    ViewContainerRef,
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Injector,
+  NgModuleFactoryLoader,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  SystemJsNgModuleLoader,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import {NotificationService} from '../../service/notification.service';
 import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
@@ -21,7 +20,7 @@ import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog
  * https://netbasal.com/dynamically-creating-components-with-angular-a7346f4a982d
  */
-@Component ({
+@Component({
   templateUrl: './dynamicModal.component.html',
   selector: 'app-bk-dynamic-modal',
   styleUrls: ['./dynamicModal.component.css'],
@@ -39,10 +38,10 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
   @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;
-  private componentRef;
-  private errorComponentRef;
   theHeader: string;
   modalShim;
+  private componentRef;
+  private errorComponentRef;
 
   constructor(private notificationService: NotificationService, private injector: Injector,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -51,27 +50,8 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
               private loader: NgModuleFactoryLoader) {
   }
 
-  /**
-   * https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
-   * @param lazyModule
-   */
-  private loadSubComponent(extraData) {
-    const moduleNameString = extraData.lazyModule.modulePath;
-    const componentName = extraData.lazyModule.componentName;
-    this.loader.load(moduleNameString).then((factory) => {
-      const module = factory.create(this._injector);
-      const r = module.componentFactoryResolver;
-      const cmpFactory = r.resolveComponentFactory(componentName);
-
-      // create a component and attach it to the view
-      this.componentRef = cmpFactory.create(this._injector);
-      this.componentRef.instance.extraDynamicData = extraData;
-      this.theBodyContainer.insert(this.componentRef.hostView);
-    });
-  }
-
   ngOnInit(): void {
-    this.notificationService.onNotification().subscribe((eventData:any) => {
+    this.notificationService.onNotification().subscribe((eventData: any) => {
       if (eventData.type === DynamicModalComponent.SHOW_DYNAMIC_MODAL) {
         if (this.theBodyContainer) {
           this.theBodyContainer.clear();
@@ -130,5 +110,24 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
     setTimeout(() => this.visible = false, 300);
     this.modalState.emit('hidden');
     // this.renderer.removeChild(document.body, this.modalShim);
+  }
+
+  /**
+   * https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
+   * @param lazyModule
+   */
+  private loadSubComponent(extraData) {
+    const moduleNameString = extraData.lazyModule.modulePath;
+    const componentName = extraData.lazyModule.componentName;
+    this.loader.load(moduleNameString).then((factory) => {
+      const module = factory.create(this._injector);
+      const r = module.componentFactoryResolver;
+      const cmpFactory = r.resolveComponentFactory(componentName);
+
+      // create a component and attach it to the view
+      this.componentRef = cmpFactory.create(this._injector);
+      this.componentRef.instance.extraDynamicData = extraData;
+      this.theBodyContainer.insert(this.componentRef.hostView);
+    });
   }
 }

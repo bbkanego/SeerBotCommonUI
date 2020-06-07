@@ -2,5 +2,7 @@
 export abstract class BaseDynamicComponent {
   context: any;
   id: number;
-  constructor() {}
+
+  constructor() {
+  }
 }

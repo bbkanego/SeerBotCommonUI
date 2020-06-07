@@ -1,6 +1,5 @@
 // http://plnkr.co/edit/ITnd5R5H4NRKqM9yy4Ir?p=preview
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {SUBSCRIBER_TYPES} from '../model/constants';
 
 export interface Notification {

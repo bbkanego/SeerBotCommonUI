@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseDynamicComponent } from '../BaseDynamicComponent';
-import { ChatData } from '../../../common/model/models';
+import {Component, OnInit} from '@angular/core';
+import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {ChatData} from '../../../common/model/models';
 
 @Component({
   selector: 'app-text-chat-component',

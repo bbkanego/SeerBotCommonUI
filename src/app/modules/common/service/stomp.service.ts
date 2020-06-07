@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 // import * as Stomp from 'stompjs';
 // import * as SockJS from 'sockjs-client';
 
@@ -23,20 +23,14 @@ export interface Config {
 @Injectable()
 export class StompService {
   public stompConfig = null;
-
-  private socket: any;
-
   public stomp: any;
-
-  private timer: any;
-
-  private resolveConPromise: (...args: any[]) => void;
   public queuePromises = [];
-
+  public status: string;
+  private socket: any;
+  private timer: any;
+  private resolveConPromise: (...args: any[]) => void;
   private disconnectPromise: any;
   private resolveDisConPromise: (...args: any[]) => void;
-
-  public status: string;
 
   constructor() {
     this.status = 'CLOSED';
@@ -73,7 +67,7 @@ export class StompService {
 
     // Debuging connection
     if (this.stompConfig.debug) {
-      this.stomp.debug = function(str) {
+      this.stomp.debug = function (str) {
         console.log(str);
       };
     } else {
@@ -93,7 +87,7 @@ export class StompService {
     this.resolveConPromise();
     this.timer = null;
     // console.log('Connected: ' + frame);
-  }
+  };
 
   /**
    * Unsuccessfull connection to server
@@ -110,7 +104,7 @@ export class StompService {
         this.startConnect();
       }, this.stompConfig.recTimeout || 5000);
     }
-  }
+  };
 
   /**
    * Subscribe
@@ -119,7 +113,7 @@ export class StompService {
     headers = headers || {};
     return this.stomp.subscribe(
       destination,
-      function(response) {
+      function (response) {
         const message = JSON.parse(response.body);
         const tempHeaders = response.headers;
         callback(message, tempHeaders);
@@ -160,7 +154,9 @@ export class StompService {
    */
   public after(name: string): Promise<{}> {
     this.nameCheck(name);
-    if (this.stompConfig.debug) { console.log('checking ' + name + ' queue ...'); }
+    if (this.stompConfig.debug) {
+      console.log('checking ' + name + ' queue ...');
+    }
     const checkQueue = setInterval(() => {
       if (this.stompConfig.queue[name]) {
         clearInterval(checkQueue);

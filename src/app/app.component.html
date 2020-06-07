@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12" style="white-space: nowrap">
-      <form [formGroup]="testForm" novalidate (ngSubmit)="save()">
+      <form (ngSubmit)="save()" [formGroup]="testForm" novalidate>
         <!-- We'll add our form controls here -->
         <label class="center-block" for="name">Name
           <span class="glyphicon glyphicon-asterisk icon-required"></span>
@@ -15,66 +15,66 @@
         <app-bk-textarea
           [currentFormGroup]="testForm"
           controlId="lastName"
+          currentFormControlName="lastName"
           label="Last Name"
           textAreaLength="3000"
-          currentFormControlName="lastName"
         ></app-bk-textarea>
 
         <app-bk-select
           [currentFormGroup]="testForm"
-          controlId="category"
           [options]="category"
-          label="Last Name"
-          currentFormControlName="category">
+          controlId="category"
+          currentFormControlName="category"
+          label="Last Name">
         </app-bk-select>
 
         <app-bk-multi-select
-          [currentFormGroup]="testForm"
-          controlId="multiSelectCategoryId"
           (onSelect)="showSelectedValues($event)"
+          [currentFormGroup]="testForm"
           [options]="category"
-          label="Last Name"
           [startingValues]="multiSelectStartValues"
-          currentFormControlName="multiSelectCategory">
+          controlId="multiSelectCategoryId"
+          currentFormControlName="multiSelectCategory"
+          label="Last Name">
         </app-bk-multi-select>
         {{ multiSelectStartValues.join() }}
         <app-bk-multi-select
-          [currentFormGroup]="testForm"
-          controlId="multiSelectCategoryId2"
           (onSelect)="showSelectedValues2($event)"
+          [currentFormGroup]="testForm"
           [options]="category"
-          label="Categories"
           [startingValues]="multiSelectStartValues2"
-          currentFormControlName="multiSelectCategory2">
+          controlId="multiSelectCategoryId2"
+          currentFormControlName="multiSelectCategory2"
+          label="Categories">
         </app-bk-multi-select>
         {{ multiSelectStartValues2.join() }}
-        <bk-button intent="success" type="submit" label="Test me!"></bk-button>
+        <bk-button intent="success" label="Test me!" type="submit"></bk-button>
         <bk-button
-          intent="success"
-          type="button"
           (onClick)="changeMultiSelectValues()"
-          label="Change Multi-select Values"></bk-button>
+          intent="success"
+          label="Change Multi-select Values"
+          type="button"></bk-button>
       </form>
     </div>
   </div>
 
   <bk-button
-    intent="success"
-    type="button"
     (onClick)="showDynamicModal()"
-    label="Show Dynamic Modal"></bk-button>
+    intent="success"
+    label="Show Dynamic Modal"
+    type="button"></bk-button>
 
   <bk-button
-    intent="success"
-    type="button"
     (onClick)="showPopout()"
-    label="Show Popout"></bk-button>
+    intent="success"
+    label="Show Popout"
+    type="button"></bk-button>
 
   <bk-button
-    intent="success"
-    type="button"
     (onClick)="showCustomModal()"
-    label="Show Custom Modal"></bk-button>
+    intent="success"
+    label="Show Custom Modal"
+    type="button"></bk-button>
 
   <app-bk-dynamic-modal #dynamicModalComponentBk></app-bk-dynamic-modal>
   <app-bk-popout #popoutComponent></app-bk-popout>
@@ -87,7 +87,7 @@
       {{customModalData.bodyMessage}}
     </div>
     <div class="app-modal-footer">
-      <bk-button intent="success" (click)='testCustomModel.hide()' label="{{ customModalData.buttonOk }}">
+      <bk-button (click)='testCustomModel.hide()' intent="success" label="{{ customModalData.buttonOk }}">
       </bk-button>
     </div>
   </app-bk-custom-modal>

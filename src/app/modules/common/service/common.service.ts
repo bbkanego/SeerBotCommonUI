@@ -1,12 +1,10 @@
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import {map} from 'rxjs/operators';
+
 
 import {Inject, Injectable} from '@angular/core';
-import {Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-
-import {HttpClient} from './httpClient.helper';
-import {CommonModalModel} from '../../../app.component';
+import {Observable} from 'rxjs';
+import {HttpClientHelper} from './httpClient.helper';
+import {HttpResponse} from '@angular/common/http';
 
 // Import RxJs required methods
 @Injectable()
@@ -15,7 +13,7 @@ export class CommonService {
   cmsContent: {} = null;
   private environment;
 
-  constructor(private httpClient: HttpClient, @Inject('environment') environment) {
+  constructor(private httpClientHelper: HttpClientHelper, @Inject('environment') environment) {
     this.environment = environment;
   }
 
@@ -43,10 +41,10 @@ export class CommonService {
    */
   private getMessagesLocal(endPointUrl): Observable<any> {
     return (
-      this.httpClient
-        .get(endPointUrl)
-        // get the response and call .json() to get the JSON data
-        .map((res: Response) => res.json())
+      this.httpClientHelper
+        .get(endPointUrl).pipe(
+        // get the response and call .body() to get the JSON data and then return an observable...
+        map((res: HttpResponse<any>) => res.body()))
     );
   }
 }

@@ -142,7 +142,7 @@ export {
   AuthenticationService
 } from './src/app/modules/common/service/authentication.service';
 export { CrudService } from './src/app/modules/common/service/crud.service';
-export { HttpClient } from './src/app/modules/common/service/httpClient.helper';
+export { HttpClientHelper } from './src/app/modules/common/service/httpClient.helper';
 export { LoggerService } from './src/app/modules/common/service/logger.service';
 export {
   NotificationService,

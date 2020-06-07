@@ -1,14 +1,14 @@
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import {map} from 'rxjs/operators';
 
-import { Inject, Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+
+import {Inject, Injectable} from '@angular/core';
 import * as JQuery from 'jquery';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
-import { SUBSCRIBER_TYPES } from '../../common/model/constants';
-import { HttpClient } from '../../common/service/httpClient.helper';
-import { NotificationService } from '../../common/service/notification.service';
+import {SUBSCRIBER_TYPES} from '../model/constants';
+import {HttpClientHelper} from './httpClient.helper';
+import {NotificationService} from './notification.service';
+import {HttpResponse} from '@angular/common/http';
 
 // Import RxJs required methods
 const $ = JQuery;
@@ -16,8 +16,9 @@ const $ = JQuery;
 @Injectable()
 export class ValidationService {
   private environment;
+
   constructor(
-    private httpClient: HttpClient,
+    private httpClientHelper: HttpClientHelper,
     private notificationService: NotificationService,
     @Inject('environment') environment
   ) {
@@ -32,40 +33,31 @@ export class ValidationService {
       '/' +
       fieldName;
     return (
-      this.httpClient
-        .get(url)
+      this.httpClientHelper
+        .get(url).pipe(
         // get the response and call .json() to get the JSON data
-        .map((res: Response) => res.json())
-        .catch((error: any) =>
-          Observable.throw(error.json().error || 'Server error')
-        )
+        map((res: HttpResponse<any>) => res.body()))
     );
   }
 
   validateAllFields(validatorName: string, serializedForm): Observable<any> {
     return (
-      this.httpClient
+      this.httpClientHelper
         .post(
           this.environment.VALIDATE_ALL_FIELD_URL + '/' + validatorName,
           serializedForm
-        )
+        ).pipe(
         // get the response and call .json() to get the JSON data
-        .map((res: Response) => res.json())
-        .catch((error: any) =>
-          Observable.throw(error.json().error || 'Server error')
-        )
+        map((res: HttpResponse<any>) => res.body()))
     );
   }
 
   getValidationRuleMetadata(validatorRule: string): Observable<any> {
     return (
-      this.httpClient
-        .get(this.environment.VALIDATION_METADATA_URL + '/' + validatorRule)
+      this.httpClientHelper
+        .get(this.environment.VALIDATION_METADATA_URL + '/' + validatorRule).pipe(
         // get the response and call .json() to get the JSON data
-        .map((res: Response) => res.json())
-        .catch((error: any) =>
-          Observable.throw(error.json().error || 'Server error')
-        )
+        map((res: HttpResponse<any>) => res.body()))
     );
   }
 

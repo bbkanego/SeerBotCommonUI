@@ -1,7 +1,6 @@
-import {Component, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
-import { Http } from '@angular/http';
-import {HttpClient} from '../../../common/service/httpClient.helper';
-import { AuthenticationService } from '../../service/authentication.service';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {HttpClientHelper} from '../../../common/service/httpClient.helper';
+import {Utils} from '../../service/utils.service';
 
 @Component({
   selector: 'app-bk-fileupload',
@@ -11,7 +10,7 @@ export class FileUploadComponent {
   @Input() showComplexFileUpload = false;
   @Input() showSimpleFileUpload = false;
   @Input() multiple = false;
-  @Input() uploadUrl = 'http://localhost:8080/webflow/api/upload';
+  @Input() uploadUrl = 'NONE';
   @Output() onBeforeSendEmitter: EventEmitter<any> = new EventEmitter();
   @Output() onBeforeUploadEmitter: EventEmitter<any> = new EventEmitter();
   @Output() onUploadEmitter: EventEmitter<any> = new EventEmitter();
@@ -23,10 +22,11 @@ export class FileUploadComponent {
 
   @ViewChild('fileInput') inputEl: ElementRef;
 
-  constructor(private http: Http, private httpClient: HttpClient, private authenticationService: AuthenticationService) {}
+  constructor(private httpClientHelper: HttpClientHelper) {
+  }
 
   onBeforeSend(event) {
-    const currentUser = JSON.parse(this.authenticationService.getCurrentUser());
+    const currentUser = JSON.parse(Utils.getCurrentUser());
     event.xhr.setRequestHeader('Authorization', currentUser.token);
     this.onBeforeSendEmitter.emit(event);
   }
@@ -56,7 +56,14 @@ export class FileUploadComponent {
     this.showProgress = true;
     this.uploadButtonLabel = 'Uploading...';
     const inputEl = this.inputEl.nativeElement;
-    if (inputEl.files.length === 0) { return; }
+    if (inputEl.files.length === 0) {
+      console.log('No files selected. Returning...');
+      return;
+    }
+    if ('NONE' === this.uploadUrl) {
+      console.log('Upload URL is not defined. Returning...');
+      return;
+    }
 
     const files: FileList = inputEl.files;
     const formData = new FormData();
@@ -64,7 +71,7 @@ export class FileUploadComponent {
       formData.append('fileUpload', files[i], files[i].name);
     }
 
-    this.httpClient.postMultipart(this.uploadUrl, formData).subscribe((response) => {
+    this.httpClientHelper.postMultipart(this.uploadUrl, formData).subscribe((response) => {
       this.showProgress = false;
       console.log('Got response!');
       this.uploadButtonLabel = 'Done';

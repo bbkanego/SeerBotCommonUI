@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as JQuery from 'jquery';
-import { Subscription } from 'rxjs/Subscription';
 
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
+import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
 
 const $ = JQuery;
 
@@ -17,9 +15,8 @@ const $ = JQuery;
  */
 export class InputComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
-  private input;
-
   @Input() inputType = 'text';
+  private input;
 
   constructor(injector: Injector) {
     super(injector);

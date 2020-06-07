@@ -1,29 +1,14 @@
-import {
-  Component,
-  Input,
-  ViewChild,
-  forwardRef,
-  OnInit,
-  HostListener,
-  ElementRef,
-  AfterViewInit,
-  Injector
-} from '@angular/core';
-import {
-  NG_VALUE_ACCESSOR,
-  ControlValueAccessor,
-  FormBuilder
-} from '@angular/forms';
-import { TreeNode } from 'primeng/primeng';
-import { FormGroup } from '@angular/forms';
+import {AfterViewInit, Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewChild} from '@angular/core';
+import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
 // import {FocusForwarderDirective} from '../../../common/directive/focusForwarder.directive';
-import { Dialog } from 'primeng/primeng';
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
+import {Dialog, TreeNode} from 'primeng/primeng';
+import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
 import * as JQuery from 'jquery';
 
 const $ = JQuery;
 
-const noop = () => {};
+const noop = () => {
+};
 
 /**
  * http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
@@ -56,17 +41,12 @@ export class TreeChooserComponent extends BaseCustomComponent
   @Input() inline = true;
 
   showTree = false;
-
-  private treeSelection: any[];
-
   nodeSelected = false;
-
   @ViewChild(Dialog) treeDialog: Dialog;
   @ViewChild('chooserInput') chooserInput: ElementRef;
   $nativeChooserInputObj;
-
   testMe: any;
-
+  private treeSelection: any[];
   // The internal data model
   private innerValue: any = '';
 
@@ -83,6 +63,19 @@ export class TreeChooserComponent extends BaseCustomComponent
     super(injector);
   }
 
+  // get accessor
+  get value(): any {
+    return this.innerValue;
+  }
+
+  // set accessor including call the onchange callback
+  set value(v: any) {
+    if (v !== this.innerValue) {
+      this.innerValue = v;
+      this.onChangeCallback(v);
+    }
+  }
+
   ngAfterViewInit() {
     this.$nativeChooserInputObj = $(this.chooserInput.nativeElement);
     this.$nativeChooserInputObj.attr('errorContainerId', this.controlId);
@@ -95,19 +88,6 @@ export class TreeChooserComponent extends BaseCustomComponent
 
     if (this.controlId == null) {
       this.controlId = this.currentFormControlName;
-    }
-  }
-
-  // get accessor
-  get value(): any {
-    return this.innerValue;
-  }
-
-  // set accessor including call the onchange callback
-  set value(v: any) {
-    if (v !== this.innerValue) {
-      this.innerValue = v;
-      this.onChangeCallback(v);
     }
   }
 

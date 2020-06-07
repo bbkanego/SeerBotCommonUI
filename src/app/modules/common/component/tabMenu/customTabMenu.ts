@@ -1,6 +1,5 @@
-import {NgModule,Component,ElementRef,OnDestroy,Input,Output,EventEmitter} from '@angular/core';
-import {TabMenu, MenuItem} from 'primeng/primeng';
-import {DomHandler} from 'primeng/primeng';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {DomHandler, MenuItem, TabMenu} from 'primeng/primeng';
 
 @Component({
   selector: 'customTabMenu',
@@ -31,7 +30,7 @@ export class CustomTabMenu extends TabMenu {
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
 
-  itemClick(event:Event, item:MenuItem):void {
+  itemClick(event: Event, item: MenuItem): void {
     super.itemClick(event, item);
 
     this.onSelect.emit({

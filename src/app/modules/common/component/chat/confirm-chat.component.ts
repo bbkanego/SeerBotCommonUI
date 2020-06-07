@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseDynamicComponent } from '../BaseDynamicComponent';
-import { Router } from '@angular/router';
-import { NotificationService } from '../../service/notification.service';
-import { ChatData } from '../../model/models';
+import {Component, OnInit} from '@angular/core';
+import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {Router} from '@angular/router';
+import {NotificationService} from '../../service/notification.service';
+import {ChatData} from '../../model/models';
 
 @Component({
   selector: 'app-confirm-chat-component',
@@ -12,7 +12,7 @@ import { ChatData } from '../../model/models';
 export class ConfirmChatComponent extends BaseDynamicComponent implements OnInit {
 
   constructor(private router: Router, private notificationService: NotificationService) {
-    super()
+    super();
   }
 
   get chatData(): ChatData {

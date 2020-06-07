@@ -1,8 +1,6 @@
-import {Component, ViewChild, ElementRef, OnInit, Input, OnDestroy,
-  Output, EventEmitter, HostListener, Injector} from '@angular/core';
+import {Component, Injector, Input, OnDestroy, OnInit} from '@angular/core';
 import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
-import {NotificationService} from '../../../common/service/notification.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 export interface TreeNode {
   id: string;
@@ -37,22 +35,22 @@ export class TreeNodeComponent extends BaseCustomComponent implements OnInit, On
   isOpen = false;
   private notificationSubscription: Subscription;
 
+  constructor(injector: Injector) {
+    super(injector);
+  }
+
   ngOnInit(): void {
     this.notificationSubscription = this.notificationService.onNotification().subscribe((event: any) => {
       if (event.type === 'OnDropCompleted_' + this.node.id) {
         this.node = event.message;
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
-  }
-
-  constructor(injector: Injector) {
-    super(injector);
   }
 
   onNodeSelect(event) {
@@ -101,9 +99,9 @@ export class TreeNodeComponent extends BaseCustomComponent implements OnInit, On
 })
 export class TreeViewComponent extends BaseCustomComponent implements OnInit, OnDestroy {
   @Input() nodes: TreeNode[] = [];
-  private notificationSubscription: Subscription;
   errorMessage: string;
   showError: boolean;
+  private notificationSubscription: Subscription;
 
   constructor(injector: Injector) {
     super(injector);

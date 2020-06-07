@@ -1,5 +1,5 @@
-<div #mainModal class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
-  [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+<div #mainModal [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}" class="modal fade"
+     tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,4 +15,4 @@
     </div>
   </div>
 </div>
-<div class="modal-backdrop" #modalBackdrop></div>
+<div #modalBackdrop class="modal-backdrop"></div>

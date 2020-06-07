@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as JQuery from 'jquery';
-import { Subscription } from 'rxjs/Subscription';
 
-import { BaseCustomComponent } from '../BaseCustomComponent.component';
-import { SUBSCRIBER_TYPES } from '../../model/constants';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
 
 const $ = JQuery;
 
@@ -30,7 +28,9 @@ export class TextareaComponent extends BaseCustomComponent implements OnInit, Af
   }
 
   getNumberOfCharsLeft(): string {
-    if (!this.textAreaLength || !this.getFormControl().value) { return null; }
+    if (!this.textAreaLength || !this.getFormControl().value) {
+      return null;
+    }
 
     return this.textAreaLength - this.getFormControl().value.length + ' chars left';
   }

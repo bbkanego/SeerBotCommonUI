@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Option } from '../../model/models';
-import { CustomValidator } from '../../validator/custom.validator';
-import { BaseCustomComponent } from '../BaseCustomComponent.component';
+import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Option} from '../../model/models';
+import {CustomValidator} from '../../validator/custom.validator';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
 
 @Component({
   selector: 'app-bk-multi-select',
@@ -19,6 +19,21 @@ export class MultiSelectComponent extends BaseCustomComponent
 
   constructor(injector: Injector) {
     super(injector);
+  }
+
+  get showSelectedValues(): string {
+    const selectedLabels: string[] = [];
+    if (this.selectedValues.length > 0) {
+      this.selectedValues.forEach((value) => {
+        this.options.forEach(option => {
+          if (option.value === value) {
+            selectedLabels.push(option.label);
+          }
+        });
+      });
+      return selectedLabels.join();
+    }
+    return this.noneLabel;
   }
 
   isSelected(valueToCheck: string): boolean {
@@ -43,13 +58,6 @@ export class MultiSelectComponent extends BaseCustomComponent
 
     if (this.getFormControl().validationRules['required']) {
       this.getFormControl().setValidators([CustomValidator.isSelectValid()]);
-    }
-  }
-
-  private setControlValue() {
-    this.getFormControl().setValue(null);
-    if (this.selectedValues.length > 0) {
-      this.getFormControl().setValue(this.selectedValues.join());
     }
   }
 
@@ -86,18 +94,10 @@ export class MultiSelectComponent extends BaseCustomComponent
     }
   }
 
-  get showSelectedValues(): string {
-    const selectedLabels: string[] = [];
+  private setControlValue() {
+    this.getFormControl().setValue(null);
     if (this.selectedValues.length > 0) {
-      this.selectedValues.forEach((value) => {
-        this.options.forEach(option => {
-          if (option.value === value) {
-            selectedLabels.push(option.label);
-          }
-        });
-      });
-      return selectedLabels.join();
+      this.getFormControl().setValue(this.selectedValues.join());
     }
-    return this.noneLabel;
   }
 }

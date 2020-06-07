@@ -1,12 +1,12 @@
-<div [formGroup]="currentFormGroup" *ngIf="currentFormGroup" style="white-space: nowrap">
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
   <label class="center-block">{{label}}&nbsp;
     <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
-    <div class="input-group" [id]="controlId">
+    <div [id]="controlId" class="input-group">
 
-      <input #bkCalendarInput autocomplete="off" (blur)="onBlurEvent($event)" 
-        [formControlName]="currentFormControlName" class="form-control bkCalendarInput" />
+      <input #bkCalendarInput (blur)="onBlurEvent($event)" [formControlName]="currentFormControlName"
+             autocomplete="off" class="form-control bkCalendarInput"/>
       <span class="input-group-btn">
-        <a class="btn btn-info btn-sm" (click)="onInputClick(bkCalendarInput, $event)">
+        <a (click)="onInputClick(bkCalendarInput, $event)" class="btn btn-info btn-sm">
           <span class="glyphicon glyphicon-calendar"></span>
         </a>
       </span>
@@ -21,29 +21,30 @@
     <tr>
       <td style="width: 50%">
         <select (change)="onYearSelect($event)" [(ngModel)]="currentYear">
-          <option value="{{year.value}}" *ngFor=" let year of years">{{year.label}}</option>
+          <option *ngFor=" let year of years" value="{{year.value}}">{{year.label}}</option>
         </select>
       </td>
       <td>
         <select (change)="onMonthSelect($event)" [(ngModel)]="currentMonth">
-          <option value="{{month.value}}" *ngFor=" let month of months">{{month.label}}</option>
+          <option *ngFor=" let month of months" value="{{month.value}}">{{month.label}}</option>
         </select>
       </td>
     </tr>
     <tr>
-      <td colspan="2" class="calendarContainer">
+      <td class="calendarContainer" colspan="2">
         <table class="calendar">
           <thead>
-            <tr>
-              <th scope="col" *ngFor="let weekDay of weekDays;let begin = first; let end = last">
-                <span>{{weekDay}}</span>
-              </th>
-            </tr>
+          <tr>
+            <th *ngFor="let weekDay of weekDays;let begin = first; let end = last" scope="col">
+              <span>{{weekDay}}</span>
+            </th>
+          </tr>
           </thead>
           <tr *ngFor="let week of dates">
             <td *ngFor="let date of week">
-              <a class="selectable" *ngIf="date.otherMonth ? showOtherMonths : true" (click)="onDateSelect($event)">{{date.day}}</a>
-              <div class="unselectable" *ngIf="date.otherMonth ? true : false">{{date.day}}</div>
+              <a (click)="onDateSelect($event)" *ngIf="date.otherMonth ? showOtherMonths : true"
+                 class="selectable">{{date.day}}</a>
+              <div *ngIf="date.otherMonth ? true : false" class="unselectable">{{date.day}}</div>
             </td>
           </tr>
         </table>

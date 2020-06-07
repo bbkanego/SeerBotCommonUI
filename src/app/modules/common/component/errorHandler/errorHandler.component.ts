@@ -1,6 +1,6 @@
-import {Component, ViewChild, OnChanges, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from '../../../common/component/modal/modal.component';
-import {NotificationService} from '../../../common/service/notification.service'
+import {NotificationService} from '../../../common/service/notification.service';
 import {Dialog} from 'primeng/primeng';
 
 @Component({
@@ -48,7 +48,7 @@ export class ErrorHandler implements OnInit, OnDestroy {
           this.errorDialog.visible = true;
         }
       },
-        error => console.log(error)
+      error => console.log(error)
     );
   }
 }

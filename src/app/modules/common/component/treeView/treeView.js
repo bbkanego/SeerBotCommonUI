@@ -5,15 +5,14 @@ $.fn.extend({
     var openedClass = 'glyphicon-minus-sign';
     var closedClass = 'glyphicon-plus-sign';
 
-    if (typeof o != 'undefined'){
-      if (typeof o.openedClass != 'undefined'){
+    if (typeof o != 'undefined') {
+      if (typeof o.openedClass != 'undefined') {
         openedClass = o.openedClass;
       }
-      if (typeof o.closedClass != 'undefined'){
+      if (typeof o.closedClass != 'undefined') {
         closedClass = o.closedClass;
       }
-    };
-
+    }
     //initialize each of the top levels
     var tree = $(this);
     tree.addClass("tree");
@@ -27,11 +26,11 @@ $.fn.extend({
           icon.toggleClass(openedClass + " " + closedClass);
           $(this).children().children().toggle();
         }
-      })
+      });
       branch.children().children().toggle();
     });
     //fire event from the dynamically added icon
-    tree.find('.branch .indicator').each(function(){
+    tree.find('.branch .indicator').each(function () {
       $(this).on('click', function () {
         $(this).closest('li').click();
       });

@@ -1,7 +1,7 @@
-import { Directive, OnInit, OnDestroy, Input } from '@angular/core';
-import { NotificationService } from '../../common/service/notification.service';
-import { StompService } from '../../common/service/stomp.service';
-import { AuthenticationService } from '../service/authentication.service';
+import {Directive, Input, OnDestroy, OnInit} from '@angular/core';
+import {NotificationService} from '../../common/service/notification.service';
+import {StompService} from '../../common/service/stomp.service';
+import {Utils} from '../service/utils.service';
 
 @Directive({
   selector: 'app-bk-websocket',
@@ -9,19 +9,17 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class WebSocketDirective implements OnInit, OnDestroy {
 
-  private subscription: any;
-  private headers = {};
-
   @Input() hostUrl: string;
   @Input() subscriptionUrl: string;
   @Input() notifyEvent: string;
+  private subscription: any;
+  private headers = {};
 
-  constructor(private stomp: StompService, private notificationService: NotificationService,
-                  private authenticationService: AuthenticationService) {
+  constructor(private stomp: StompService, private notificationService: NotificationService) {
   }
 
   setUpStomp() {
-    const currentUser = JSON.parse(this.authenticationService.getCurrentUser());
+    const currentUser = JSON.parse(Utils.getCurrentUser());
     if (currentUser && currentUser.token) {
       this.headers['Authorization'] = currentUser.token;
     }
@@ -30,7 +28,7 @@ export class WebSocketDirective implements OnInit, OnDestroy {
       host: this.hostUrl + '?token=' + currentUser.token,
       debug: false,
       headers: this.headers,
-      queue: { 'init': false }
+      queue: {'init': false}
     };
   }
 
@@ -55,13 +53,13 @@ export class WebSocketDirective implements OnInit, OnDestroy {
     // disconnect
     this.stomp.disconnect().then(() => {
       // console.log('Connection closed')
-    })
+    });
   }
 
   // response
   private handleResponse(data) {
     // console.log("data received = " + JSON.stringify(data));
-    const chartData = { 'chartData': data };
+    const chartData = {'chartData': data};
     this.notificationService.notifyAny(chartData, this.notifyEvent, this.notifyEvent);
   }
 }

@@ -1,16 +1,13 @@
-// http://stackoverflow.com/questions/34464108/angular2-set-headers-for-every-request/34465070#34465070
-// https://github.com/ivanderbu2/angular-redux/blob/master/src/app/core/http.service.ts
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/finally';
-
+import {catchError, finalize, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable, throwError as _throw} from 'rxjs';
 
 import {SUBSCRIBER_TYPES} from '../model/constants';
 import {NotificationService} from './notification.service';
-import {AuthenticationService} from './authentication.service';
-import {_throw} from 'rxjs/observable/throw';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Utils} from './utils.service';
+// http://stackoverflow.com/questions/34464108/angular2-set-headers-for-every-request/34465070#34465070
+// https://github.com/ivanderbu2/angular-redux/blob/master/src/app/core/http.service.ts
 
 export interface IntputHeader {
   name: string;
@@ -21,22 +18,20 @@ export interface IntputHeader {
 /**
  * This is a helper which abstracts the HTTP POST and get and adds additional headers to the each request.
  */
-export class HttpClient {
+export class HttpClientHelper {
   private timeoutObj;
 
   constructor(
-    private http: Http,
-    private notificationService: NotificationService,
-    private authenticationService: AuthenticationService
+    private http: HttpClient,
+    private notificationService: NotificationService
   ) {
   }
 
   // tslint:disable-next-line:member-ordering
   static createAuthorizationHeader(
-    authenticationService: AuthenticationService,
-    headers: Headers
+    headers: HttpHeaders
   ) {
-    const currentUser = JSON.parse(authenticationService.getCurrentUser());
+    const currentUser = JSON.parse(Utils.getCurrentUser());
     if (currentUser && currentUser.token) {
       /*headers.append('Authorization', 'Basic ' +
           // The btoa() method encodes a string in base-64.
@@ -46,8 +41,146 @@ export class HttpClient {
   }
 
   // tslint:disable-next-line:member-ordering
-  static setCommonHeaders(headers: Headers) {
+  static setCommonHeaders(headers: HttpHeaders) {
     headers.append('Content-Type', 'application/json');
+  }
+
+  get(url): Observable<HttpResponse<any>> {
+    this.showLoader();
+
+    const headers = new HttpHeaders();
+    HttpClientHelper.setCommonHeaders(headers);
+    HttpClientHelper.createAuthorizationHeader(headers);
+    return this.http
+      .get(url, {
+        headers: headers, observe: 'response'
+      }).pipe(
+        catchError(err => {
+          return this.handleError(err);
+        }),
+        tap(
+          (response: HttpResponse<Object>) => {
+            return this.onSuccess(response);
+          },
+          (error: HttpResponse<Object>) => {
+            this.onError(error);
+          }
+        ),
+        finalize(() => {
+          this.onEnd();
+        }),);
+  }
+
+  post(
+    url,
+    serializedData,
+    inputHeaders?: IntputHeader[]
+  ): Observable<HttpResponse<any>> {
+    this.showLoader();
+    const headers: HttpHeaders = new HttpHeaders();
+    if (inputHeaders) {
+      inputHeaders.forEach(header => {
+        headers.append(header.name, header.value);
+      });
+    }
+    HttpClientHelper.setCommonHeaders(headers);
+    HttpClientHelper.createAuthorizationHeader(headers);
+    const requestOptions = {
+      headers: headers,
+      withCredentials: true,
+      observe: 'response' as 'body'
+    };
+    return this.http
+      .post(url, serializedData, requestOptions).pipe(
+        catchError(err => {
+          return this.handleError(err);
+        }),
+        tap(
+          (response: HttpResponse<Object>) => {
+            return this.onSuccess(response);
+          },
+          (error: HttpResponse<Object>) => {
+            this.onError(error);
+          }
+        ),
+        finalize(() => {
+          this.onEnd();
+        }),);
+  }
+
+  put(url, serializedData): Observable<HttpResponse<any>> {
+    this.showLoader();
+    const headers = new HttpHeaders();
+    HttpClientHelper.setCommonHeaders(headers);
+    HttpClientHelper.createAuthorizationHeader(headers);
+    return this.http
+      .put(url, serializedData, {
+        headers: headers, observe: 'response'
+      }).pipe(
+        catchError(err => {
+          return this.handleError(err);
+        }),
+        tap(
+          (response: HttpResponse<Object>) => {
+            return this.onSuccess(response);
+          },
+          (error: HttpResponse<Object>) => {
+            this.onError(error);
+          }
+        ),
+        finalize(() => {
+          this.onEnd();
+        }),);
+  }
+
+  delete(url: string, id: string): Observable<HttpResponse<any>> {
+    this.showLoader();
+    const headers = new HttpHeaders();
+    HttpClientHelper.setCommonHeaders(headers);
+    HttpClientHelper.createAuthorizationHeader(headers);
+    return this.http
+      .delete(url + '/' + id, {
+        headers: headers, observe: 'response'
+      }).pipe(
+        catchError(err => {
+          return this.handleError(err);
+        }),
+        tap(
+          (response: HttpResponse<Object>) => {
+            return this.onSuccess(response);
+          },
+          (error: HttpResponse<Object>) => {
+            this.onError(error);
+          }
+        ),
+        finalize(() => {
+          this.onEnd();
+        }),);
+  }
+
+  postMultipart(url, formData: FormData): Observable<HttpResponse<any>> {
+    this.showLoader();
+    const headers = new HttpHeaders();
+    // do not set the content type. the browser will set that. if you set content type manually u will get error.
+    HttpClientHelper.createAuthorizationHeader(headers);
+    return this.http
+      .post(url, formData, {
+        headers: headers
+      }).pipe(
+        catchError(err => {
+          return this.handleError(err);
+        }),
+        tap(
+          (response: HttpResponse<Object>) => {
+            return this.onSuccess(response);
+          },
+          (error: HttpResponse<Object>) => {
+            this.onError(error);
+          }
+        ),
+        finalize(() => {
+          this.onEnd();
+        }),);
   }
 
   private handleError(error: Response | any) {
@@ -97,151 +230,14 @@ export class HttpClient {
     return _throw(errMsg);
   }
 
-  get(url): Observable<Response> {
-    this.showLoader();
-
-    const headers = new Headers();
-    HttpClient.setCommonHeaders(headers);
-    HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http
-      .get(url, {
-        headers: headers
-      })
-      .catch(err => {
-        return this.handleError(err);
-      })
-      .do(
-        (response: Response) => {
-          return this.onSuccess(response);
-        },
-        (error: any) => {
-          this.onError(error);
-        }
-      )
-      .finally(() => {
-        this.onEnd();
-      });
-  }
-
-  post(
-    url,
-    serializedData,
-    inputHeaders?: IntputHeader[]
-  ): Observable<Response> {
-    this.showLoader();
-    const headers = new Headers();
-    if (inputHeaders) {
-      inputHeaders.forEach(header => {
-        headers.append(header.name, header.value);
-      });
-    }
-    HttpClient.setCommonHeaders(headers);
-    HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    const requestOptions = new RequestOptions({
-      headers: headers,
-      withCredentials: true
-    });
-    return this.http
-      .post(url, serializedData, requestOptions)
-      .catch(err => {
-        return this.handleError(err);
-      })
-      .do(
-        (res: Response) => {
-          this.onSuccess(res);
-        },
-        (error: any) => {
-          this.onError(error);
-        }
-      )
-      .finally(() => {
-        this.onEnd();
-      });
-  }
-
-  put(url, serializedData): Observable<Response> {
-    this.showLoader();
-    const headers = new Headers();
-    HttpClient.setCommonHeaders(headers);
-    HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http
-      .put(url, serializedData, {
-        headers: headers
-      })
-      .catch(err => {
-        return this.handleError(err);
-      })
-      .do(
-        (res: Response) => {
-          this.onSuccess(res);
-        },
-        (error: any) => {
-          this.onError(error);
-        }
-      )
-      .finally(() => {
-        this.onEnd();
-      });
-  }
-
-  delete(url: string, id: string): Observable<Response> {
-    this.showLoader();
-    const headers = new Headers();
-    HttpClient.setCommonHeaders(headers);
-    HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http
-      .delete(url + '/' + id, {
-        headers: headers
-      })
-      .catch(err => {
-        return this.handleError(err);
-      })
-      .do(
-        (res: Response) => {
-          this.onSuccess(res);
-        },
-        (error: any) => {
-          this.onError(error);
-        }
-      )
-      .finally(() => {
-        this.onEnd();
-      });
-  }
-
-  postMultipart(url, formData: FormData) {
-    this.showLoader();
-    const headers = new Headers();
-    // do not set the content type. the browser will set that. if you set content type manually u will get error.
-    HttpClient.createAuthorizationHeader(this.authenticationService, headers);
-    return this.http
-      .post(url, formData, {
-        headers: headers
-      })
-      .catch(err => {
-        return this.handleError(err);
-      })
-      .do(
-        (res: Response) => {
-          this.onSuccess(res);
-        },
-        (error: any) => {
-          this.onError(error);
-        }
-      )
-      .finally(() => {
-        this.onEnd();
-      });
-  }
-
-  private onSuccess(response: Response) {
+  private onSuccess(response: HttpResponse<Object>) {
     console.log('Request successful, status: ' + response.status);
     if (response.status !== 200) {
       return this.handleError(response);
     }
   }
 
-  private onError(res: Response): void {
+  private onError(res: HttpResponse<Object>): void {
     console.log('Error, status code: ' + res.status);
   }
 

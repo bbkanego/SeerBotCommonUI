@@ -3,10 +3,8 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ContentChild,
   ContentChildren,
   Directive,
-  DoCheck,
   EmbeddedViewRef,
   Input,
   OnChanges,
@@ -15,11 +13,10 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
-  ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import { Utils } from '../../../common/service/utils.service';
-import { Option } from '../../../common/model/models';
+import {Utils} from '../../../common/service/utils.service';
+import {Option} from '../../../common/model/models';
 
 /**
  * This allows you to include specific template types in components that you can work with
@@ -36,7 +33,8 @@ import { Option } from '../../../common/model/models';
 export class BkTemplateDirective {
   @Input('bkTemplate') name: string;
 
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) {
+  }
 
   getType(): string {
     return this.name;
@@ -60,7 +58,8 @@ export class DataColumnComponent implements OnInit, AfterContentInit {
   // allows user to alter the header display!
   headerTemplate = null;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngAfterContentInit(): void {
     this.templates.forEach(item => {
@@ -93,7 +92,8 @@ export class ColumnHeaderTemplateLoader implements OnInit, OnDestroy {
 
   view: EmbeddedViewRef<any>;
 
-  constructor(public viewContainer: ViewContainerRef) {}
+  constructor(public viewContainer: ViewContainerRef) {
+  }
 
   ngOnInit() {
     /**
@@ -131,7 +131,8 @@ export class ColumnBodyTemplateLoader implements OnInit, OnDestroy {
 
   view: EmbeddedViewRef<any>;
 
-  constructor(public viewContainer: ViewContainerRef) {}
+  constructor(public viewContainer: ViewContainerRef) {
+  }
 
   ngOnInit() {
     /**
@@ -196,7 +197,8 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   // this will be NgModel bound
   filterProp: string;
 
-  constructor(private utils: Utils, private cd: ChangeDetectorRef) {}
+  constructor(private utils: Utils, private cd: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
     this.filteredRecords = this.records;
@@ -242,27 +244,6 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
     }
   }
 
-  private calculateNumOfPages(): void {
-    this.numberOfPagesArray = [];
-    if (this.filteredRecords && this.filteredRecords.length > 0) {
-      const len = this.filteredRecords.length;
-      if (len > this.pageSize) {
-        const remainder = len % this.pageSize;
-        this.numberOfPages = Math.trunc(len / this.pageSize);
-        if (remainder != 0) {
-          this.numberOfPages += 1;
-        }
-      } else {
-        this.numberOfPages = 1;
-      }
-    }
-
-    for (let i = 1; i <= this.numberOfPages; i++) {
-      this.numberOfPagesArray.push(i);
-    }
-    this.end = String(this.pageSize);
-  }
-
   highLightPageTrigger(page: number) {
     $('.pageTrigger').removeClass('active');
     $('.' + page + 'Trigger').addClass('active');
@@ -272,8 +253,12 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   goToPage(goToPage: number) {
     this.highLightPageTrigger(goToPage);
 
-    if (goToPage > this.numberOfPages) return;
-    if (goToPage < 1) return;
+    if (goToPage > this.numberOfPages) {
+      return;
+    }
+    if (goToPage < 1) {
+      return;
+    }
 
     let isMoveForward: boolean = true;
     if (goToPage < this.currentPage) {
@@ -312,7 +297,7 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   ngAfterViewInit(): void {
     this.dataColumnsArray = this.dataColumns.toArray();
     /**
-     * Since the data columns array is getting updated after the digest/verification process, we need to explicitely call 
+     * Since the data columns array is getting updated after the digest/verification process, we need to explicitely call
      * the detect changes methos.
      */
     this.cd.detectChanges();
@@ -325,7 +310,7 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   sortColumn(event, column: DataColumnComponent, sortAscFlag: boolean) {
     if (!column.sort) {
       return;
-    };
+    }
     this.sortAsc = sortAscFlag;
     this.currentSortColumn = column.field;
     if (this.sortAsc) {
@@ -356,9 +341,30 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
 
   getColumnStyle(dataColumn: DataColumnComponent) {
     if (dataColumn) {
-    return dataColumn.style;
+      return dataColumn.style;
     } else {
       return '';
     }
+  }
+
+  private calculateNumOfPages(): void {
+    this.numberOfPagesArray = [];
+    if (this.filteredRecords && this.filteredRecords.length > 0) {
+      const len = this.filteredRecords.length;
+      if (len > this.pageSize) {
+        const remainder = len % this.pageSize;
+        this.numberOfPages = Math.trunc(len / this.pageSize);
+        if (remainder != 0) {
+          this.numberOfPages += 1;
+        }
+      } else {
+        this.numberOfPages = 1;
+      }
+    }
+
+    for (let i = 1; i <= this.numberOfPages; i++) {
+      this.numberOfPagesArray.push(i);
+    }
+    this.end = String(this.pageSize);
   }
 }

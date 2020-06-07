@@ -46,13 +46,13 @@
 
 .customerChat {
   background-color: beige;
-  width:80%;
+  width: 80%;
   float: right;
 }
 
 .botChat {
   background-color: #b9f7f4;
-  width:80%;
+  width: 80%;
   float: left;
 }
 

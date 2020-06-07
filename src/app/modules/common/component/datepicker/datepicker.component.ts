@@ -1,30 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  ViewChild,
-  Injector,
-  OnDestroy,
-  HostListener
-} from '@angular/core';
-import { Calendar, DomHandler } from 'primeng/primeng';
-import { BaseCustomComponent } from '../../../common/component/BaseCustomComponent.component';
-import { Option } from '../../../common/model/models';
+import {AfterViewInit, Component, ElementRef, HostListener, Injector, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+import {Option} from '../../../common/model/models';
 import * as _moment from 'moment';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-import { SUBSCRIBER_TYPES } from '../../../common/model/constants';
-import { Subscription } from 'rxjs/Subscription';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 const m = _moment;
 
@@ -44,12 +22,12 @@ export interface LocaleSettings {
   animations: [
     trigger('enterAnimation', [
       transition(':enter', [
-        style({ transform: 'translateXY(100%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateXY(0)', opacity: 1 }))
+        style({transform: 'translateXY(100%)', opacity: 0}),
+        animate('500ms', style({transform: 'translateXY(0)', opacity: 1}))
       ]),
       transition(':leave', [
-        style({ transform: 'translateXY(0)', opacity: 1 }),
-        animate('500ms', style({ transform: 'translateXY(100%)', opacity: 0 }))
+        style({transform: 'translateXY(0)', opacity: 1}),
+        animate('500ms', style({transform: 'translateXY(100%)', opacity: 0}))
       ])
     ])
   ]
@@ -59,7 +37,6 @@ export interface LocaleSettings {
  */
 export class DatePickerComponent extends BaseCustomComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  private nativeElem: any;
   @ViewChild('bkCalendarInput') bkCalendarInput: ElementRef;
   showDateContainer = false;
   dateSelected = false;
@@ -71,33 +48,36 @@ export class DatePickerComponent extends BaseCustomComponent
   currentMonth: number;
   currentMonthText: string;
   currentYear: number;
-
   weekDays: string[];
+  @Input() dataType = 'date';
+  @Input() disabledDates: Array<Date>;
+  @Input() disabledDays: Array<number>;
+  @Input() disabled: any;
+  _isValid = true;
+  value: Date;
+  focus: boolean;
+  filled: boolean;
+  inputFieldValue: string = null;
+  ticksTo1970: number;
+  private nativeElem: any;
   private dateInput: HTMLInputElement;
 
-  @Input() dataType = 'date';
+  constructor(private el: ElementRef, private renderer: Renderer2, injector: Injector) {
+    super(injector);
+    const tenYearsBack: Date = new Date();
+    tenYearsBack.setFullYear(new Date().getFullYear() - 10);
+    this.nativeElem = el.nativeElement;
+    for (let i = 1; i < 21; i++) {
+      const year: string = tenYearsBack.getFullYear() + i + '';
+      this.years.push(new Option(year, year));
+    }
 
-  @Input() disabledDates: Array<Date>;
-
-  @Input() disabledDays: Array<number>;
-
-  @Input() disabled: any;
+    for (let i = 0; i < 12; i++) {
+      this.months.push(new Option(i + '', this.locale.monthNames[i]));
+    }
+  }
 
   _minDate: Date;
-
-  _maxDate: Date;
-
-  _isValid = true;
-
-  value: Date;
-
-  focus: boolean;
-
-  filled: boolean;
-
-  inputFieldValue: string = null;
-
-  ticksTo1970: number;
 
   @Input()
   get minDate(): Date {
@@ -108,6 +88,8 @@ export class DatePickerComponent extends BaseCustomComponent
     this._minDate = date;
     this.createMonth(this.currentMonth, this.currentYear);
   }
+
+  _maxDate: Date;
 
   @Input()
   get maxDate(): Date {
@@ -161,21 +143,6 @@ export class DatePickerComponent extends BaseCustomComponent
       'Dec'
     ]
   };
-
-  constructor(private el: ElementRef, private renderer: Renderer2, injector: Injector) {
-    super(injector);
-    const tenYearsBack: Date = new Date();
-    tenYearsBack.setFullYear(new Date().getFullYear() - 10);
-    this.nativeElem = el.nativeElement;
-    for (let i = 1; i < 21; i++) {
-      const year: string = tenYearsBack.getFullYear() + i + '';
-      this.years.push(new Option(year, year));
-    }
-
-    for (let i = 0; i < 12; i++) {
-      this.months.push(new Option(i + '', this.locale.monthNames[i]));
-    }
-  }
 
   get locale() {
     return this._locale;
@@ -394,7 +361,7 @@ export class DatePickerComponent extends BaseCustomComponent
       y = year;
     }
 
-    return { month: m, year: y };
+    return {month: m, year: y};
   }
 
   getNextMonthAndYear(month: number, year: number) {
@@ -408,7 +375,7 @@ export class DatePickerComponent extends BaseCustomComponent
       y = year;
     }
 
-    return { month: m, year: y };
+    return {month: m, year: y};
   }
 
   getSundayIndex() {
@@ -422,7 +389,9 @@ export class DatePickerComponent extends BaseCustomComponent
         this.value.getMonth() === dateMeta.month &&
         this.value.getFullYear() === dateMeta.year
       );
-    } else { return false; }
+    } else {
+      return false;
+    }
   }
 
   isToday(today, day, month, year): boolean {
@@ -570,7 +539,9 @@ export class DatePickerComponent extends BaseCustomComponent
         if (literal) {
           if (format.charAt(iFormat) === '\'' && !lookAhead('\'')) {
             literal = false;
-          } else { output += format.charAt(iFormat); }
+          } else {
+            output += format.charAt(iFormat);
+          }
         } else {
           switch (format.charAt(iFormat)) {
             case 'd':
@@ -592,9 +563,9 @@ export class DatePickerComponent extends BaseCustomComponent
                     date.getFullYear(),
                     date.getMonth(),
                     date.getDate()
-                  ).getTime() -
+                    ).getTime() -
                     new Date(date.getFullYear(), 0, 0).getTime()) /
-                    86400000
+                  86400000
                 ),
                 3
               );
@@ -614,7 +585,7 @@ export class DatePickerComponent extends BaseCustomComponent
               output += lookAhead('y')
                 ? date.getFullYear()
                 : (date.getFullYear() % 100 < 10 ? '0' : '') +
-                  date.getFullYear() % 100;
+                date.getFullYear() % 100;
               break;
             case '@':
               output += date.getTime();
@@ -623,7 +594,11 @@ export class DatePickerComponent extends BaseCustomComponent
               output += date.getTime() * 10000 + this.ticksTo1970;
               break;
             case '\'':
-              if (lookAhead('\'')) { output += '\''; } else { literal = true; }
+              if (lookAhead('\'')) {
+                output += '\'';
+              } else {
+                literal = true;
+              }
 
               break;
             default:

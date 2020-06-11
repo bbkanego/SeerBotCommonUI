@@ -55,3 +55,17 @@ npm update
 
 npm install --save core-js@^2.5.0
 ```
+
+## Upgrade from Angular 6 to 7
+Run the below commands
+```
+npm install @angular/animations@^7 @angular/common@^7 @angular/compiler@^7 @angular/core@^7 @angular/forms@^7 @angular/http@^7 @angular/platform-browser@^7 @angular/platform-browser-dynamic@^7 @angular/platform-server@^7 @angular/router@^7 --save
+
+npm install @angular/compiler-cli@^7 @angular/cli@^7 @angular/language-service@^7 --save-dev
+
+npm install core-js@latest zone.js@latest --save
+
+npm install typescript@latest --save-dev
+
+npm install rxjs@latest rxjs-compat@latest --save
+```

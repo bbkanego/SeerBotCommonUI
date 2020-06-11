@@ -11,8 +11,8 @@ export class ErrorHandler implements OnInit, OnDestroy {
   @Input() handlerType: string;
   @Input() errorHandlerHeading: string;
 
-  @ViewChild(ModalComponent) errorModal: ModalComponent;
-  @ViewChild(Dialog) errorDialog: Dialog;
+  @ViewChild(ModalComponent, {static: false}) errorModal: ModalComponent;
+  @ViewChild(Dialog, {static: false}) errorDialog: Dialog;
 
   // private subscriberType:string = handlerType;
   exceptionDetails: string;

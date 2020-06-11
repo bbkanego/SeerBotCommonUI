@@ -36,8 +36,8 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
   visible = false;
   visibleAnimate = false;
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
-  @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;
+  @ViewChild('theBody', {read: ViewContainerRef, static: false}) theBodyContainer: ViewContainerRef;
+  @ViewChild('theError', {read: ViewContainerRef, static: false}) theErrorContainer: ViewContainerRef;
   theHeader: string;
   modalShim;
   private componentRef;

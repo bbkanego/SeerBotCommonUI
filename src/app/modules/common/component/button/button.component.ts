@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Injector, Input, OnInit, ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+import {BaseCustomComponent} from '../BaseCustomComponent.component';
 
 @Component({
   selector: 'bk-button',
@@ -20,7 +20,7 @@ export class ButtonComponent extends BaseCustomComponent implements OnInit, Afte
   @Input() tooltip;
   @Input() tootipPosition = 'bottom';
 
-  @ViewChild('targetButton') targetButton: ElementRef;
+  @ViewChild('targetButton', {static: false}) targetButton: ElementRef;
 
   private buttonTypes = {
     'success': 'btn btn-success active', 'danger': 'btn btn-danger active',

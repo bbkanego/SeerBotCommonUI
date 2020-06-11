@@ -1,6 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {HttpClientHelper} from '../../../common/service/httpClient.helper';
 import {Utils} from '../../service/utils.service';
+import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-fileupload',
@@ -20,7 +21,7 @@ export class FileUploadComponent {
   showProgress = false;
   uploadButtonLabel = 'Upload File';
 
-  @ViewChild('fileInput') inputEl: ElementRef;
+  @ViewChild('fileInput', {static: false}) inputEl: ElementRef;
 
   constructor(private httpClientHelper: HttpClientHelper) {
   }

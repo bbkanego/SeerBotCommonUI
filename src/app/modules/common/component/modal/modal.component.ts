@@ -1,5 +1,6 @@
 // http://jasonwatmore.com/post/2017/01/24/angular-2-custom-modal-window-dialog-box
 import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Dialog} from 'primeng/primeng';
 
 /**
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog
@@ -18,8 +19,8 @@ export class ModalComponent {
   visible = false;
   visibleAnimate = false;
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild('modalBackdrop') modalBackdrop: ElementRef;
-  @ViewChild('mainModal') mainModal: ElementRef;
+  @ViewChild('modalBackdrop', {static: false}) modalBackdrop: ElementRef;
+  @ViewChild('mainModal', {static: false}) mainModal: ElementRef;
 
   constructor() {
 

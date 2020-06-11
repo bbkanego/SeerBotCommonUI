@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit
 import {Option} from '../../model/models';
 import {CustomValidator} from '../../validator/custom.validator';
 import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-multi-select',
@@ -12,7 +13,7 @@ export class MultiSelectComponent extends BaseCustomComponent
   implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() options: Option[];
-  @ViewChild('selectWidget') selectWidget: ElementRef;
+  @ViewChild('selectWidget', {static: false}) selectWidget: ElementRef;
   selectedValues: string[] = [];
   @Input() startingValues: any[] = [];
   @Input() noneLabel = 'None Selected';

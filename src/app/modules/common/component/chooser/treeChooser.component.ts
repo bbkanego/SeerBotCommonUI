@@ -42,8 +42,8 @@ export class TreeChooserComponent extends BaseCustomComponent
 
   showTree = false;
   nodeSelected = false;
-  @ViewChild(Dialog) treeDialog: Dialog;
-  @ViewChild('chooserInput') chooserInput: ElementRef;
+  @ViewChild(Dialog, {static: false}) treeDialog: Dialog;
+  @ViewChild('chooserInput', {static: false}) chooserInput: ElementRef;
   $nativeChooserInputObj;
   testMe: any;
   private treeSelection: any[];

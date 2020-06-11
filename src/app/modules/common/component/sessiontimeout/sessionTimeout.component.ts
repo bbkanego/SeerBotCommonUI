@@ -13,7 +13,7 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
   @Input() sessionTimeOutInMins = 30;
   sessionTimeOutInSeconds = 0;
   timeoutMessageDisplayInSeconds = 5 * 60;
-  @ViewChild(Dialog) sessionDialog: Dialog;
+  @ViewChild(Dialog, {static: false}) sessionDialog: Dialog;
   sessionTimeoutHeading = 'Session Ending';
   sessionTimeoutMessage = 'Your session is about to end!';
   intervalTracker: any;

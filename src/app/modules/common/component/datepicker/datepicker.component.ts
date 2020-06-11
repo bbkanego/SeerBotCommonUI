@@ -37,7 +37,7 @@ export interface LocaleSettings {
  */
 export class DatePickerComponent extends BaseCustomComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('bkCalendarInput') bkCalendarInput: ElementRef;
+  @ViewChild('bkCalendarInput', {static: false}) bkCalendarInput: ElementRef;
   showDateContainer = false;
   dateSelected = false;
   showOtherMonths = false;

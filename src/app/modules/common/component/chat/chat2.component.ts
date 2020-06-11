@@ -30,6 +30,7 @@ import {Router} from '@angular/router';
 import {OptionsChatComponent} from '../../../common/component/chat/options-chat.component';
 import {TextChat2ComponentComponent} from './text-chat2-component.component';
 import {Utils} from '../../service/utils.service';
+import {Dialog} from 'primeng/primeng';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -43,13 +44,13 @@ export class Chat2Component
   clickedColumn: any;
   localMessageJSON: any;
   localEventSubscription: Subscription;
-  @ViewChild('chatbox')
+  @ViewChild('chatbox', {static: false})
   chatBox: ElementRef;
-  @ViewChild('chatMessageBoxContainer')
+  @ViewChild('chatMessageBoxContainer', {static: false})
   chatMessageBoxContainer: ElementRef;
-  @ViewChild('messageListContainer')
+  @ViewChild('messageListContainer', {static: false})
   messageListContainer: ElementRef;
-  @ViewChild('messageList', {read: ViewContainerRef})
+  @ViewChild('messageList', {read: ViewContainerRef, static: false})
   messageList: ViewContainerRef;
   showChatBox = false;
   @Input()

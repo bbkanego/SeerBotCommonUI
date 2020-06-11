@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit
 import * as JQuery from 'jquery';
 
 import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Dialog} from 'primeng/primeng';
 
 const $ = JQuery;
 
@@ -11,7 +12,7 @@ const $ = JQuery;
   styleUrls: ['./textarea.component.css']
 })
 export class TextareaComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
+  @ViewChild('bkInputWidget', {static: false}) bkInputWidget: ElementRef;
 
   @Input() textAreaLength: number = null;
 

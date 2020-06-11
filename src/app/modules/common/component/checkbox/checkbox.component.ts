@@ -1,5 +1,6 @@
 import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent.component';
+import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-checkbox',
@@ -9,7 +10,7 @@ import {BaseCustomComponent} from '../../../common/component/BaseCustomComponent
 export class CheckboxComponent extends BaseCustomComponent
   implements OnInit, OnDestroy {
 
-  @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
+  @ViewChild('bkInputWidget', {static: false}) bkInputWidget: ElementRef;
 
   @Input() value: string;
 

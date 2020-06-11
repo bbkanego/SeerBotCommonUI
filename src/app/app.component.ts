@@ -1,4 +1,3 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators} from '@angular/forms';
 import {BaseCustomComponent} from './modules/common/component/BaseCustomComponent.component';
 import {CustomFormControl} from './modules/common/model/controls';
@@ -7,6 +6,7 @@ import {CustomValidator} from './modules/common/validator/custom.validator';
 import {DynamicModalComponent, ModalComponent} from '../../public_api';
 import {HelpExampleComponent} from './modules/test-components/help/help-example.component';
 import {PopoutComponent} from './modules/common/component/popout/popout.component';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 
 export interface CommonModalModel {
   header: string;
@@ -31,7 +31,7 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   chartData: ChartData;
   customModalData: CommonModalModel = {header: '', bodyMessage: '', buttonOk: ''};
 
-  @ViewChild('customModal') testCustomModel: ModalComponent;
+  @ViewChild('customModal', {static: false}) testCustomModel: ModalComponent;
 
   constructor(injector: Injector) {
     super(injector);

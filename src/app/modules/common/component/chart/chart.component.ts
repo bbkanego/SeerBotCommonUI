@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnIni
 
 import {Chart} from 'chart.js';
 import {ChartData} from '../../model/models';
+import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-chart',
@@ -9,7 +10,7 @@ import {ChartData} from '../../model/models';
 })
 export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() chartData: ChartData = null;
-  @ViewChild('chart') chartElement: ElementRef;
+  @ViewChild('chart', {static: false}) chartElement: ElementRef;
   chart: Chart = null;
 
   reInit(inputChartData) {

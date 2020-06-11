@@ -69,3 +69,16 @@ npm install typescript@latest --save-dev
 
 npm install rxjs@latest rxjs-compat@latest --save
 ```
+
+## Upgrade from Angular 7 to 8
+```
+// upgrade to latest NPM
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+npm install @angular/animations@^8 @angular/common@^8 @angular/compiler@^8 @angular/core@^8 @angular/forms@^8 @angular/platform-browser@^8 @angular/platform-browser-dynamic@^8 @angular/platform-server@^8 @angular/router@^8
+
+npm install @angular-devkit/build-angular@0.800.0 @angular/compiler-cli@^8 @angular/cli@^8 @angular/language-service@^8 --save-dev
+
+```

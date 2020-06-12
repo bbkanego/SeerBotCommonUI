@@ -54,6 +54,8 @@ npm install webpack@latest --save-dev
 npm update
 
 npm install --save core-js@^2.5.0
+
+ng update @angular/cli --> this will update the angular-cli.json to angular.json
 ```
 
 ## Upgrade from Angular 6 to 7

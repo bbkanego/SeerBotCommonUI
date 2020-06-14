@@ -131,6 +131,41 @@
           }
         }
       }
+    },
+    "seerlogics-ngui-components": {
+      "projectType": "library",
+      "root": "projects/seerlogics-ngui-components",
+      "sourceRoot": "projects/seerlogics-ngui-components/src",
+      "prefix": "seer",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/seerlogics-ngui-components/tsconfig.lib.json",
+            "project": "projects/seerlogics-ngui-components/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/seerlogics-ngui-components/src/test.ts",
+            "tsConfig": "projects/seerlogics-ngui-components/tsconfig.spec.json",
+            "karmaConfig": "projects/seerlogics-ngui-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/seerlogics-ngui-components/tsconfig.lib.json",
+              "projects/seerlogics-ngui-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "my-component-library",

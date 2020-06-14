@@ -1,0 +1,24 @@
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
+  <label class="center-block">{{label}}&nbsp;<span *ngIf="isRequired()"
+                                                   class="glyphicon glyphicon-asterisk icon-required"></span>
+    <div [id]="controlId" class="input-group">
+      <input #chooserInput (blur)="onBlurEvent($event)" [formControlName]="currentFormControlName"
+             class="form-control chooserInput"
+             type="text"/>
+      <span class="input-group-btn">
+        <a (click)="onIconClick($event)" class="btn btn-info btn-sm">
+          <span class="glyphicon glyphicon-th-list"></span>
+        </a>
+      </span>
+    </div>
+  </label>
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{getErrorMessage()}}
+  </div>
+</div>
+<p-dialog [ngClass]="['bk-treeChooser-dialog']" header="Select Weapon" modal="modal"
+          responsive="true">
+  <p-tree (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)" [ngClass]="['bk-treeChooser']"
+          [value]="treeNodes" selectionMode="single"
+  ></p-tree>
+</p-dialog>

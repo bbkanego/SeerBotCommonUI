@@ -1,0 +1,13 @@
+<table class='tableWidget2'>
+  <tr>
+    <td colspan="2">
+      {{messageJSON.message}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input (click)="clickYes()" type="button" value="{{messageJSON.yesOption.message}}">
+      <input (click)="clickNo()" type="button" value="{{messageJSON.noOption.message}}">
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,19 @@
+<li class="message {{getChatMessageClass()}}">
+  <div class="avatar"></div>
+  <div class="text_wrapper">
+    <table class="tableWidget2">
+      <tr>
+        <th colspan="3">
+          {{getMessage().heading}}
+        </th>
+      </tr>
+      <tr *ngFor="let row of getMessage().rows">
+        <td *ngFor="let col of row.cols">
+          <a (click)="navigateTo(col)" *ngIf='col.clickUrl'>{{col.col}}</a>
+          <span *ngIf='!col.clickAction && !col.clickUrl'>{{col.col}}</span>
+          <span (click)="clickAndSendResponse(col)" *ngIf='col.clickAction'>{{col.col}}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</li>

@@ -1,0 +1,45 @@
+<!--
+  https://stackoverflow.com/questions/31196980/using-a-glyphicon-as-an-li-bullet-point-bootstrap-3
+-->
+<div class="container-fluid" scrollTo>
+  <div #errorContainer class="row">
+    <div *ngIf="hasErrorMessages || fieldErrors" class="errorMessage alert alert-danger tp-20margin">
+      <div (click)='hideErrorContainer()' class="action"><span class="actionIcon glyphicon glyphicon-remove"></span>
+      </div>
+      <h4><span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;{{errorHeading}}</h4>
+      <ul *ngIf="hasErrorMessages">
+        <li *ngFor="let errorMessage of errorMessages; let i=index">
+          {{errorMessage.message}}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="errorMessage != null" class="errorMessage alert alert-danger tp-20margin">
+      <div (click)='hideErrorContainer()' class="action"><span class="actionIcon glyphicon glyphicon-remove"></span>
+      </div>
+      <h4><span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;{{errorHeading}}</h4>
+      <ul class="error-bullet">
+        <li>
+          {{errorMessage}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<app-bk-custom-modal #errorsModal>
+  <div class="app-modal-header">
+    <span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>&nbsp;There Were Errors
+  </div>
+  <div class="app-modal-body">
+    <h4>{{errorHeading}}</h4>
+    <ul *ngIf="hasErrorMessages">
+      <li *ngFor="let errorMessage of errorMessages; let i=index">
+        {{errorMessage.message}}
+      </li>
+    </ul>
+  </div>
+  <div class="app-modal-footer">
+    <bk-button (click)='errorsModal.hide()' intent="warning" label="OK">
+    </bk-button>
+  </div>
+</app-bk-custom-modal>

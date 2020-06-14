@@ -1,0 +1,40 @@
+.modal {
+  z-index: 1000;
+  text-align: center;
+  padding: 0 !important;
+  position: absolute;
+  top: 50%;
+}
+
+.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-backdrop {
+  /*should be below the .modal but above all other elements*/
+  z-index: 900;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f5f5f5;
+  /*makes the below elements visible to a degree.*/
+  opacity: 0.5;
+  display: none;
+}
+
+.modal-header {
+  font-size: 25px !important;
+  font-weight: bolder !important;
+}

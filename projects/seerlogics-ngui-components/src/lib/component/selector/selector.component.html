@@ -1,0 +1,35 @@
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup">
+  <select #selectWidget
+          (blur)="onBlurEvent($event)"
+          (change)="onChange($event)"
+          (focus)="onFocusEvent($event)"
+          *ngIf='!label'
+          [formControlName]="currentFormControlName"
+          [id]="controlId"
+          class="form-control">
+    <option *ngFor="let option of options; let i = index" value="{{ option.value }}">{{
+      option.label
+      }}</option>
+  </select>
+
+  <label *ngIf='label' class="center-block">{{ label }}&nbsp;
+    <span
+      *ngIf="isRequired()"
+      class="glyphicon glyphicon-asterisk icon-required"></span>
+    <select
+      #selectWidget
+      (blur)="onBlurEvent($event)"
+      (change)="onChange($event)"
+      (focus)="onFocusEvent($event)"
+      [formControlName]="currentFormControlName"
+      [id]="controlId"
+      class="form-control">
+      <option *ngFor="let option of options; let i = index" value="{{ option.value }}">{{
+        option.label
+        }}</option>
+    </select>
+  </label>
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{ getErrorMessage() }}
+  </div>
+</div>

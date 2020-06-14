@@ -1,0 +1,30 @@
+.modal {
+  /*position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ddd;
+  padding: 1rem;*/
+}
+
+.modal-body {
+  max-height: calc(100vh - 212px);
+  overflow-y: auto;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+  }
+}
+
+.modal-white .modal-backdrop {
+  background-color: #0000ff;
+}

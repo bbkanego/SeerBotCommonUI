@@ -16,7 +16,15 @@
       "dom"
     ],
     "module": "es2015",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "seerlogics-ngui-components": [
+        "dist/seerlogics-ngui-components"
+      ],
+      "seerlogics-ngui-components/*": [
+        "dist/seerlogics-ngui-components/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableIvy": true

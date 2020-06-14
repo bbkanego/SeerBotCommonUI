@@ -1,0 +1,10 @@
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
+  <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
+  <label #checkboxGrpLabel *ngFor="let option of options; let i=index" class="radio-inline radiogrp">
+    <input (blur)="onBlurEvent($event)" [formControlName]="currentFormControlName" [value]="option.value"
+           class="form-control" id="checkbox_{{i}}"
+           type="checkbox"/>{{option.label}}</label>
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{getErrorMessage()}}
+  </div>
+</div>

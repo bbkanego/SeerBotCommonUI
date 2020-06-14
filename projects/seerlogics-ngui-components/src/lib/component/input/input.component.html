@@ -1,0 +1,23 @@
+<div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
+  <input #bkInputWidget (blur)="onBlurEvent($event)" *ngIf='!label' [formControlName]="currentFormControlName" [id]="controlId"
+         [type]="inputType"
+         autocomplete="off" class="form-control"/>
+  <label *ngIf='label' class="center-block">{{label}}&nbsp;
+    <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
+    <input #bkInputWidget (blur)="onBlurEvent($event)" [formControlName]="currentFormControlName" [id]="controlId"
+           [type]="inputType"
+           autocomplete="off" class="form-control"/>
+  </label>
+
+  <!-- Material support
+    <mat-form-field class="example-full-width">
+      <input #bkInputWidget autocomplete="off" [id]="controlId" 
+          [formControlName]="currentFormControlName" [type]="inputType"
+          (blur)="onBlurEvent($event)"
+        matInput placeholder="Favorite food">
+    </mat-form-field>
+  -->
+  <div *ngIf="isInvalid()" class="errorMessage">
+    {{getErrorMessage()}}
+  </div>
+</div>

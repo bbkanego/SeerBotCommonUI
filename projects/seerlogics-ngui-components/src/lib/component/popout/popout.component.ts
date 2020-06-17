@@ -38,9 +38,9 @@ export class PopoutComponent implements OnInit, OnDestroy {
   visible = false;
   visibleAnimate = false;
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild('theBody', {read: ViewContainerRef, static: false}) theBodyContainer: ViewContainerRef;
-  @ViewChild('theError', {read: ViewContainerRef, static: false}) theErrorContainer: ViewContainerRef;
-  @ViewChild('dynamicPopoutMinimized', {static: false}) dynamicPopoutMinimized: ElementRef;
+  @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
+  @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;
+  @ViewChild('dynamicPopoutMinimized') dynamicPopoutMinimized: ElementRef;
   theHeader: string;
   modalShim;
   @Input()

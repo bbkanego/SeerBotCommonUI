@@ -1,7 +1,8 @@
 <div>
   <div class="node">
     <span (click)="triggerClick($event)" [class]="nodeStateClass" id="{{node.label}}_Trigger">&nbsp;</span>
-    <span (click)="onNodeSelect($event)" (contextmenu)="onContextMenuLocal($event)" [dragTargetParent]="parentNode" [dragTarget]="node" [dropTarget]="node"
+    <span (click)="onNodeSelect($event)" (contextmenu)="onContextMenuLocal($event)" [dragTargetParent]="parentNode"
+          [dragTarget]="node" [dropTarget]="node"
           appBkDraggable
           appBkDropTarget class="label" id="{{node.label}}_Item">{{node.label}}</span>
   </div>

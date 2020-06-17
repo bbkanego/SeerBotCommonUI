@@ -1,5 +1,6 @@
 <div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
-  <input #bkInputWidget (blur)="onBlurEvent($event)" *ngIf='!label' [formControlName]="currentFormControlName" [id]="controlId"
+  <input #bkInputWidget (blur)="onBlurEvent($event)" *ngIf='!label' [formControlName]="currentFormControlName"
+         [id]="controlId"
          [type]="inputType"
          autocomplete="off" class="form-control"/>
   <label *ngIf='label' class="center-block">{{label}}&nbsp;

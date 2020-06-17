@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from '../modal/modal.component';
 import {NotificationService} from '../../service/notification.service';
-import {Dialog} from 'primeng/primeng';
+import {Dialog} from 'primeng';
 
 @Component({
   selector: 'app-bk-error-handler',
@@ -11,8 +11,8 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
   @Input() handlerType: string;
   @Input() errorHandlerHeading: string;
 
-  @ViewChild(ModalComponent, {static: false}) errorModal: ModalComponent;
-  @ViewChild(Dialog, {static: false}) errorDialog: Dialog;
+  @ViewChild(ModalComponent) errorModal: ModalComponent;
+  @ViewChild(Dialog) errorDialog: Dialog;
 
   // private subscriberType:string = handlerType;
   exceptionDetails: string;

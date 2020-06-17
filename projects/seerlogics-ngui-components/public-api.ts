@@ -8,6 +8,9 @@ export * from './src/lib/component/button/button.component';
 export * from './src/lib/component/chart/chart.module';
 export * from './src/lib/component/chart/chart.component';
 
+export * from './src/lib/component/baseCustom.component';
+export * from './src/lib/component/baseDynamic.component';
+export * from './src/lib/component/baseReactive.component';
 
 export * from './src/lib/component/chat/chat.module';
 export * from './src/lib/component/chat/chat.component';
@@ -20,6 +23,7 @@ export * from './src/lib/component/chat/text-chat2-component.component';
 
 export * from './src/lib/component/checkbox/checkbox.module';
 export * from './src/lib/component/checkbox/checkbox.component';
+export * from './src/lib/component/checkbox/checkboxGroup.component';
 
 export * from './src/lib/component/chooser/treeChooser.component';
 export * from './src/lib/component/chooser/treeChooser.module';
@@ -82,7 +86,6 @@ export * from './src/lib/directive/scrollTo.directive';
 export * from './src/lib/directive/validateOnBlur.directive';
 export * from './src/lib/directive/websocket.directive';
 
-export * from './src/lib/guard/guard.module';
 export * from './src/lib/guard/pendingChanges.guard';
 
 export * from './src/lib/pipe/pipe.module';
@@ -100,6 +103,12 @@ export * from './src/lib/service/notification.service';
 export * from './src/lib/service/stomp.service';
 export * from './src/lib/service/utils.service';
 export * from './src/lib/service/validation.services';
+
+export * from './src/lib/validator/custom.validator';
+
+export * from './src/lib/model/constants';
+export * from './src/lib/model/controls';
+export * from './src/lib/model/models';
 
 export * from './src/lib/validator/custom.validator';
 

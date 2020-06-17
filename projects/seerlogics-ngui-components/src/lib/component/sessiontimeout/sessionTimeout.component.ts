@@ -1,6 +1,6 @@
 import {Component, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../service/notification.service';
-import {Dialog} from 'primeng/primeng';
+import {Dialog} from 'primeng';
 import {Subscription} from 'rxjs';
 import {NavigationStart, Router} from '@angular/router';
 
@@ -13,7 +13,7 @@ export class SessionTimeoutComponent implements OnInit, OnDestroy {
   @Input() sessionTimeOutInMins = 30;
   sessionTimeOutInSeconds = 0;
   timeoutMessageDisplayInSeconds = 5 * 60;
-  @ViewChild(Dialog, {static: false}) sessionDialog: Dialog;
+  @ViewChild(Dialog) sessionDialog: Dialog;
   sessionTimeoutHeading = 'Session Ending';
   sessionTimeoutMessage = 'Your session is about to end!';
   intervalTracker: any;

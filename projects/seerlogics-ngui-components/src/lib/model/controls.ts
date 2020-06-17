@@ -1,4 +1,3 @@
-import {Injectable} from '@angular/core';
 import {AsyncValidatorFn, FormControl, ValidatorFn, Validators} from '@angular/forms';
 import {CustomValidator} from '../validator/custom.validator';
 
@@ -7,8 +6,6 @@ export const VALIDATION_ERROR_TYPES = {
   INVALID_DATA: 'invalidData'
 };
 
-// @dynamic
-@Injectable()
 export class CustomFormControl extends FormControl {
   validationRules = {};
   private validationErrorMap = new Map<string, string>();

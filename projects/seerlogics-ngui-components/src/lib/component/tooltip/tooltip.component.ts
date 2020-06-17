@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 
 import * as JQuery from 'jquery';
-import {Dialog} from 'primeng/primeng';
 
 const $ = JQuery;
 
@@ -14,7 +13,7 @@ export class TooltipComponent implements OnInit, AfterViewInit {
   @Input() tooltipText;
   @Input() targetElementRef: HTMLElement;
   @Input() position = 'right';
-  @ViewChild('tooltipContainer', {static: false}) tooltipContainerRef: ElementRef;
+  @ViewChild('tooltipContainer') tooltipContainerRef: ElementRef;
 
   constructor(private renderer: Renderer2) {
   }

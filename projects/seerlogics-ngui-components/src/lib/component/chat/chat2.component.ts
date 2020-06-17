@@ -23,14 +23,13 @@ import {StompService} from '../../service/stomp.service';
 import {Notification, NotificationService} from '../../service/notification.service';
 import {ChatData} from '../../model/models';
 import {TableChatComponentComponent} from './table-chat-component.component';
-import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {BaseDynamicComponent} from '../baseDynamic.component';
 import {Subscription} from 'rxjs';
 import {ConfirmChatComponent} from './confirm-chat.component';
 import {Router} from '@angular/router';
 import {OptionsChatComponent} from './options-chat.component';
 import {TextChat2ComponentComponent} from './text-chat2-component.component';
 import {UtilsService} from '../../service/utils.service';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -44,13 +43,13 @@ export class Chat2Component
   clickedColumn: any;
   localMessageJSON: any;
   localEventSubscription: Subscription;
-  @ViewChild('chatbox', {static: false})
+  @ViewChild('chatbox')
   chatBox: ElementRef;
-  @ViewChild('chatMessageBoxContainer', {static: false})
+  @ViewChild('chatMessageBoxContainer')
   chatMessageBoxContainer: ElementRef;
-  @ViewChild('messageListContainer', {static: false})
+  @ViewChild('messageListContainer')
   messageListContainer: ElementRef;
-  @ViewChild('messageList', {read: ViewContainerRef, static: false})
+  @ViewChild('messageList', {read: ViewContainerRef})
   messageList: ViewContainerRef;
   showChatBox = false;
   @Input()

@@ -1,9 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input,
-  OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 
 import {Chart} from 'chart.js';
 import {ChartData} from '../../model/models';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-chart',
@@ -11,7 +9,7 @@ import {Dialog} from 'primeng/primeng';
 })
 export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() chartData: ChartData = null;
-  @ViewChild('chart', {static: false}) chartElement: ElementRef;
+  @ViewChild('chart') chartElement: ElementRef;
   chart: Chart = null;
 
   reInit(inputChartData) {

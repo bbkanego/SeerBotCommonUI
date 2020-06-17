@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as JQuery from 'jquery';
 
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
-import {Dialog} from 'primeng/primeng';
+import {BaseCustomComponent} from '../baseCustom.component';
 
 const $ = JQuery;
 
@@ -15,7 +14,7 @@ const $ = JQuery;
  * Source of Calendar: /Users/bkane/svn/code/angular/primeng-master/components/calendar/calendar.ts
  */
 export class InputComponent extends BaseCustomComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('bkInputWidget', {static: false}) bkInputWidget: ElementRef;
+  @ViewChild('bkInputWidget') bkInputWidget: ElementRef;
   @Input() inputType = 'text';
   private input;
 

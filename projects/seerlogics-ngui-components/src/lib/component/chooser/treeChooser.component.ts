@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
 // import {FocusForwarderDirective} from '../../../common/directive/focusForwarder.directive';
-import {Dialog, TreeNode} from 'primeng/primeng';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {Dialog, TreeNode} from 'primeng';
+import {BaseCustomComponent} from '../baseCustom.component';
 import * as JQuery from 'jquery';
 
 const $ = JQuery;
@@ -42,8 +42,8 @@ export class TreeChooserComponent extends BaseCustomComponent
 
   showTree = false;
   nodeSelected = false;
-  @ViewChild(Dialog, {static: false}) treeDialog: Dialog;
-  @ViewChild('chooserInput', {static: false}) chooserInput: ElementRef;
+  @ViewChild(Dialog) treeDialog: Dialog;
+  @ViewChild('chooserInput') chooserInput: ElementRef;
   $nativeChooserInputObj;
   testMe: any;
   private treeSelection: any[];

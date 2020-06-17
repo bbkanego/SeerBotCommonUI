@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {BaseDynamicComponent} from '../baseDynamic.component';
 import {NotificationService} from '../../service/notification.service';
 import {Router} from '@angular/router';
 import {ChatData} from '../../model/models';

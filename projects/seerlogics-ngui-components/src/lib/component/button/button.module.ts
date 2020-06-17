@@ -7,4 +7,5 @@ import {CommonModule} from '@angular/common';
   exports: [ButtonComponent],
   imports: [CommonModule]
 })
-export class ButtonModule {}
+export class ButtonModule {
+}

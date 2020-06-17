@@ -9,4 +9,5 @@ import {CommonModule} from '@angular/common';
   declarations: [ChartComponent],
   providers: [],
 })
-export class ChartModule {}
+export class ChartModule {
+}

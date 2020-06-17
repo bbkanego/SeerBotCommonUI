@@ -12,7 +12,8 @@
   </ul>
   <div class="col-sm-12 messageButtonContainer">
     <div class="input-group">
-      <input #chatbox (keydown)=onKeydownEvent($event) class="form-control message_input" placeholder="Type your message here and hit enter..."
+      <input #chatbox (keydown)=onKeydownEvent($event) class="form-control message_input"
+             placeholder="Type your message here and hit enter..."
              type="text">
       <span class="input-group-btn">
                 <button (click)="sendMessage()" class="btn btn-default send-button" type="button">Send</button>

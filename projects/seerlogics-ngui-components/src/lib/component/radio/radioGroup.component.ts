@@ -1,7 +1,6 @@
 import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-radio-grp',
@@ -11,7 +10,7 @@ import {Dialog} from 'primeng/primeng';
 export class RadioGroupComponent extends BaseCustomComponent
   implements OnInit, OnDestroy {
 
-  @ViewChild('#radioGrpLabel', {static: false}) radioGrpLabel: ElementRef;
+  @ViewChild('#radioGrpLabel') radioGrpLabel: ElementRef;
   @Input() options: Option[];
 
   @Input() label = 'No Label Defined';

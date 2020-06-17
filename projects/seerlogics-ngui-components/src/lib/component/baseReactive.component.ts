@@ -3,7 +3,7 @@ import {CustomFormControl} from '../model/controls';
 import {NotificationService} from '../service/notification.service';
 import {Directive, Injector} from '@angular/core';
 import {SUBSCRIBER_TYPES} from '../model/constants';
-import {BaseCustomComponent} from './BaseCustomComponent.component';
+import {BaseCustomComponent} from './baseCustom.component';
 
 export interface AllValidationErrors {
   controlName: string;
@@ -36,6 +36,7 @@ function getFormValidationErrors(controls: FormGroupControls): AllValidationErro
   return errors;
 }
 
+@Directive()
 export abstract class BaseReactiveComponent extends BaseCustomComponent {
   constructor(injector: Injector) {
     super(injector);

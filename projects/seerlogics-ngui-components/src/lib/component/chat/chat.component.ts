@@ -19,7 +19,7 @@ import {Notification, NotificationService} from '../../service/notification.serv
 import {ChatData} from '../../model/models';
 import {TextChatComponentComponent} from './text-chat-component.component';
 import {TableChatComponentComponent} from './table-chat-component.component';
-import {BaseDynamicComponent} from '../BaseDynamicComponent';
+import {BaseDynamicComponent} from '../baseDynamic.component';
 import {Subscription} from 'rxjs';
 import {ConfirmChatComponent} from './confirm-chat.component';
 import {Router} from '@angular/router';
@@ -38,9 +38,9 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewChe
   clickedColumn: any;
   localMessageJSON: any;
   localEventSubscription: Subscription;
-  @ViewChild('chatbox', {static: false}) chatBox: ElementRef;
-  @ViewChild('chatMessageBoxContainer', {static: false}) chatMessageBoxContainer: ElementRef;
-  @ViewChild('chatMessageBox', {read: ViewContainerRef, static: false})
+  @ViewChild('chatbox') chatBox: ElementRef;
+  @ViewChild('chatMessageBoxContainer') chatMessageBoxContainer: ElementRef;
+  @ViewChild('chatMessageBox', {read: ViewContainerRef})
   chatMessageBox: ViewContainerRef;
   showChatBox = false;
   @Input() showChatBoxAfterSeconds = 10000;

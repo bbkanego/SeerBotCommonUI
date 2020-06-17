@@ -1,5 +1,5 @@
 import {Component, Injector, Input, OnDestroy, OnInit} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {BaseCustomComponent} from '../baseCustom.component';
 import {Subscription} from 'rxjs';
 
 export interface TreeNode {

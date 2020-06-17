@@ -3,7 +3,6 @@ import {NotificationService} from '../../service/notification.service';
 import {SUBSCRIBER_TYPES} from '../../model/constants';
 import {NavigationStart, Router} from '@angular/router';
 import {ModalComponent} from '../modal/modal.component';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-error-messages',
@@ -18,8 +17,8 @@ export class ErrorMessagesComponent
   errorMessage: string = null;
   errorCode: string = null;
   referenceCode: string;
-  @ViewChild('errorContainer', {static: false}) errorContainer: ElementRef;
-  @ViewChild('errorsModal', {static: false}) errorsModal: ModalComponent;
+  @ViewChild('errorContainer') errorContainer: ElementRef;
+  @ViewChild('errorsModal') errorsModal: ModalComponent;
   @Input()
   errorHeading = 'There were errors. Please fix before proceeding!';
   private sub: any;

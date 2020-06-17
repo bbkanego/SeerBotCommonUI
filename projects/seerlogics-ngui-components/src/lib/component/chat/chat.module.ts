@@ -7,9 +7,12 @@ import {OptionsChatComponent} from './options-chat.component';
 import {TableChatComponentComponent} from './table-chat-component.component';
 import {TextChatComponentComponent} from './text-chat-component.component';
 import {TextChat2ComponentComponent} from './text-chat2-component.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ButtonModule} from '../button/button.module';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule,
+    ReactiveFormsModule, ButtonModule],
   exports: [Chat2Component, ChatComponent,
     ConfirmChatComponent, OptionsChatComponent, TableChatComponentComponent,
     TextChatComponentComponent, TextChat2ComponentComponent],
@@ -18,4 +21,5 @@ import {TextChat2ComponentComponent} from './text-chat2-component.component';
     TextChatComponentComponent, TextChat2ComponentComponent],
   providers: [],
 })
-export class ChatModule {}
+export class ChatModule {
+}

@@ -84,3 +84,21 @@ npm install @angular/animations@^8 @angular/common@^8 @angular/compiler@^8 @angu
 npm install @angular-devkit/build-angular@0.800.0 @angular/compiler-cli@^8 @angular/cli@^8 @angular/language-service@^8 --save-dev
 
 ```
+
+## Upgrade from Angular 8 to 9
+```
+npm i typescript@">=3.6.4 <3.8.0"
+ng update @angular/cli --force
+```
+
+## Build the library using Angular v9 & NgPackagr
+```
+bkane@bhushansUbuntuAcer:~/Bhushan/code/angular/Angular-Library-With-NgPackagr$ ng build seerlogics-ngui-components
+
+once the above succeeds, the library will be copied to "/home/bkane/Bhushan/code/angular/Angular-Library-With-NgPackagr/dist"
+
+npm pack ~/Bhushan/code/angular/Angular-Library-With-NgPackagr/dist/seerlogics-ngui-components
+cd ~/Bhushan/code/angular/Angular-Library-With-NgPackagr
+npm install ~/Bhushan/code/angular/Angular-Library-With-NgPackagr/seerlogics-ngui-components-1.0.0.tgz
+
+```

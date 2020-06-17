@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Injector, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
 import * as _moment from 'moment';
 import {animate, style, transition, trigger} from '@angular/animations';
@@ -37,7 +37,7 @@ export interface LocaleSettings {
  */
 export class DatePickerComponent extends BaseCustomComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('bkCalendarInput', {static: false}) bkCalendarInput: ElementRef;
+  @ViewChild('bkCalendarInput') bkCalendarInput: ElementRef;
   showDateContainer = false;
   dateSelected = false;
   showOtherMonths = false;

@@ -1,14 +1,16 @@
 <div *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
 
   <span *ngIf='!label'>
-    <textarea #bkInputWidget (blur)="onBlurEvent($event)" [attr.maxLength]="textAreaLength > 0 ? textAreaLength : null" [formControlName]="currentFormControlName"
+    <textarea #bkInputWidget (blur)="onBlurEvent($event)" [attr.maxLength]="textAreaLength > 0 ? textAreaLength : null"
+              [formControlName]="currentFormControlName"
               [id]="controlId"
               autocomplete="off" class="form-control"></textarea>
     {{getNumberOfCharsLeft()}}
   </span>
   <label *ngIf='label' class="center-block">{{label}}&nbsp;
     <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
-    <textarea #bkInputWidget (blur)="onBlurEvent($event)" [attr.maxLength]="textAreaLength > 0 ? textAreaLength : null" [formControlName]="currentFormControlName"
+    <textarea #bkInputWidget (blur)="onBlurEvent($event)" [attr.maxLength]="textAreaLength > 0 ? textAreaLength : null"
+              [formControlName]="currentFormControlName"
               [id]="controlId"
               autocomplete="off" class="form-control"></textarea>
     {{getNumberOfCharsLeft()}}

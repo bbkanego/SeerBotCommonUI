@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
 import {CustomValidator} from '../../validator/custom.validator';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-select',
@@ -13,7 +12,7 @@ export class SelectorComponent extends BaseCustomComponent
   implements AfterViewInit, OnInit, OnDestroy {
 
   @Input() options: Option[];
-  @ViewChild('selectWidget', {static: false}) selectWidget: ElementRef;
+  @ViewChild('selectWidget') selectWidget: ElementRef;
 
   ngAfterViewInit(): void {
     if (!this.getFormControl().value) {

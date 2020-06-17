@@ -1,7 +1,6 @@
 import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BaseCustomComponent} from '../BaseCustomComponent.component';
+import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
-import {Dialog} from 'primeng/primeng';
 
 @Component({
   selector: 'app-bk-checkbox-grp',
@@ -11,7 +10,7 @@ import {Dialog} from 'primeng/primeng';
 export class CheckboxGroupComponent extends BaseCustomComponent
   implements OnInit, OnDestroy {
 
-  @ViewChild('#checkboxGrpLabel', {static: false}) checkboxGrpLabelObj: ElementRef;
+  @ViewChild('#checkboxGrpLabel') checkboxGrpLabelObj: ElementRef;
   @Input() options: Option[];
 
   constructor(injector: Injector) {

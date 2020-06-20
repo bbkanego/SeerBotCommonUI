@@ -88,7 +88,7 @@ npm install @angular-devkit/build-angular@0.800.0 @angular/compiler-cli@^8 @angu
 ## Upgrade from Angular 8 to 9
 ```
 npm i typescript@">=3.6.4 <3.8.0"
-ng update @angular/cli --force
+ng update @angular/cli --force --allow-dirty
 ```
 
 ## Build the library using Angular v9 & NgPackagr

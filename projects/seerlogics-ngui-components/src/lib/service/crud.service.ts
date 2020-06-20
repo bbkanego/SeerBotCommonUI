@@ -26,31 +26,31 @@ export abstract class CrudService<T> {
 
   protected getRequest(url: string): Observable<T> {
     return this.httpClientHelper.get(url).pipe(
-      map((res: HttpResponse<any>) => res.body()));
+      map((res: HttpResponse<any>) => res.body));
     // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected postRequest(url: string, model: T): Observable<T> {
     return this.httpClientHelper.post(url, JSON.stringify(model)).pipe(
-      map((res: HttpResponse<any>) => res.body()));
+      map((res: HttpResponse<any>) => res.body));
     // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected putRequest(url: string, model: T): Observable<T> {
     return this.httpClientHelper.put(url, JSON.stringify(model)).pipe(
-      map((res: HttpResponse<any>) => res.body()));
+      map((res: HttpResponse<any>) => res.body));
     // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected deleteRequest(url: string, id: string): Observable<T> {
     return this.httpClientHelper.delete(url, id).pipe(
-      map((res: HttpResponse<any>) => res.body()));
+      map((res: HttpResponse<any>) => res.body));
     // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   protected postMultiPartRequest(url: string, model: FormData): Observable<T> {
     return this.httpClientHelper.postMultipart(url, model).pipe(
-      map((res: HttpResponse<any>) => res.body()));
+      map((res: HttpResponse<any>) => res.body));
     // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 }

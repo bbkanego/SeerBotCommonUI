@@ -27,12 +27,12 @@ export class IncludePartialDirective implements OnInit {
   private parseTemplate(res: HttpResponse<any>) {
     if (this.type !== 'template') {
       // this.element.nativeElement.innerHTML = res.text();
-      this.setInnerHtml(this.element.nativeElement, res.body());
+      this.setInnerHtml(this.element.nativeElement, res.body);
     } else if (this.type === 'template') {
       const head = document.head || document.getElementsByTagName('head')[0];
       const style = document.createElement('style');
       style.type = 'text/css';
-      style.appendChild(document.createTextNode(res.body()));
+      style.appendChild(document.createTextNode(res.body));
       head.appendChild(style);
     }
   }

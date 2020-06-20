@@ -39,7 +39,7 @@ export class ValidationService {
       this.httpClientHelper
         .get(url).pipe(
         // get the response and call .json() to get the JSON data
-        map((res: HttpResponse<any>) => res.body()))
+        map((res: HttpResponse<any>) => res.body))
     );
   }
 
@@ -51,7 +51,7 @@ export class ValidationService {
           serializedForm
         ).pipe(
         // get the response and call .json() to get the JSON data
-        map((res: HttpResponse<any>) => res.body()))
+        map((res: HttpResponse<any>) => res.body))
     );
   }
 
@@ -60,7 +60,7 @@ export class ValidationService {
       this.httpClientHelper
         .get(this.environment.VALIDATION_METADATA_URL + '/' + validatorRule).pipe(
         // get the response and call .json() to get the JSON data
-        map((res: HttpResponse<any>) => res.body()))
+        map((res: HttpResponse<any>) => res.body))
     );
   }
 

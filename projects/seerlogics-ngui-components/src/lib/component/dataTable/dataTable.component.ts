@@ -200,12 +200,12 @@ export class DataTableComponent implements AfterViewInit, OnInit, OnChanges {
   constructor(private utils: UtilsService, private cd: ChangeDetectorRef) {
   }
 
-  getUpdatedFilteredRecords() {
-    this.filteredRecords.slice(parseInt(this.start), parseInt(this.end));
+  getUpdatedFilteredRecords(): any[] {
+    return this.filteredRecords.slice(parseInt(this.start), parseInt(this.end));
   }
 
-  getUpdatedNumberOfPagesArray() {
-    this.numberOfPagesArray.slice(parseInt(this.pagingStart), parseInt(this.pagingEnd));
+  getUpdatedNumberOfPagesArray(): any[] {
+    return this.numberOfPagesArray.slice(parseInt(this.pagingStart), parseInt(this.pagingEnd));
   }
 
   ngOnInit(): void {

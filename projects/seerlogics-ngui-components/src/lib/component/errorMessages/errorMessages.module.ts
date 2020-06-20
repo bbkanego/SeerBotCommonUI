@@ -13,5 +13,5 @@ import {ModalModule} from '../modal/modal.module';
   declarations: [ErrorMessagesComponent],
   providers: [],
 })
-export class NameModule {
+export class ErrorMessagesModule {
 }

@@ -22,41 +22,18 @@ export interface IntputHeader {
  * This is a helper which abstracts the HTTP POST and get and adds additional headers to the each request.
  */
 export class HttpClientHelper {
-  private timeoutObj;
 
   constructor(
     private http: HttpClient,
     private notificationService: NotificationService
-  ) {
-  }
-
-  // tslint:disable-next-line:member-ordering
-  static createAuthorizationHeader(
-    headers: HttpHeaders
-  ) {
-    const currentUser = JSON.parse(UtilsService.getCurrentUser());
-    if (currentUser && currentUser.token) {
-      /*headers.append('Authorization', 'Basic ' +
-          // The btoa() method encodes a string in base-64.
-        btoa('username:password'));*/
-      headers.append('Authorization', 'Bearer ' + currentUser.token);
-    }
-  }
-
-  // tslint:disable-next-line:member-ordering
-  static setCommonHeaders(headers: HttpHeaders) {
-    headers.append('Content-Type', 'application/json');
-  }
+  ) {}
 
   get(url): Observable<HttpResponse<any>> {
     this.showLoader();
 
-    const headers = new HttpHeaders();
-    HttpClientHelper.setCommonHeaders(headers);
-    HttpClientHelper.createAuthorizationHeader(headers);
     return this.http
       .get(url, {
-        headers: headers, observe: 'response'
+        observe: 'response'
       }).pipe(
         catchError(err => {
           return this.handleError(err);
@@ -86,8 +63,6 @@ export class HttpClientHelper {
         headers.append(header.name, header.value);
       });
     }
-    HttpClientHelper.setCommonHeaders(headers);
-    HttpClientHelper.createAuthorizationHeader(headers);
     const requestOptions = {
       headers: headers,
       withCredentials: true,
@@ -113,12 +88,9 @@ export class HttpClientHelper {
 
   put(url, serializedData): Observable<HttpResponse<any>> {
     this.showLoader();
-    const headers = new HttpHeaders();
-    HttpClientHelper.setCommonHeaders(headers);
-    HttpClientHelper.createAuthorizationHeader(headers);
     return this.http
       .put(url, serializedData, {
-        headers: headers, observe: 'response'
+        observe: 'response'
       }).pipe(
         catchError(err => {
           return this.handleError(err);
@@ -138,12 +110,9 @@ export class HttpClientHelper {
 
   delete(url: string, id: string): Observable<HttpResponse<any>> {
     this.showLoader();
-    const headers = new HttpHeaders();
-    HttpClientHelper.setCommonHeaders(headers);
-    HttpClientHelper.createAuthorizationHeader(headers);
     return this.http
       .delete(url + '/' + id, {
-        headers: headers, observe: 'response'
+        observe: 'response'
       }).pipe(
         catchError(err => {
           return this.handleError(err);
@@ -163,12 +132,8 @@ export class HttpClientHelper {
 
   postMultipart(url, formData: FormData): Observable<HttpResponse<any>> {
     this.showLoader();
-    const headers = new HttpHeaders();
-    // do not set the content type. the browser will set that. if you set content type manually u will get error.
-    HttpClientHelper.createAuthorizationHeader(headers);
     return this.http
       .post(url, formData, {
-        headers: headers
       }).pipe(
         catchError(err => {
           return this.handleError(err);

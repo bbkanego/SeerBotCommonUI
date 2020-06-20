@@ -45,8 +45,8 @@ export class CommonService {
     return (
       this.httpClientHelper
         .get(endPointUrl).pipe(
-        // get the response and call .body() to get the JSON data and then return an observable...
-        map((res: HttpResponse<any>) => res.body()))
+        // get the response and call .body to get the JSON data and then return an observable...
+        map((res: HttpResponse<any>) => res.body))
     );
   }
 }

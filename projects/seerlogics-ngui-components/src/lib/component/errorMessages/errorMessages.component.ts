@@ -38,19 +38,20 @@ export class ErrorMessagesComponent
   ngAfterViewInit() {
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
-        /*//console.log("Mutations = " + JSON.stringify(mutation));
-         this.fieldErrors = false;
-         this.hasErrorMessages = false;*/
       });
     });
-    const config = {attributes: true, childList: true, characterData: true};
-    observer.observe(this.errorContainer.nativeElement, config);
+    if (this.errorContainer) {
+      const config = {attributes: true, childList: true, characterData: true};
+      observer.observe(this.errorContainer.nativeElement, config);
+    }
   }
 
   ngOnInit(): void {
     this.sub = this.notificationService.onNotification().subscribe(
       (data: any) => {
-        this.errorContainer.nativeElement.style.display = 'block';
+        if (this.errorContainer) {
+          this.errorContainer.nativeElement.style.display = 'block';
+        }
         if (
           SUBSCRIBER_TYPES.PAGE_ERROR === data.subscriberType ||
           SUBSCRIBER_TYPES.ERROR_207 === data.subscriberType
@@ -91,7 +92,9 @@ export class ErrorMessagesComponent
   }
 
   hideErrorContainer() {
-    this.errorContainer.nativeElement.style.display = 'none';
+    if (this.errorContainer) {
+      this.errorContainer.nativeElement.style.display = 'none';
+    }
     this.hasErrorMessages = false;
     this.fieldErrors = false;
     this.errorMessages = null;

@@ -15,10 +15,10 @@
   <bk-button (onClick)="filterResults($event)" intent="success" label="Filter"></bk-button>
   <bk-button (onClick)="clearFilter($event)" intent="danger" label="Clear Filter"></bk-button>
 </div>
-<div *ngIf='filteredRecords.length === 0'>
+<div *ngIf='!filteredRecords || filteredRecords.length === 0'>
   <span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{noResultsFoundHeader}}
 </div>
-<table *ngIf='filteredRecords.length > 0' class="table table-striped table-bordered">
+<table *ngIf='filteredRecords && filteredRecords.length > 0' class="table table-striped table-bordered">
   <thead>
   <tr class="visible-lg visible-md">
     <th (click)="sortColumn($event, dataColumn, sortAsc)" *ngFor="let dataColumn of dataColumnsArray;let i=index">

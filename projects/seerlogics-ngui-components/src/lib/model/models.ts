@@ -52,5 +52,5 @@ export interface ChartData {
   type: string;
   labels: string[];
   dataSets: ChartDataSet[];
-  options?: {};
+  options?: {title?: {}, onClick?:{}}
 }

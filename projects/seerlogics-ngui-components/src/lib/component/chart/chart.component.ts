@@ -1,4 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 
 import {Chart} from 'chart.js';
 import {ChartData} from '../../model/models';
@@ -11,6 +23,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   @Input() chartData: ChartData = null;
   @ViewChild('chart') chartElement: ElementRef;
   chart: Chart = null;
+  @Output() onClick: EventEmitter<any> = new EventEmitter();
 
   reInit(inputChartData) {
     if (this.chart) {
@@ -27,6 +40,11 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
         this.chartData = inputChartData;
       }
 
+      this.chartData.options.onClick = (event) =>{
+        const activePoints = this.chart.getElementsAtEvent(event);
+        this.clickEvent(activePoints);
+      };
+
       /**
        * Very good examples here: https://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/
        */
@@ -39,6 +57,10 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
         options: this.chartData.options
       });
     }
+  }
+
+  private clickEvent(activePoints) {
+    this.onClick.emit(activePoints);
   }
 
   ngOnInit(): void {

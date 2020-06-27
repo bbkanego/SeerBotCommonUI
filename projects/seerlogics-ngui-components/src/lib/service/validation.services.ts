@@ -2,16 +2,13 @@ import {map} from 'rxjs/operators';
 
 
 import {Inject, Injectable} from '@angular/core';
-import * as JQuery from 'jquery';
+import * as $ from 'jquery';
 import {Observable} from 'rxjs';
 
 import {SUBSCRIBER_TYPES} from '../model/constants';
 import {HttpClientHelper} from './httpClient.helper';
 import {NotificationService} from './notification.service';
 import {HttpResponse} from '@angular/common/http';
-
-// Import RxJs required methods
-const $ = JQuery;
 
 // tree shakable service
 @Injectable({

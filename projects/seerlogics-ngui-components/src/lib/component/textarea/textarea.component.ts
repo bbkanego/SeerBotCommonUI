@@ -1,9 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import * as JQuery from 'jquery';
+import * as $ from 'jquery';
 
 import {BaseCustomComponent} from '../baseCustom.component';
-
-const $ = JQuery;
 
 @Component({
   selector: 'app-bk-textarea',

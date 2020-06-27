@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 
-import * as JQuery from 'jquery';
-
-const $ = JQuery;
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-bk-tooltip',

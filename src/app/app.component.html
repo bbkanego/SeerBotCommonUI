@@ -93,7 +93,7 @@
 
   <div class="row">
     <div class="col-sm-12" style="white-space: nowrap">
-      <app-bk-chart [chartData]="chartData"></app-bk-chart>
+      <app-bk-chart #chartComponent *ngIf="chartData" (onClick)="displayDetails($event)" [chartData]="chartData"></app-bk-chart>
     </div>
   </div>
 </div>

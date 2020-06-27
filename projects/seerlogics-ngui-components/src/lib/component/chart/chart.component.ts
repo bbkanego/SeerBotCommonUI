@@ -40,7 +40,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
         this.chartData = inputChartData;
       }
 
-      this.chartData.options.onClick = (event) =>{
+      this.chartData.options.onClick = (event) => {
         const activePoints = this.chart.getElementsAtEvent(event);
         this.clickEvent(activePoints);
       };
@@ -57,10 +57,6 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
         options: this.chartData.options
       });
     }
-  }
-
-  private clickEvent(activePoints) {
-    this.onClick.emit(activePoints);
   }
 
   ngOnInit(): void {
@@ -83,5 +79,9 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
 
   isAllDataProvided() {
     return this.chartData != null;
+  }
+
+  private clickEvent(activePoints) {
+    this.onClick.emit(activePoints);
   }
 }

@@ -3,9 +3,7 @@ import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from '@angular/for
 // import {FocusForwarderDirective} from '../../../common/directive/focusForwarder.directive';
 import {Dialog, TreeNode} from 'primeng';
 import {BaseCustomComponent} from '../baseCustom.component';
-import * as JQuery from 'jquery';
-
-const $ = JQuery;
+import * as $ from 'jquery';
 
 const noop = () => {
 };

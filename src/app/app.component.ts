@@ -42,6 +42,10 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
     super(injector);
   }
 
+  displayDetails(data) {
+    console.log(data);
+  }
+
   showCustomModal() {
     this.customModalData = {header: 'Test Header', bodyMessage: 'Test Body Message', buttonOk: 'Done'};
     this.testCustomModel.show();
@@ -97,7 +101,15 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
       } as ChartDataSet,
     ];
 
-    this.chartData = {type: 'bar', labels: ['Bot Performance'], dataSets: dataSets};
+    const chartOptions = {
+      title: {
+        display: true,
+        text: "Test Chart Options"
+      }
+    };
+
+    this.chartData = {type: 'bar', labels: ['Bot Performance'],
+            dataSets: dataSets, options: chartOptions};
   }
 
   showDynamicModal() {

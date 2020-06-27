@@ -19,6 +19,7 @@ import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
 /**
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog
  * https://netbasal.com/dynamically-creating-components-with-angular-a7346f4a982d
+ * https://indepth.dev/here-is-what-you-need-to-know-about-dynamic-components-in-angular/
  */
 @Component({
   templateUrl: './dynamicModal.component.html',

@@ -5,7 +5,6 @@ import {Observable, throwError as _throw} from 'rxjs';
 import {SUBSCRIBER_TYPES} from '../model/constants';
 import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {UtilsService} from './utils.service';
 // http://stackoverflow.com/questions/34464108/angular2-set-headers-for-every-request/34465070#34465070
 // https://github.com/ivanderbu2/angular-redux/blob/master/src/app/core/http.service.ts
 
@@ -26,7 +25,8 @@ export class HttpClientHelper {
   constructor(
     private http: HttpClient,
     private notificationService: NotificationService
-  ) {}
+  ) {
+  }
 
   get(url): Observable<HttpResponse<any>> {
     this.showLoader();
@@ -133,8 +133,7 @@ export class HttpClientHelper {
   postMultipart(url, formData: FormData): Observable<HttpResponse<any>> {
     this.showLoader();
     return this.http
-      .post(url, formData, {
-      }).pipe(
+      .post(url, formData, {}).pipe(
         catchError(err => {
           return this.handleError(err);
         }),

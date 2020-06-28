@@ -3,7 +3,7 @@ import {
   Component,
   ComponentFactoryResolver,
   EventEmitter,
-  Injector,
+  Injector, Input,
   NgModuleFactoryLoader,
   OnDestroy,
   OnInit,
@@ -36,6 +36,7 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
   public static SHOW_DYNAMIC_MODAL = 'ShowDynamicModal';
   visible = false;
   visibleAnimate = false;
+  @Input() showCloseX = false;
   @Output() modalState: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('theBody', {read: ViewContainerRef}) theBodyContainer: ViewContainerRef;
   @ViewChild('theError', {read: ViewContainerRef}) theErrorContainer: ViewContainerRef;

@@ -16,6 +16,15 @@ import {
 import {NotificationService} from '../../service/notification.service';
 import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
 
+export interface DynamicModalMetadata {
+  extraData: {
+    showCloseX?: boolean,
+    modalHeader?: string,
+    lazyModule?: boolean
+  },
+  component: any;
+}
+
 /**
  * http://stackoverflow.com/questions/34513558/angular-2-0-and-modal-dialog
  * https://netbasal.com/dynamically-creating-components-with-angular-a7346f4a982d
@@ -62,7 +71,9 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
           this.theErrorContainer.clear();
         }
 
-        const extraData = eventData.message.extraData;
+        const dynamicModalMetadata: DynamicModalMetadata = eventData.message;
+        const extraData = dynamicModalMetadata.extraData;
+        this.showCloseX = extraData.showCloseX;
         if (extraData.lazyModule) {
           this.loadSubComponent(extraData);
           this.theHeader = extraData.modalHeader;
@@ -71,7 +82,7 @@ export class DynamicModalComponent implements OnInit, OnDestroy {
           const errorFactory = this.componentFactoryResolver.resolveComponentFactory(ErrorMessagesComponent);
           this.errorComponentRef = this.theErrorContainer.createComponent(errorFactory);
         } else {
-          const componentToAppend = eventData.message.component;
+          const componentToAppend = dynamicModalMetadata.component;
           const factory = this.componentFactoryResolver.resolveComponentFactory(componentToAppend);
           this.componentRef = this.theBodyContainer.createComponent(factory);
           this.componentRef.instance.extraDynamicData = extraData;

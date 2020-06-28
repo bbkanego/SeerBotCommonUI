@@ -6,6 +6,7 @@ import {
   CustomFormControl,
   CustomValidator,
   DynamicModalComponent,
+  DynamicModalMetadata,
   ModalComponent,
   Option,
   PopoutComponent
@@ -104,20 +105,23 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
     const chartOptions = {
       title: {
         display: true,
-        text: "Test Chart Options"
+        text: 'Test Chart Options'
       }
     };
 
-    this.chartData = {type: 'bar', labels: ['Bot Performance'],
-            dataSets: dataSets, options: chartOptions};
+    this.chartData = {
+      type: 'bar', labels: ['Bot Performance'],
+      dataSets: dataSets, options: chartOptions
+    };
   }
 
   showDynamicModal() {
-    const eventData = {
-      extraData: {modalHeader: 'Dynamic Modal Example'},
+
+    const ddm: DynamicModalMetadata = {
+      extraData: {modalHeader: 'Dynamic Modal Example', showCloseX: true},
       component: HelpExampleComponent
     };
-    this.notificationService.notifyAny(eventData, DynamicModalComponent.SHOW_DYNAMIC_MODAL, DynamicModalComponent.SHOW_DYNAMIC_MODAL);
+    this.notificationService.notifyAny(ddm, DynamicModalComponent.SHOW_DYNAMIC_MODAL, DynamicModalComponent.SHOW_DYNAMIC_MODAL);
   }
 
   showPopout() {

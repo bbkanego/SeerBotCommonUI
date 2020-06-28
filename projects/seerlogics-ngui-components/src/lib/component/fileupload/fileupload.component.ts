@@ -3,7 +3,7 @@ import {HttpClientHelper} from '../../service/httpClient.helper';
 import {UtilsService} from '../../service/utils.service';
 
 @Component({
-  selector: 'app-bk-fileupload',
+  selector: 'seer-fileupload',
   templateUrl: './fileupload.component.html'
 })
 export class FileUploadComponent {

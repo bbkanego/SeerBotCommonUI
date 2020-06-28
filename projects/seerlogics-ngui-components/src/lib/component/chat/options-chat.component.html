@@ -20,9 +20,9 @@
     <div style='margin-top:10px'>
       <span *ngFor="let coptions of messageJSON.options">
         <span *ngFor="let option of coptions.option">
-          <bk-button (onClick)="clickAndSendResponse(option)" *ngIf="isButtonWidgetType(option)"
+          <seer-button (onClick)="clickAndSendResponse(option)" *ngIf="isButtonWidgetType(option)"
                      [label]="option.message"
-                     class='options chat-button-success' intent="success"></bk-button>
+                     class='options chat-button-success' intent="success"></seer-button>
           <a *ngIf="isLinkWidgetType(option)" class='aLink' href="{{option.clickResponse}}"
              target="_blank">{{option.message}}</a>
         </span>

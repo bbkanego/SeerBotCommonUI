@@ -2,7 +2,7 @@ import {Component, ElementRef, Injector, Input, OnDestroy, OnInit, ViewChild} fr
 import {BaseCustomComponent} from '../baseCustom.component';
 
 @Component({
-  selector: 'app-bk-checkbox',
+  selector: 'seer-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.css']
 })

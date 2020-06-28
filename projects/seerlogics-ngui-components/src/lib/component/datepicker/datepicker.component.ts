@@ -16,7 +16,7 @@ export interface LocaleSettings {
 }
 
 @Component({
-  selector: 'bk-datepicker',
+  selector: 'seer-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
   animations: [

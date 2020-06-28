@@ -4,7 +4,7 @@ import {CustomValidator} from '../../validator/custom.validator';
 import {BaseCustomComponent} from '../baseCustom.component';
 
 @Component({
-  selector: 'app-bk-multi-select',
+  selector: 'seer-multi-select',
   templateUrl: './multiSelect.component.html',
   styleUrls: ['./multiSelect.component.css']
 })

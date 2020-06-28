@@ -5,7 +5,7 @@ import {NavigationStart, Router} from '@angular/router';
 import {ModalComponent} from '../modal/modal.component';
 
 @Component({
-  selector: 'app-bk-error-messages',
+  selector: 'seer-error-messages',
   templateUrl: './errorMessages.component.html',
   styleUrls: ['./errorMessages.component.css']
 })

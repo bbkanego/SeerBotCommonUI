@@ -5,7 +5,7 @@ import {NotificationService} from '../../service/notification.service';
 import {ChatData} from '../../model/models';
 
 @Component({
-  selector: 'app-confirm-chat-component',
+  selector: 'seer-confirm-chat-component',
   templateUrl: './confirm-chat.component.html',
   styleUrls: ['./confirm-chat.component.css']
 })

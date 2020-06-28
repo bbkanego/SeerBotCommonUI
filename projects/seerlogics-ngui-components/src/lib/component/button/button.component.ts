@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, Injector, Input, OnInit, ViewChild
 import {BaseCustomComponent} from '../baseCustom.component';
 
 @Component({
-  selector: 'bk-button',
+  selector: 'seer-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css']
 })

@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {NotificationService} from '../../service/notification.service';
 
 @Component({
-  selector: 'app-table-chat-component',
+  selector: 'seer-table-chat-component',
   templateUrl: './table-chat-component.component.html',
   styleUrls: ['./table-chat-component.component.css']
 })

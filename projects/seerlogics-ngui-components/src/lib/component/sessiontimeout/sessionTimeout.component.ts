@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {NavigationStart, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-bk-session-timeout',
+  selector: 'seer-session-timeout',
   templateUrl: './sessionTimeout.component.html'
 })
 export class SessionTimeoutComponent implements OnInit, OnDestroy {

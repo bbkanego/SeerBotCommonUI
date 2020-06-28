@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 import {BaseCustomComponent} from '../baseCustom.component';
 
 @Component({
-  selector: 'app-bk-textarea',
+  selector: 'seer-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.css']
 })

@@ -29,7 +29,7 @@ import {environment} from '../../environments/environment';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'app-bk-chat',
+  selector: 'seer-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   providers: [StompService]

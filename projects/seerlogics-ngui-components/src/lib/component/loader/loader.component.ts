@@ -6,7 +6,7 @@ import {NotificationService} from '../../service/notification.service';
 import {SUBSCRIBER_TYPES} from '../../model/constants';
 
 @Component({
-  selector: 'app-angular-loader',
+  selector: 'seer-angular-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.css']
 })

@@ -3,7 +3,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChil
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-bk-tooltip',
+  selector: 'seer-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.css']
 })

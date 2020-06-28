@@ -4,7 +4,7 @@ import {Option} from '../../model/models';
 import {CustomValidator} from '../../validator/custom.validator';
 
 @Component({
-  selector: 'app-bk-select',
+  selector: 'seer-select',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.css']
 })

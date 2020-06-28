@@ -11,7 +11,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
  */
 @Component({
   templateUrl: './modal.component.html',
-  selector: 'app-bk-custom-modal',
+  selector: 'seer-custom-modal',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {

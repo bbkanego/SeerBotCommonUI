@@ -12,8 +12,8 @@
     <br/>
     <input [(ngModel)]="filterValue" class="form-control" id="filterValue" type="text"/>
   </label>
-  <bk-button (onClick)="filterResults($event)" intent="success" label="Filter"></bk-button>
-  <bk-button (onClick)="clearFilter($event)" intent="danger" label="Clear Filter"></bk-button>
+  <seer-button (onClick)="filterResults($event)" intent="success" label="Filter"></seer-button>
+  <seer-button (onClick)="clearFilter($event)" intent="danger" label="Clear Filter"></seer-button>
 </div>
 <div *ngIf='!filteredRecords || filteredRecords.length === 0'>
   <span class="glyphicon glyphicon-info-sign"></span>&nbsp;{{noResultsFoundHeader}}
@@ -28,8 +28,8 @@
                 class="glyphicon {{sortingImage}}"></span>
         </span>
       <span *ngIf="dataColumn.headerTemplate" class="{{sortColumnClass(dataColumn)}}">
-          <bk-columnHeaderTemplateLoader [column]="dataColumn" [records]="filteredRecords" [rowIndex]="i">
-          </bk-columnHeaderTemplateLoader>&nbsp;
+          <seer-columnHeaderTemplateLoader [column]="dataColumn" [records]="filteredRecords" [rowIndex]="i">
+          </seer-columnHeaderTemplateLoader>&nbsp;
           <span *ngIf="dataColumn.sort && (currentSortColumn === dataColumn.field)"
                 class="glyphicon {{sortingImage}}"></span>
         </span>
@@ -85,8 +85,8 @@
           </span>
         <!-- If there is a body template defined for this column, include that -->
         <span *ngIf="dataColumn.bodyTemplate">
-            <bk-columnBodyTemplateLoader [column]="dataColumn" [rowData]="rowData" [rowIndex]="rowIndex">
-            </bk-columnBodyTemplateLoader>
+            <seer-columnBodyTemplateLoader [column]="dataColumn" [rowData]="rowData" [rowIndex]="rowIndex">
+            </seer-columnBodyTemplateLoader>
           </span>
       </td>
     </tr>
@@ -101,8 +101,8 @@
                 </span>
               <!-- If there is a body template defined for this column, include that -->
               <span *ngIf="dataColumn.bodyTemplate">
-                  <bk-columnBodyTemplateLoader [column]="dataColumn" [rowData]="rowData" [rowIndex]="rowIndex">
-                  </bk-columnBodyTemplateLoader>
+                  <seer-columnBodyTemplateLoader [column]="dataColumn" [rowData]="rowData" [rowIndex]="rowIndex">
+                  </seer-columnBodyTemplateLoader>
                 </span>
             </td>
           </tr>

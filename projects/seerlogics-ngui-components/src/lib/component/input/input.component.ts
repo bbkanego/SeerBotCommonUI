@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 import {BaseCustomComponent} from '../baseCustom.component';
 
 @Component({
-  selector: 'app-bk-input',
+  selector: 'seer-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })

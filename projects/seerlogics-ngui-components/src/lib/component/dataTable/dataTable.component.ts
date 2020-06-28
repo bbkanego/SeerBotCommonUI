@@ -42,7 +42,7 @@ export class BkTemplateDirective {
 }
 
 @Directive({
-  selector: 'bk-column'
+  selector: 'seer-column'
 })
 export class DataColumnComponent implements OnInit, AfterContentInit {
   @Input() field;
@@ -83,7 +83,7 @@ export class DataColumnComponent implements OnInit, AfterContentInit {
 }
 
 @Directive({
-  selector: 'bk-columnHeaderTemplateLoader'
+  selector: 'seer-columnHeaderTemplateLoader'
 })
 export class ColumnHeaderTemplateLoader implements OnInit, OnDestroy {
   @Input() column: any;
@@ -120,7 +120,7 @@ export class ColumnHeaderTemplateLoader implements OnInit, OnDestroy {
 }
 
 @Directive({
-  selector: 'bk-columnBodyTemplateLoader'
+  selector: 'seer-columnBodyTemplateLoader'
 })
 export class ColumnBodyTemplateLoader implements OnInit, OnDestroy {
   @Input() column: any;
@@ -159,7 +159,7 @@ export class ColumnBodyTemplateLoader implements OnInit, OnDestroy {
 }
 
 @Component({
-  selector: 'bk-datatable',
+  selector: 'seer-datatable',
   templateUrl: './dataTable.component.html',
   styleUrls: ['./dataTable.component.css']
 })

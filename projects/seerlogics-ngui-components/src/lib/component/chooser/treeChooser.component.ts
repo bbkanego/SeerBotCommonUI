@@ -21,7 +21,7 @@ export const TREE_CHOOSER_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'bk-treeChooser',
+  selector: 'seer-treeChooser',
   templateUrl: './treeChooser.component.html',
   styleUrls: ['./treeChooser.component.css'],
   providers: [TREE_CHOOSER_CONTROL_VALUE_ACCESSOR],

@@ -10,7 +10,7 @@
   </p-footer>
 </p-dialog>
 
-<app-bk-custom-modal (modalState)="errorModelState($event)">
+<seer-custom-modal (modalState)="errorModelState($event)">
   <div class="app-modal-header">
     {{errorHandlerHeading}}
   </div>
@@ -20,4 +20,4 @@
   <div class="app-modal-footer">
     <button (click)="errorModal.hide()" class="btn btn-default" type="button">Close</button>
   </div>
-</app-bk-custom-modal>
+</seer-custom-modal>

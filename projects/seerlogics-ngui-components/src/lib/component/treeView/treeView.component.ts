@@ -22,7 +22,7 @@ export interface TreeNode {
 }
 
 @Component({
-  selector: 'bk-treeNode',
+  selector: 'seer-treeNode',
   templateUrl: './treeNode.component.html',
   styleUrls: ['./treeView.component.css']
 })
@@ -93,7 +93,7 @@ export class TreeNodeComponent extends BaseCustomComponent implements OnInit, On
 }
 
 @Component({
-  selector: 'bk-treeView',
+  selector: 'seer-treeView',
   templateUrl: './treeView.component.html',
   styleUrls: ['./treeView.component.css']
 })

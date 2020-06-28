@@ -32,7 +32,7 @@ export interface DynamicModalMetadata {
  */
 @Component({
   templateUrl: './dynamicModal.component.html',
-  selector: 'app-bk-dynamic-modal',
+  selector: 'seer-dynamic-modal',
   styleUrls: ['./dynamicModal.component.css'],
   providers: [
     {

@@ -7,6 +7,6 @@
           appBkDropTarget class="label" id="{{node.label}}_Item">{{node.label}}</span>
   </div>
   <div *ngIf="((node.children && node.children.length > 0) && isOpen) || isOpen" class="children">
-    <bk-treeNode *ngFor="let childNode of node.children" [node]="childNode" [parentNode]="node"></bk-treeNode>
+    <seer-treeNode *ngFor="let childNode of node.children" [node]="childNode" [parentNode]="node"></seer-treeNode>
   </div>
 </div>

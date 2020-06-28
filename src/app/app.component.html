@@ -3,31 +3,31 @@
     <div class="col-sm-12" style="white-space: nowrap">
       <form (ngSubmit)="save()" [formGroup]="testForm" novalidate>
         <!-- We'll add our form controls here -->
-        <label class="center-block" for="name">Name
+        <label class="center-block">Name
           <span class="glyphicon glyphicon-asterisk icon-required"></span>
-          <app-bk-input
+          <seer-input
             [currentFormGroup]="testForm"
             controlId="name"
-            currentFormControlName="name"></app-bk-input>
+            currentFormControlName="name"></seer-input>
         </label>
 
-        <app-bk-textarea
+        <seer-textarea
           [currentFormGroup]="testForm"
           controlId="lastName"
           currentFormControlName="lastName"
           label="Last Name"
           textAreaLength="3000"
-        ></app-bk-textarea>
+        ></seer-textarea>
 
-        <app-bk-select
+        <seer-select
           [currentFormGroup]="testForm"
           [options]="category"
           controlId="category"
           currentFormControlName="category"
           label="Last Name">
-        </app-bk-select>
+        </seer-select>
 
-        <app-bk-multi-select
+        <seer-multi-select
           (onSelect)="showSelectedValues($event)"
           [currentFormGroup]="testForm"
           [options]="category"
@@ -35,9 +35,9 @@
           controlId="multiSelectCategoryId"
           currentFormControlName="multiSelectCategory"
           label="Last Name">
-        </app-bk-multi-select>
+        </seer-multi-select>
         {{ multiSelectStartValues.join() }}
-        <app-bk-multi-select
+        <seer-multi-select
           (onSelect)="showSelectedValues2($event)"
           [currentFormGroup]="testForm"
           [options]="category"
@@ -45,40 +45,40 @@
           controlId="multiSelectCategoryId2"
           currentFormControlName="multiSelectCategory2"
           label="Categories">
-        </app-bk-multi-select>
+        </seer-multi-select>
         {{ multiSelectStartValues2.join() }}
-        <bk-button intent="success" label="Test me!" type="submit"></bk-button>
-        <bk-button
+        <seer-button intent="success" label="Test me!" type="submit"></seer-button>
+        <seer-button
           (onClick)="changeMultiSelectValues()"
           intent="success"
           label="Change Multi-select Values"
-          type="button"></bk-button>
+          type="button"></seer-button>
       </form>
     </div>
   </div>
 
-  <bk-button
+  <seer-button
     (onClick)="showDynamicModal()"
     intent="success"
     label="Show Dynamic Modal"
-    type="button"></bk-button>
+    type="button"></seer-button>
 
-  <bk-button
+  <seer-button
     (onClick)="showPopout()"
     intent="success"
     label="Show Popout"
-    type="button"></bk-button>
+    type="button"></seer-button>
 
-  <bk-button
+  <seer-button
     (onClick)="showCustomModal()"
     intent="success"
     label="Show Custom Modal"
-    type="button"></bk-button>
+    type="button"></seer-button>
 
-  <app-bk-dynamic-modal #dynamicModalComponentBk></app-bk-dynamic-modal>
-  <app-bk-popout #popoutComponent></app-bk-popout>
+  <seer-dynamic-modal #dynamicModalComponentBk></seer-dynamic-modal>
+  <seer-popout #popoutComponent></seer-popout>
 
-  <app-bk-custom-modal #customModal>
+  <seer-custom-modal #customModal>
     <div class="app-modal-header">
       <span class="custom-glyphicon glyphicon glyphicon-exclamation-sign"></span>{{customModalData.header}}
     </div>
@@ -86,14 +86,14 @@
       {{customModalData.bodyMessage}}
     </div>
     <div class="app-modal-footer">
-      <bk-button (click)='testCustomModel.hide()' intent="success" label="{{ customModalData.buttonOk }}">
-      </bk-button>
+      <seer-button (click)='testCustomModel.hide()' intent="success" label="{{ customModalData.buttonOk }}">
+      </seer-button>
     </div>
-  </app-bk-custom-modal>
+  </seer-custom-modal>
 
   <div class="row">
     <div class="col-sm-12" style="white-space: nowrap">
-      <app-bk-chart #chartComponent *ngIf="chartData" (onClick)="displayDetails($event)" [chartData]="chartData"></app-bk-chart>
+      <seer-chart #chartComponent *ngIf="chartData" (onClick)="displayDetails($event)" [chartData]="chartData"></seer-chart>
     </div>
   </div>
 </div>

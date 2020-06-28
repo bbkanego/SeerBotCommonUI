@@ -3,7 +3,7 @@ import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
 
 @Component({
-  selector: 'app-bk-radio-grp',
+  selector: 'seer-radio-grp',
   templateUrl: './radioGroup.component.html',
   styleUrls: ['./radioGroup.component.css']
 })

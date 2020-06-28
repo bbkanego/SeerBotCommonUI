@@ -16,7 +16,7 @@ import {Chart} from 'chart.js';
 import {ChartData} from '../../model/models';
 
 @Component({
-  selector: 'app-bk-chart',
+  selector: 'seer-chart',
   templateUrl: './chart.component.html'
 })
 export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {

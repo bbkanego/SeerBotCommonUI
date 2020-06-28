@@ -33,7 +33,7 @@ import {UtilsService} from '../../service/utils.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'app-bk-chat2',
+  selector: 'seer-chat2',
   templateUrl: './chat2.component.html',
   styleUrls: ['./chat2.component.css'],
   providers: [StompService]

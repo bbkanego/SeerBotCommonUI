@@ -4,7 +4,7 @@ import {StompService} from '../service/stomp.service';
 import {UtilsService} from '../service/utils.service';
 
 @Directive({
-  selector: 'app-bk-websocket',
+  selector: 'seer-websocket',
   providers: [StompService]
 })
 export class WebSocketDirective implements OnInit, OnDestroy {

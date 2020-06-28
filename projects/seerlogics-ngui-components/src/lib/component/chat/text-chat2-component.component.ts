@@ -3,7 +3,7 @@ import {BaseDynamicComponent} from '../baseDynamic.component';
 import {ChatData} from '../../model/models';
 
 @Component({
-  selector: 'app-text-chat-component',
+  selector: 'seer-text-chat-component',
   templateUrl: './text-chat2-component.component.html',
   styleUrls: ['./text-chat2-component.component.css']
 })

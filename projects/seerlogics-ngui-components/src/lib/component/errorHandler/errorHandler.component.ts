@@ -4,7 +4,7 @@ import {NotificationService} from '../../service/notification.service';
 import {Dialog} from 'primeng';
 
 @Component({
-  selector: 'app-bk-error-handler',
+  selector: 'seer-error-handler',
   templateUrl: './errorHandler.component.html'
 })
 export class ErrorHandlerComponent implements OnInit, OnDestroy {

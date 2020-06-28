@@ -3,7 +3,7 @@ import {BaseCustomComponent} from '../baseCustom.component';
 import {Option} from '../../model/models';
 
 @Component({
-  selector: 'app-bk-checkbox-grp',
+  selector: 'seer-checkbox-grp',
   templateUrl: './checkboxGroup.component.html',
   styleUrls: ['./checkbox.component.css']
 })

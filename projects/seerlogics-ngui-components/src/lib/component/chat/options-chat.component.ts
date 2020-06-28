@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ChatData} from '../../model/models';
 
 @Component({
-  selector: 'app-options-chat',
+  selector: 'seer-options-chat',
   templateUrl: './options-chat.component.html',
   styleUrls: ['./options-chat.component.css']
 })

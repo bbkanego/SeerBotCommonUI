@@ -24,7 +24,7 @@ import {ErrorMessagesComponent} from '../errorMessages/errorMessages.component';
  */
 @Component({
   templateUrl: './popout.component.html',
-  selector: 'app-bk-popout',
+  selector: 'seer-popout',
   styleUrls: ['./popout.component.css'],
   providers: [
     {

@@ -75,6 +75,9 @@ export * from './src/lib/component/tooltip/tooltip.module';
 export * from './src/lib/component/treeView/treeView.component';
 export * from './src/lib/component/treeView/treeView.module';
 
+export * from './src/lib/component/typeahead/typeahead.component';
+export * from './src/lib/component/typeahead/typeahead.module';
+
 export * from './src/lib/component/errorMessages/errorMessages.module';
 export * from './src/lib/component/errorMessages/errorMessages.component';
 

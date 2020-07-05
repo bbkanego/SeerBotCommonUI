@@ -11,7 +11,7 @@ export class UtilsService {
     return localStorage.getItem(COMMON_CONST.CURRENT_USER);
   }
 
-  createDeepCopy(entity) {
+  static createDeepCopy(entity) {
     //return JSON.parse(JSON.stringify(entity));
     return ld.cloneDeep(entity);
   }
@@ -28,7 +28,7 @@ export class UtilsService {
     });
   }
 
-  sortBy(arrayOfObjects: any[], sortByColumn) {
+  static sortBy(arrayOfObjects: any[], sortByColumn) {
     return ld.sortBy(arrayOfObjects, sortByColumn);
   }
 
@@ -36,5 +36,31 @@ export class UtilsService {
     return ld.remove(arrayOfObjects, function (obj) {
       return obj[property] !== value;
     });
+  }
+
+  /**
+   * This example returns a random integer between the specified values.
+   * The value is no lower than min (or the next integer greater than min if min
+   * isn't an integer), and is less than (but not equal to) max.
+   * @param min
+   * @param max
+   */
+  static getRandomIntExclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    //The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  /**
+   * Getting a random integer between two values, inclusive
+   * @param min
+   * @param max
+   */
+  static getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    //The maximum is inclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

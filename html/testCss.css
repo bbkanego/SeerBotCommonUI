@@ -1,0 +1,31 @@
+ul.typeAheadSuggestions {
+  list-style: none;
+  background: darkorange;
+  margin: 0;
+  padding-left: 0;
+  max-width: 300px;
+}
+
+ul.typeAheadSuggestions li {
+  color: #fff;
+  background: darkorange;
+  display: block;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+ul.typeAheadSuggestions li a {
+  color: #fff;
+}
+
+ul.typeAheadSuggestions li:hover,
+li:focus-within {
+  background: red;
+  cursor: pointer;
+}
+
+ul.typeAheadSuggestions li:focus-within a {
+  outline: none;
+}

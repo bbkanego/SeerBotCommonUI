@@ -11,6 +11,14 @@
             currentFormControlName="name"></seer-input>
         </label>
 
+        <label class="center-block">Type Ahead
+          <seer-typeahead
+            [displayValues]="displayValues"
+            [currentFormGroup]="testForm"
+            controlId="name"
+            currentFormControlName="name"></seer-typeahead>
+        </label>
+
         <seer-textarea
           [currentFormGroup]="testForm"
           controlId="lastName"

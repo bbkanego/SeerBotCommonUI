@@ -1,0 +1,43 @@
+a {
+  text-decoration: none;
+}
+
+ul.typeAheadSuggestions {
+  list-style: none;
+  background: darkorange;
+  margin: 0;
+  padding-left: 0;
+  max-width: 300px;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+}
+
+ul.typeAheadSuggestions li {
+  color: #000;
+  background: #fff;
+  display: block;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+ul.typeAheadSuggestions li.optionFocus {
+  background: #ebebebeb;
+  cursor: pointer;
+}
+
+ul.typeAheadSuggestions li a {
+  color: #fff;
+}
+
+ul.typeAheadSuggestions li:hover,
+li:focus-within {
+  background: #ebebebeb;
+  cursor: pointer;
+}
+
+ul.typeAheadSuggestions li:focus-within a {
+  outline: none;
+}

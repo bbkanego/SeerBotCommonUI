@@ -1,18 +1,16 @@
 import {FormGroup, Validators} from '@angular/forms';
-import {
-  BaseCustomComponent,
-  ChartData,
-  ChartDataSet,
-  CustomFormControl,
-  CustomValidator,
-  DynamicModalComponent,
-  DynamicModalMetadata,
-  ModalComponent,
-  Option,
-  PopoutComponent
-} from 'seerlogics-ngui-components';
 import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {HelpExampleComponent} from './help/help.component';
+import {BaseCustomComponent} from '../../projects/seerlogics-ngui-components/src/lib/component/baseCustom.component';
+import {ChartData, ChartDataSet, Option} from '../../projects/seerlogics-ngui-components/src/lib/model/models';
+import {ModalComponent} from '../../projects/seerlogics-ngui-components/src/lib/component/modal/modal.component';
+import {CustomFormControl} from '../../projects/seerlogics-ngui-components/src/lib/model/controls';
+import {CustomValidator} from '../../projects/seerlogics-ngui-components/src/lib/validator/custom.validator';
+import {
+  DynamicModalComponent,
+  DynamicModalMetadata
+} from '../../projects/seerlogics-ngui-components/src/lib/component/modal/dynamicModal.component';
+import {PopoutComponent} from '../../projects/seerlogics-ngui-components/src/lib/component/popout/popout.component';
 
 export interface CommonModalModel {
   header: string;
@@ -33,6 +31,7 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   multiSelectStartValues2: any[] = [];
   selectedValuesForMultiSelect: string[] = [];
   selectedValuesForMultiSelect2: string[] = [];
+  displayValues: string[] = [];
 
   chartData: ChartData;
   customModalData: CommonModalModel = {header: '', bodyMessage: '', buttonOk: ''};
@@ -53,6 +52,7 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displayValues = this.getCountries();
     this.multiSelectStartValues = [{value: 'cat1', label: 'Tennis'},
       {value: 'cat3', label: 'Football'},
       {value: 'cat4', label: 'Soccer'}];
@@ -150,5 +150,32 @@ export class AppComponent extends BaseCustomComponent implements OnInit {
   changeMultiSelectValues() {
     this.multiSelectStartValues = ['cat1'];
     this.multiSelectStartValues2 = ['cat3'];
+  }
+
+  private getCountries() {
+    return ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina",
+      "Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus",
+      "Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil",
+      "British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada",
+      "Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo",
+      "Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark",
+      "Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea",
+      "Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia",
+      "French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland",
+      "Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong",
+      "Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey"
+      ,"Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia",
+      "Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali",
+      "Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro",
+      "Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles",
+      "New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau",
+      "Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico",
+      "Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino",
+      "Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia",
+      "Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia",
+      "St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand",
+      "Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda",
+      "Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City",
+      "Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
   }
 }

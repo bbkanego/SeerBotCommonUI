@@ -1,0 +1,28 @@
+<div (seerClickOutside)="onClickOutsideCallback()" *ngIf="currentFormGroup" [formGroup]="currentFormGroup" style="white-space: nowrap">
+  <input #thInputWidget (blur)="onBlurEvent($event)" (focus)="onFocusEvent($event)" *ngIf='!label'
+         [formControlName]="currentFormControlName" (keydown)="handleKeyDown($event)" (keyup)="handleKeyUp($event)"
+         [id]="controlId"
+         [type]="inputType"
+         autocomplete="off" class="form-control"/>
+  <label *ngIf='label' class="center-block">{{label}}&nbsp;
+    <span *ngIf="isRequired()" class="glyphicon glyphicon-asterisk icon-required"></span>
+    <input #thInputWidget (blur)="onBlurEvent($event)" (focus)="onFocusEvent($event)" (keyup)="handleKeyUp($event)"
+           (keydown)="handleKeyDown($event)"
+           [formControlName]="currentFormControlName" [id]="controlId"
+           [type]="inputType"
+           autocomplete="off" class="form-control"/>
+  </label>
+  <ng-container *ngIf="showThLayer else errorMessage">
+    <ul class="typeAheadSuggestions" #typeAheadSuggestions>
+      <li *ngFor="let value of matchingDisplayValues; index as i">
+        {{value}}
+        <input id='{{idPrefix}}{{i}}' class="{{getInputClassPrefix()}}" type="hidden" value="{{value}}"/>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #errorMessage>
+    <div *ngIf="isInvalid()" class="errorMessage">
+      {{getErrorMessage()}}
+    </div>
+  </ng-template>
+</div>

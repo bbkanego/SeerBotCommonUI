@@ -62,6 +62,7 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
   }
 
   filterMatchingValues(input: string) {
+    this.currentIndex = -1;
     this.matchingDisplayValues = this.displayValues.filter((value: string) => {
       return value.toLowerCase().startsWith(input.toLowerCase());
     });
@@ -78,14 +79,14 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
     }
 
     const typeAheadSuggestObj = $(this.typeAheadSuggestions.nativeElement);
-    console.log('key down pressed: ' + event.target + ', ' + typeAheadSuggestObj.attr('class'));
+    this.loggerService.debug('key down pressed: ' + event.target + ', ' + typeAheadSuggestObj.attr('class'));
     let keyPressed;
     if (event.key !== undefined) {
       keyPressed = event.key;
     } else if (event.keyCode !== undefined) {
       keyPressed = event.keyCode;
     }
-    console.log('keyPressed = ' + keyPressed);
+    this.loggerService.debug('keyPressed = ' + keyPressed);
     this.keyUpFilterSubject.next(keyPressed);
     if (keyPressed == 'ArrowDown') {
       this.keyUpSubject.next(true);
@@ -98,7 +99,7 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
 
   private filterOnKeyDown(keyPressed) {
     const inputObj = $(this.inputWidget.nativeElement);
-    console.log('--------------------------' + inputObj.val() + ', currentIndex = ' + this.currentIndex
+    this.loggerService.debug('--------------------------' + inputObj.val() + ', currentIndex = ' + this.currentIndex
       + ', length = ' + this.matchingDisplayValues.length);
     if (keyPressed !== 'ArrowDown' && keyPressed !== 'ArrowDown' && keyPressed !== 'Enter') {
       this.filterMatchingValues(inputObj.val());
@@ -154,7 +155,7 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
   onClickOutsideCallback() {
     this.showError = true;
     this.showThLayer = false;
-    console.log('sdfsdfsdfsdf');
+    this.loggerService.debug('sdfsdfsdfsdf');
   }
 
   ngOnDestroy(): void {

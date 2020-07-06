@@ -104,11 +104,12 @@ export * from './src/lib/service/crud.service';
 export * from './src/lib/service/dialogService.service';
 export * from './src/lib/service/emitter.service';
 export * from './src/lib/service/httpClient.helper';
-export * from './src/lib/service/logger.service';
 export * from './src/lib/service/notification.service';
 export * from './src/lib/service/stomp.service';
 export * from './src/lib/service/utils.service';
 export * from './src/lib/service/validation.services';
+export * from './src/lib/service/logging/log-publishers.service';
+export * from './src/lib/service/logging/log.service';
 
 export * from './src/lib/validator/custom.validator';
 

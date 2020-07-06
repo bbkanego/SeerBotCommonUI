@@ -13,8 +13,8 @@
            autocomplete="off" class="form-control"/>
   </label>
   <ng-container *ngIf="showThLayer else errorMessage">
-    <ul class="typeAheadSuggestions" #typeAheadSuggestions>
-      <li *ngFor="let value of matchingDisplayValues; index as i">
+    <ul class="list-group" #typeAheadSuggestions>
+      <li class='list-group-item' *ngFor="let value of matchingDisplayValues; index as i">
         {{value}}
         <input id='{{idPrefix}}{{i}}' class="{{getInputClassPrefix()}}" type="hidden" value="{{value}}"/>
       </li>

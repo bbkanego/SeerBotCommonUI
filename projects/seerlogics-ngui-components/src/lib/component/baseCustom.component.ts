@@ -5,7 +5,7 @@ import {CustomFormControl} from '../model/controls';
 import {CommonService} from '../service/common.service';
 import {ValidationService} from '../service/validation.services';
 import {NotificationService} from '../service/notification.service';
-import {LoggerService} from '../service/logger.service';
+import {LogService} from '../service/logging/log.service';
 
 @Directive()
 @Injectable()
@@ -27,16 +27,16 @@ export abstract class BaseCustomComponent {
   // use this to pass data to component when creating components using angular dynamic components
   extraDynamicData: any = {};
   protected notificationService: NotificationService;
-  protected loggerService: LoggerService;
   protected elementBlurred = false;
   protected validationService: ValidationService;
   protected commonService: CommonService;
+  protected loggerService: LogService;
 
   constructor(injector: Injector) {
     this.validationService = injector.get(ValidationService);
     this.commonService = injector.get(CommonService);
     this.notificationService = injector.get(NotificationService);
-    this.loggerService = injector.get(LoggerService);
+    this.loggerService = injector.get(LogService);
   }
 
   getFormControl(): CustomFormControl {

@@ -8,7 +8,7 @@ ul.typeAheadSuggestions {
   margin: 0;
   padding-left: 0;
   max-width: 300px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid red;
   border-radius: 10px;
 }
 
@@ -20,10 +20,10 @@ ul.typeAheadSuggestions li {
   position: relative;
   text-decoration: none;
   transition-duration: 0.5s;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid red;
 }
 
-ul.typeAheadSuggestions li.optionFocus {
+li.optionFocus {
   background: #ebebebeb;
   cursor: pointer;
 }

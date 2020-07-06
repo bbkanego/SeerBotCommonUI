@@ -36,6 +36,9 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
   @Input()
   displayValues: string[] = [];
 
+  @Input()
+  placeholder: string = 'Start typing...';
+
   // this displays the values that actually match based on what the user entered.
   matchingDisplayValues: string[] = [];
 
@@ -99,9 +102,8 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
 
   private filterOnKeyDown(keyPressed) {
     const inputObj = $(this.inputWidget.nativeElement);
-    this.loggerService.debug('--------------------------' + inputObj.val() + ', currentIndex = ' + this.currentIndex
-      + ', length = ' + this.matchingDisplayValues.length);
-    if (keyPressed !== 'ArrowDown' && keyPressed !== 'ArrowDown' && keyPressed !== 'Enter') {
+    this.loggerService.debug('Matching Display values length = ' + this.matchingDisplayValues.length);
+    if (keyPressed !== 'ArrowDown' && keyPressed !== 'ArrowUp' && keyPressed !== 'Enter') {
       this.filterMatchingValues(inputObj.val());
     }
   }
@@ -119,6 +121,7 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
     if (this.currentIndex < 0) {
       this.currentIndex = 0;
     }
+    this.loggerService.debug('Increment = ' + increment + ", currentIndex = " + this.currentIndex);
     $('.' + this.getInputClassPrefix()).parent('li').removeClass('optionFocus');
     $('#' + this.idPrefix + (this.currentIndex)).parent('li').addClass('optionFocus');
   }
@@ -155,7 +158,6 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
   onClickOutsideCallback() {
     this.showError = true;
     this.showThLayer = false;
-    this.loggerService.debug('sdfsdfsdfsdf');
   }
 
   ngOnDestroy(): void {

@@ -2,6 +2,7 @@
   <input #thInputWidget (blur)="onBlurEvent($event)" (focus)="onFocusEvent($event)" *ngIf='!label'
          [formControlName]="currentFormControlName" (keydown)="handleKeyDown($event)" (keyup)="handleKeyUp($event)"
          [id]="controlId"
+         [placeholder]="placeholder"
          [type]="inputType"
          autocomplete="off" class="form-control"/>
   <label *ngIf='label' class="center-block">{{label}}&nbsp;
@@ -10,6 +11,7 @@
            (keydown)="handleKeyDown($event)"
            [formControlName]="currentFormControlName" [id]="controlId"
            [type]="inputType"
+           [placeholder]="placeholder"
            autocomplete="off" class="form-control"/>
   </label>
   <ng-container *ngIf="showThLayer else errorMessage">

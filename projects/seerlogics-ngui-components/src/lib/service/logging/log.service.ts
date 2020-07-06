@@ -16,9 +16,11 @@ export enum LogLevel {
   Off = 6
 }
 
-// ****************************************************
-// Log Entry Class
-// ****************************************************
+/**
+ * Logging Entry class:
+ * https://www.codemag.com/Article/1711021/Logging-in-Angular-Applications
+ * https://www.pdsa.com/downloads
+ */
 export class LogEntry {
   // Public Properties
   entryDate: Date = new Date();

@@ -65,6 +65,10 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
   }
 
   filterMatchingValues(input: string) {
+    if (!input || input.length === 0) {
+      this.matchingDisplayValues = [];
+      return;
+    }
     this.currentIndex = -1;
     this.matchingDisplayValues = this.displayValues.filter((value: string) => {
       return value.toLowerCase().startsWith(input.toLowerCase());

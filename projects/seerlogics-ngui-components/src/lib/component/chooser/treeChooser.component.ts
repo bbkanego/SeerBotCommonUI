@@ -5,6 +5,19 @@ import {Dialog, TreeNode} from 'primeng';
 import {BaseCustomComponent} from '../baseCustom.component';
 import * as $ from 'jquery';
 
+export interface SeerTreeNode {
+  children?: SeerTreeNode[],
+  label: string,
+  code: string,
+  data?: any;
+  icon?: any;
+  expandedIcon?: any;
+  collapsedIcon?: any;
+  locked?: boolean,
+  draggable?: boolean,
+  droppable?: boolean
+}
+
 const noop = () => {
 };
 
@@ -32,7 +45,8 @@ export const TREE_CHOOSER_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class TreeChooserComponent extends BaseCustomComponent
   implements OnInit, ControlValueAccessor, AfterViewInit {
-  @Input() treeNodes: TreeNode[];
+  //@Input() treeNodes: TreeNode[];
+  @Input() treeNodes: SeerTreeNode[];
 
   // for formsModule based pages
   @Input() name: string;

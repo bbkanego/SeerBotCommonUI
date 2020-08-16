@@ -9,13 +9,12 @@ import {ScrollToDirective} from './scrollTo.directive';
 import {ValidationOnBlurDirective} from './validateOnBlur.directive';
 import {WebSocketDirective} from './websocket.directive';
 import {CommonModule} from '@angular/common';
-import {LostFocusDirective} from './lostFocus.directive';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [LostFocusDirective, BlurForwarderDirective, ClickOutsideDirective, FocusForwarderDirective, WebSocketDirective,
+  exports: [BlurForwarderDirective, ClickOutsideDirective, FocusForwarderDirective, WebSocketDirective,
     DraggableDirective, DropTargetDirective, IncludePartialDirective, ScrollToDirective, ValidationOnBlurDirective],
-  declarations: [LostFocusDirective, BlurForwarderDirective, ClickOutsideDirective, FocusForwarderDirective, WebSocketDirective,
+  declarations: [BlurForwarderDirective, ClickOutsideDirective, FocusForwarderDirective, WebSocketDirective,
     DraggableDirective, DropTargetDirective, IncludePartialDirective, ScrollToDirective, ValidationOnBlurDirective],
   providers: [],
 })

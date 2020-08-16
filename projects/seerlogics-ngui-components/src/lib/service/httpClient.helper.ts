@@ -57,10 +57,10 @@ export class HttpClientHelper {
     inputHeaders?: IntputHeader[]
   ): Observable<HttpResponse<any>> {
     this.showLoader();
-    const headers: HttpHeaders = new HttpHeaders();
+    let headers: HttpHeaders = new HttpHeaders();
     if (inputHeaders) {
       inputHeaders.forEach(header => {
-        headers.append(header.name, header.value);
+        headers = headers.set(header.name, header.value);
       });
     }
     const requestOptions = {

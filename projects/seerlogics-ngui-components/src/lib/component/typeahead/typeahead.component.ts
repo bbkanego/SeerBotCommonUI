@@ -22,8 +22,6 @@ export class TypeaheadComponent extends BaseCustomComponent implements OnInit, O
 
   @ViewChild('thInputWidget') inputWidget: ElementRef;
   @Input() inputType = 'text';
-  private onChange: Function;
-  private onTouched: Function;
 
   showThLayer: boolean = false;
   showError: boolean = false;

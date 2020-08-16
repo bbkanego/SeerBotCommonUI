@@ -26,6 +26,7 @@ import {NotificationService} from '../../projects/seerlogics-ngui-components/src
 import {AuthenticationService} from '../../projects/seerlogics-ngui-components/src/lib/service/authentication.service';
 import {CommonService} from '../../projects/seerlogics-ngui-components/src/lib/service/common.service';
 import {ValidationService} from '../../projects/seerlogics-ngui-components/src/lib/service/validation.services';
+import {TreeChooserModule} from '../../projects/seerlogics-ngui-components/src/lib/component/chooser/treeChooser.module';
 
 const routes: Routes = [];
 
@@ -36,7 +37,7 @@ const routes: Routes = [];
   imports: [
     BrowserModule, BrowserAnimationsModule, InputModule, ButtonModule, ModalModule, TextareaModule,
     SelectorModule, MultiSelectModule, PopoutModule, ChartModule, TypeaheadModule,
-    HttpClientModule, ReactiveFormsModule, FormsModule, RouterModule.forRoot(routes), TypeaheadModule
+    HttpClientModule, ReactiveFormsModule, FormsModule, RouterModule.forRoot(routes), TypeaheadModule, TreeChooserModule
   ],
   providers: [NotificationService, AuthenticationService,
     CommonService, ValidationService, {provide: 'environment', useValue: {}}],

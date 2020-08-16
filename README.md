@@ -1,18 +1,16 @@
-# MyComponentLibrary
+# Seerlogics UI Components (seerlogics-ngui-components)
 
 This component library provides a shared library of commonly used components which can be included in your Angular projects. The components include various widgets, validation etc.
 
 ## Test components
-1. wewe
-2. Next start the app using 'npm run start'
-
-## How to deploy the component library
-> To deploy run the below commands
+1. The application defined in "/home/bkane/Bhushan/code/angular/Angular-Library-With-NgPackagr/src/app" is used for testing.
+2. IN order to test, you first need to build the component library. This can be done using:
 ```
-Angular-Library-With-NgPackagr bkane$ npm run packagr
-Angular-Library-With-NgPackagr bkane$ npm pack ./dist
-ProjectToInstallIN bkane$ npm install ../Angular-Library-With-NgPackagr/my-component-library-0.0.0.tgz
+cd ~/Bhushan/code/angular/Angular-Library-With-NgPackagr
+## Next run the below command...
+$ ./scripts/buildAndInstallLib.sh
 ```
+2. Next start the app using '~/Bhushan/code/angular/Angular-Library-With-NgPackagr$ npm run start'
 
 ## Upgrade from Angular 5 to 6:
 
@@ -101,4 +99,13 @@ npm pack ~/Bhushan/code/angular/Angular-Library-With-NgPackagr/dist/seerlogics-n
 cd ~/Bhushan/code/angular/Angular-Library-With-NgPackagr
 npm install ~/Bhushan/code/angular/Angular-Library-With-NgPackagr/seerlogics-ngui-components-1.0.0.tgz
 
+```
+
+## Deploy/Use the SeerLogics components in the BotAdminUI application
+1. First navigate to the directory and perform the below steps:
+```
+cd ~/Bhushan/code/angular/SeerlogicsBotAdminUI/main-app
+# next deploy the components
+$ ./updateComponentLib.sh
+$ npm run local
 ```

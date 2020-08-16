@@ -11,7 +11,7 @@ export class UtilsService {
     return localStorage.getItem(COMMON_CONST.CURRENT_USER);
   }
 
-  static createDeepCopy(entity) {
+  createDeepCopy(entity) {
     //return JSON.parse(JSON.stringify(entity));
     return ld.cloneDeep(entity);
   }
@@ -28,7 +28,7 @@ export class UtilsService {
     });
   }
 
-  static sortBy(arrayOfObjects: any[], sortByColumn) {
+  sortBy(arrayOfObjects: any[], sortByColumn) {
     return ld.sortBy(arrayOfObjects, sortByColumn);
   }
 

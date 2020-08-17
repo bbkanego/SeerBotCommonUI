@@ -13,16 +13,53 @@ $(function () {
     event.preventDefault();
     event.stopPropagation();
     let tarElem = $(event.target);
+    if (tarElem.hasClass('nodeIcon') || tarElem.hasClass('nodeItem')) {
+      return;
+    }
     const targClass = tarElem.attr('class');
-    console.log(targClass);
+    console.log('The class is = ' + targClass);
+    let expanded = tarElem.hasClass('fa-minus');
     if ('nodeItem' === targClass) {
       tarElem = tarElem.parent('li');
       const targClass2 = tarElem.attr('class');
-      console.log(targClass2);
+      expanded = tarElem.hasClass('fa-minus');
+      console.log('The class is 2 = ' + targClass2);
     }
-    addNodeHtml(tarElem, treeNodeParent);
-  })
+    const ulChildren = tarElem.children('ul');
+    console.log('The current children are: ' + ulChildren.length);
+    if (!expanded) {
+      if (ulChildren.length === 0) {
+        addNodeHtmlFromChildren(tarElem, treeNodeParent.children);
+      } else {
+        ulChildren.show();
+        tarElem.removeClass('fa-plus').addClass('fa-minus');
+        tarElem.children('.nodeIcon').removeClass('fa-folder').addClass('fa-folder-open');
+      }
+    } else {
+      ulChildren.hide();
+      tarElem.removeClass('fa-minus').addClass('fa-plus');
+      tarElem.children('.nodeIcon').removeClass('fa-folder-open').addClass('fa-folder');
+    }
+  });
 });
+
+function addNodeHtmlFromChildren(container, treeNodeArray) {
+  for (let i = 0; i < treeNodeArray.length; i++) {
+    const currentTreeNode = treeNodeArray[i];
+    const ulObject = $('<ul class="list-group"></ul>');
+    const liObject = $('<li class="list-group-item ' +
+      'list-node fa fa-plus"><span class="nodeIcon fa fa-folder"></span><span class="nodeItem">' + currentTreeNode.label + '</span></li>');
+    ulObject.append(liObject);
+    const parent = $(container);
+    parent.append(ulObject);
+    parent.removeClass('fa-plus').addClass('fa-minus');
+    parent.children('.nodeIcon').removeClass('fa-folder').addClass('fa-folder-open');
+
+    if (currentTreeNode.children || currentTreeNode.children.length > 0) {
+      addNodeHtmlFromChildren(liObject, currentTreeNode.children);
+    }
+  }
+}
 
 function addNodeHtml(container, treeNode) {
   const ulObject = $('<ul class="list-group"></ul>');
@@ -33,11 +70,7 @@ function addNodeHtml(container, treeNode) {
   parent.append(ulObject);
   parent.removeClass('fa-plus').addClass('fa-minus');
   for (let i = 0; i < treeNode.children.length; i++) {
-    addNodeHtml(liObject, treeNode.children[i]);
-/*
-    const html = '<ul class="list-group"><li class="list-group-item list-node fa fa-plus"><span class="nodeItem">' + treeNodeParent.children[i].label + '</span></li></ul>';
-    $('#parentNode').append(html);
-*/
+    addNodeHtmlFromChildren(liObject, treeNode.children);
   }
 }
 

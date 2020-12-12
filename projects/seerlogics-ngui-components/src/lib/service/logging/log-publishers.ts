@@ -1,8 +1,9 @@
-﻿import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
+
+import {throwError as observableThrowError, of as observableOf, Observable} from 'rxjs';
+
+
+
+
 
 import {LogEntry} from './log.service';
 import {HttpClientHelper, IntputHeader} from '../httpClient.helper';
@@ -37,13 +38,13 @@ export class LogConsole extends LogPublisher {
     // Log to console
     console.log(entry.buildLogString());
 
-    return Observable.of(true);
+    return observableOf(true);
   }
 
   clear(): Observable<boolean> {
     console.clear();
 
-    return Observable.of(true);
+    return observableOf(true);
   }
 }
 
@@ -78,13 +79,13 @@ export class LogLocalStorage extends LogPublisher {
       console.log(ex);
     }
 
-    return Observable.of(ret);
+    return observableOf(ret);
   }
 
   // Clear all log entries from local storage
   clear(): Observable<boolean> {
     localStorage.removeItem(this.location);
-    return Observable.of(true);
+    return observableOf(true);
   }
 }
 
@@ -115,7 +116,7 @@ export class LogWebApi extends LogPublisher {
   // Clear all log entries from local storage
   clear(): Observable<boolean> {
     // TODO: Call Web API to clear all values
-    return Observable.of(true);
+    return observableOf(true);
   }
 
   // ***************
@@ -134,6 +135,6 @@ export class LogWebApi extends LogPublisher {
 
     console.error('An error occurred', errors);
 
-    return Observable.throw(errors);
+    return observableThrowError(errors);
   }
 }

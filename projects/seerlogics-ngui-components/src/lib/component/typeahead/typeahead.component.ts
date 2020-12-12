@@ -3,7 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BaseCustomComponent} from '../baseCustom.component';
 import * as $ from 'jquery';
 import {UtilsService} from '../../service/utils.service';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Component({
